@@ -106,7 +106,8 @@
     .card-title-bar { background: linear-gradient(135deg, #2a2010 0%, #1a1508 50%, #2a2010 100%); border-bottom: 2px solid var(--gold-border); padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
     .card-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.06em; }
     .card-mana { font-size: 0.85rem; color: var(--gold); letter-spacing: 0.1em; }
-    .card-art { background: linear-gradient(135deg, #0d1a0d 0%, #1a0d08 50%, #0d0d1a 100%); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); min-height: 120px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .card-art { background: linear-gradient(135deg, #0d1a0d 0%, #1a0d08 50%, #0d0d1a 100%); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); min-height: 120px; display: flex; align-items: center; justify-content: center; font-size: 4rem; background-size: cover; background-position: center; }
+    .art-img { min-height: 160px; background-size: cover !important; background-position: center top !important; font-size: 0; }
     .card-type-line { background: linear-gradient(135deg, #1a1810, #100e08, #1a1810); border-bottom: 1px solid var(--gold-border); padding: 0.4rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.7rem; color: var(--off-white); display: flex; justify-content: space-between; align-items: center; }
     .rarity-symbol { font-size: 0.8rem; }
     .rarity-symbol.mythic { color: #e85a1a; }
@@ -163,6 +164,8 @@
     .agent-card-name { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.04em; }
     .agent-cost { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.08em; }
     .agent-art-box { min-height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border-bottom: 1px solid var(--gold-border); }
+    .card-art.has-img, .agent-art-box.has-img, .path-art.has-img { background-size: cover !important; background-position: center top !important; font-size: 0 !important; min-height: 160px; }
+    .path-art.has-img { min-height: 120px; }
     .agent-type-line { background: linear-gradient(135deg, #1a1810, #100e08, #1a1810); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 0.3rem 1rem; display: flex; justify-content: space-between; align-items: center; }
     .agent-type-text { font-family: 'Cinzel', serif; font-size: 13px; color: var(--white); letter-spacing: 0.08em; }
     .agent-text-box { padding: 24px; }
@@ -387,7 +390,7 @@
         <span class="card-name">Bennu, the Phoenix of Austin</span>
         <span class="card-mana">{B}{G}{R}</span>
       </div>
-      <div class="card-art" style="min-height:140px; background: linear-gradient(135deg, #0d1a0d 0%, #1a0808 40%, #1a1008 70%, #0d0d18 100%);">🔥</div>
+      <div class="card-art has-img" style="background-image:url('images/01-bennu-phoenix.webp');"></div>
       <div class="card-type-line">
         <span>Legendary Creature — Phoenix Coffee Shop</span>
         <span class="rarity-symbol mythic">◆</span>
@@ -551,7 +554,7 @@
           <span class="path-card-name">Digital Foundation</span>
           <span style="font-size:0.65rem; color:var(--gold); font-family:'Cinzel',serif;">PATH A</span>
         </div>
-        <div class="path-art" style="background: linear-gradient(135deg, #0d1a1a 0%, #0d0d1a 100%);">⚙️</div>
+        <div class="path-art has-img" style="background-image:url('images/02-digital-foundation.webp');"></div>
         <div class="path-type-line">
           <span>Enchantment — Continuous · Autonomous</span>
           <span class="rarity-symbol rare">◈</span>
@@ -569,7 +572,7 @@
           <span class="path-card-name">Community Relaunch</span>
           <span style="font-size:0.65rem; color:var(--gold); font-family:'Cinzel',serif;">PATH B</span>
         </div>
-        <div class="path-art" style="background: linear-gradient(135deg, #1a0d0d 0%, #0d1a0d 100%);">🤝</div>
+        <div class="path-art has-img" style="background-image:url('images/03-community-relaunch.webp');"></div>
         <div class="path-type-line">
           <span>Sorcery — Recovery · Ground Game · Legacy</span>
           <span class="rarity-symbol mythic">◆</span>
@@ -607,7 +610,7 @@
 
       <div class="agent-mtg">
         <div class="agent-name-bar"><span class="agent-card-name">The Guardian</span><span class="agent-cost">{G}{G}</span></div>
-        <div class="agent-art-box" style="background: linear-gradient(135deg, #0a1a0a, #1a0d08);">⭐</div>
+        <div class="agent-art-box has-img" style="background-image:url('images/04-the-voice.webp');"></div>
         <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Review Manager</span><span class="rarity-symbol rare">◈</span></div>
         <div class="agent-text-box">
           <p>Monitors Google and Yelp for every new review across all three locations. Responds to positive reviews within 4 hours in Bennu's voice. Flags problems before they escalate.</p>
@@ -631,7 +634,7 @@
 
       <div class="agent-mtg">
         <div class="agent-name-bar"><span class="agent-card-name">The Voice</span><span class="agent-cost">{R}{W}</span></div>
-        <div class="agent-art-box" style="background: linear-gradient(135deg, #1a0808, #0d1a1a);">📱</div>
+        <div class="agent-art-box has-img" style="background-image:url('images/04-the-voice.webp');"></div>
         <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Social Media</span><span class="rarity-symbol rare">◈</span></div>
         <div class="agent-text-box">
           <p>Generates and schedules content in Bennu's voice — the thrift store couches, dusty books, grumpy barista energy that made this place a legend.</p>
@@ -655,7 +658,7 @@
 
       <div class="agent-mtg">
         <div class="agent-name-bar"><span class="agent-card-name">The Regular</span><span class="agent-cost">{B}{U}</span></div>
-        <div class="agent-art-box" style="background: linear-gradient(135deg, #08081a, #1a0a0a);">💬</div>
+        <div class="agent-art-box has-img" style="background-image:url('images/05-the-regular.webp');"></div>
         <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Re-Engagement</span><span class="rarity-symbol mythic">◆</span></div>
         <div class="agent-text-box">
           <p>Your cashierless QR system has been capturing every customer contact since day one. The Regular uses that database to bring them back — automatically.</p>
@@ -688,7 +691,7 @@
 
       <div class="agent-mtg">
         <div class="agent-name-bar"><span class="agent-card-name">The Mapper</span><span class="agent-cost">{G}{U}</span></div>
-        <div class="agent-art-box" style="background: linear-gradient(135deg, #0d1a08, #0a0d1a);">📍</div>
+        <div class="agent-art-box has-img" style="background-image:url('images/06-the-mapper.webp');"></div>
         <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Local SEO</span><span class="rarity-symbol rare">◈</span></div>
         <div class="agent-text-box">
           <p>When someone searches "24 hour coffee Austin" at 1:30 AM — you show up first. Not Starbucks. Bennu. The Mapper keeps you visible everywhere searches happen.</p>
@@ -712,7 +715,7 @@
 
       <div class="agent-mtg">
         <div class="agent-name-bar"><span class="agent-card-name">The Messenger</span><span class="agent-cost">{W}{R}</span></div>
-        <div class="agent-art-box" style="background: linear-gradient(135deg, #1a1a08, #0d0a1a);">✉️</div>
+        <div class="agent-art-box has-img" style="background-image:url('images/07-the-messenger.webp');"></div>
         <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · SMS Campaigns</span><span class="rarity-symbol uncommon">◇</span></div>
         <div class="agent-text-box">
           <p>Direct line to your customers. "Latte of the month." Event announcements. Flash deals. Compliant, trackable, effective.</p>
@@ -728,7 +731,7 @@
 
       <div class="agent-mtg">
         <div class="agent-name-bar"><span class="agent-card-name">The Merchant</span><span class="agent-cost">{U}{B}{R}</span></div>
-        <div class="agent-art-box" style="background: linear-gradient(135deg, #1a0808, #1a1808, #081a08);">🛍️</div>
+        <div class="agent-art-box has-img" style="background-image:url('images/08-the-merchant.webp');"></div>
         <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Merch & E-Commerce</span><span class="rarity-symbol rare">◈</span></div>
         <div class="agent-text-box">
           <p>Bennu has a merch shop. The Merchant keeps it alive — monitoring what's trending in the culture, what your regulars are wearing, and making sure your product line stays current with the meta.</p>
@@ -756,7 +759,7 @@
           <span class="agent-card-name" style="color:var(--white);">Mac Mini — The Stronghold</span>
           <span class="agent-cost">🖥</span>
         </div>
-        <div class="agent-art-box" style="background: linear-gradient(135deg, #1a1a1a, #0a0a0a);">🏰</div>
+        <div class="agent-art-box has-img" style="background-image:url('images/09-the-stronghold.webp');"></div>
         <div class="agent-type-line"><span class="agent-type-text">Artifact — Hardware · On-Site Infrastructure</span><span class="rarity-symbol rare">◈</span></div>
         <div class="agent-text-box">
           <p>Your agents don't live in a cloud subscription that can disappear. Dedicated hardware, configured and delivered to your main location. Your fleet runs locally — under your roof.</p>
