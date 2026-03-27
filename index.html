@@ -1,524 +1,997 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bennu Coffee × AGE — Digital Foundation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Steve & Stephanie Williams — Raize The Vibe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --espresso: #2C1810;
-      --cream: #F5F0E8;
-      --copper: #B87333;
-      --copper-light: #D4956A;
-      --warm-white: #FFFBF5;
-      --muted: #6B5B4F;
-      --text: #1A1A1A;
+      --espresso: #0d0a08;
+      --espresso-mid: #1a1410;
+      --espresso-light: #2a1f18;
+      --copper: #b87333;
+      --copper-light: #d4834a;
+      --copper-dim: rgba(184,115,51,0.15);
+      --copper-glow: rgba(184,115,51,0.06);
+      --cream: #f0ebe3;
+      --cream-mid: #d4ccbf;
+      --cream-dim: rgba(240,235,227,0.7);
+      --white: #faf7f4;
+      --muted: rgba(240,235,227,0.45);
+      --green: #5a8a5a;
+      --green-dim: rgba(90,138,90,0.15);
+      --border: rgba(184,115,51,0.18);
+      --border-subtle: rgba(240,235,227,0.08);
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background: var(--cream);
-      color: var(--text);
       font-family: 'Inter', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.6;
-    }
-    
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 32px;
-      background: rgba(245,240,232,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(44,24,16,0.08);
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
-      color: var(--espresso);
-    }
-    .nav-tag {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 85vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 120px 32px 80px;
-      max-width: 800px; margin: 0 auto;
-      text-align: center;
-    }
-    .hero-eyebrow {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-      color: var(--copper); margin-bottom: 24px;
-      text-transform: uppercase;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 600; line-height: 1.15;
-      color: var(--espresso); margin-bottom: 24px;
-    }
-    .hero-sub {
-      font-size: 17px; color: var(--muted); line-height: 1.8;
-      max-width: 560px; margin: 0 auto 40px;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 80px 32px;
-      max-width: 720px; margin: 0 auto;
-    }
-    .section-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
-      color: var(--copper); margin-bottom: 16px;
-      text-transform: uppercase;
-    }
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 4vw, 36px);
-      font-weight: 600; line-height: 1.2;
-      color: var(--espresso); margin-bottom: 16px;
-    }
-    p { margin-bottom: 16px; }
-
-    /* CARDS */
-    .card {
-      background: var(--warm-white);
-      border: 1px solid rgba(44,24,16,0.08);
-      border-radius: 16px;
-      padding: 32px;
-      margin-bottom: 20px;
-    }
-    .card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 600;
-      color: var(--espresso); margin-bottom: 12px;
-    }
-    .card p { color: var(--muted); font-size: 15px; }
-
-    /* FEATURES */
-    .feature-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px; margin: 32px 0;
-    }
-    .feature {
-      background: var(--warm-white);
-      border: 1px solid rgba(44,24,16,0.06);
-      border-radius: 12px;
-      padding: 24px;
-    }
-    .feature-icon { font-size: 24px; margin-bottom: 12px; }
-    .feature h4 {
-      font-size: 14px; font-weight: 700;
-      color: var(--espresso); margin-bottom: 6px;
-    }
-    .feature p { font-size: 13px; color: var(--muted); margin: 0; }
-
-    /* PRICING */
-    .pricing-card {
       background: var(--espresso);
       color: var(--cream);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      margin: 40px 0;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
-    .pricing-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px; font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .pricing-amount {
-      font-size: 48px; font-weight: 700;
-      color: var(--copper-light);
-      margin: 16px 0 8px;
-    }
-    .pricing-sub { font-size: 14px; opacity: 0.7; margin-bottom: 24px; }
-    .pricing-divider {
-      border: none; border-top: 1px solid rgba(255,255,255,0.15);
-      margin: 24px 0;
-    }
-    .pricing-or {
-      font-size: 12px; font-weight: 600; letter-spacing: 0.15em;
-      opacity: 0.5; margin: 16px 0;
-    }
-    .pricing-alt {
-      font-size: 20px; font-weight: 600;
-      color: var(--copper-light);
-    }
-    .pricing-alt-note { font-size: 13px; opacity: 0.6; }
 
-    /* QUOTE */
-    .quote {
+    /* ─── PROGRESS BAR ─── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(13,10,8,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.85rem 2rem;
+      display: flex; align-items: center; gap: 0;
+    }
+    .progress-step {
+      flex: 1; text-align: center;
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      cursor: pointer; padding: 0.25rem 0.1rem;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .progress-step::after {
+      content: ''; position: absolute; bottom: -0.85rem; left: 0; right: 0;
+      height: 2px; background: var(--border-subtle); transition: background 0.3s;
+    }
+    .progress-step.active { color: var(--copper); }
+    .progress-step.active::after { background: var(--copper); }
+    .progress-step.done { color: var(--cream-mid); }
+    .progress-step.done::after { background: var(--green); }
+
+    /* ─── STAGES ─── */
+    .stage { display: none; min-height: 100vh; animation: fadeIn 0.5s ease; }
+    .stage.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+    h1 { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; color: var(--white); }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; color: var(--white); }
+    h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 600; color: var(--white); line-height: 1.25; }
+    h4 { font-size: 1rem; font-weight: 600; color: var(--copper-light); font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; }
+    p { color: var(--cream-dim); font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
+    em { color: var(--cream); font-style: normal; font-weight: 500; }
+    strong { color: var(--white); font-weight: 600; }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: 860px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+    .container-wide { max-width: 1100px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+
+    /* ─── EYEBROW ─── */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--copper);
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--copper); }
+
+    /* ─── DIVIDER ─── */
+    hr { border: none; border-top: 1px solid var(--border-subtle); margin: 3rem 0; }
+
+    /* ─── PAIN BLOCKS ─── */
+    .pain-block {
+      background: var(--espresso-mid); border: 1px solid var(--border-subtle);
       border-left: 3px solid var(--copper);
-      padding: 20px 24px;
-      background: rgba(184,115,51,0.06);
-      border-radius: 0 12px 12px 0;
-      margin: 32px 0;
+      border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem;
     }
-    .quote p {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px; font-style: italic;
-      color: var(--espresso); margin: 0;
+    .pain-quote {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.1rem; color: var(--white); margin-bottom: 1rem;
+      line-height: 1.5;
     }
-    .quote cite {
-      display: block; margin-top: 12px;
-      font-size: 12px; font-style: normal;
-      color: var(--muted);
+    .pain-diff {
+      font-size: 0.85rem; color: var(--cream-dim); border-top: 1px solid var(--border-subtle);
+      padding-top: 0.85rem; margin-top: 0.85rem;
     }
+    .pain-diff strong { color: var(--copper-light); }
 
-    /* FORM */
-    .form-section {
-      background: var(--warm-white);
-      border-radius: 20px;
-      padding: 48px 40px;
-      margin: 48px 0;
+    /* ─── PATH CARDS ─── */
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2.5rem 0; }
+    .path-card {
+      background: var(--espresso-mid); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem 2rem;
+      cursor: pointer; transition: all 0.25s;
+      position: relative; overflow: hidden;
     }
-    .form-section h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px; font-weight: 600;
-      color: var(--espresso); margin-bottom: 8px;
-      text-align: center;
+    .path-card:hover { border-color: var(--copper-light); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(184,115,51,0.15); }
+    .path-card.featured { border-color: rgba(184,115,51,0.5); background: linear-gradient(135deg, rgba(184,115,51,0.08), var(--espresso-mid)); }
+    .path-icon { font-size: 2rem; margin-bottom: 1.25rem; }
+    .path-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--copper); margin-bottom: 0.75rem; }
+    .path-card.featured .path-tag { color: var(--copper-light); }
+    .path-price { font-size: 1.6rem; font-weight: 800; color: var(--copper); font-family: 'Playfair Display', serif; margin: 1rem 0 0.5rem; }
+    .path-price-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.25rem; }
+    .path-cta {
+      display: inline-block; width: 100%; text-align: center;
+      background: transparent; border: 1px solid var(--copper);
+      color: var(--copper); padding: 0.65rem 1.25rem;
+      border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+      text-decoration: none;
     }
-    .form-section > p {
-      text-align: center; color: var(--muted);
-      margin-bottom: 32px;
+    .path-cta:hover { background: var(--copper); color: var(--espresso); }
+    .path-card.featured .path-cta { background: var(--copper); color: var(--espresso); }
+    .path-card.featured .path-cta:hover { background: var(--copper-light); }
+
+    /* ─── MODULE CARDS ─── */
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+    .module-card {
+      background: var(--espresso-light); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 1.75rem;
     }
-    .form-group { margin-bottom: 24px; }
-    .form-group label {
-      display: block; font-size: 13px; font-weight: 600;
-      color: var(--espresso); margin-bottom: 8px;
+    .module-number { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--copper); margin-bottom: 0.5rem; }
+    .module-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--white); font-family: 'Inter', sans-serif; font-weight: 700; }
+    .module-card p { font-size: 0.875rem; color: var(--muted); margin: 0; line-height: 1.6; }
+    .module-detail { margin-top: 0.75rem; }
+    .module-detail ul { list-style: none; padding: 0; }
+    .module-detail li { font-size: 0.8rem; color: var(--muted); padding: 0.2rem 0; padding-left: 1rem; position: relative; }
+    .module-detail li::before { content: '→'; position: absolute; left: 0; color: var(--copper); }
+    .module-live { display: inline-block; margin-top: 0.75rem; font-size: 0.7rem; font-weight: 600; color: var(--green); background: var(--green-dim); padding: 0.2rem 0.6rem; border-radius: 4px; }
+
+    /* ─── TIMELINE ─── */
+    .timeline { position: relative; padding-left: 2rem; margin: 2rem 0; }
+    .timeline::before { content: ''; position: absolute; left: 0.4rem; top: 0.5rem; bottom: 0.5rem; width: 1px; background: var(--border); }
+    .tl-item { position: relative; margin-bottom: 2rem; }
+    .tl-dot { position: absolute; left: -1.75rem; top: 0.35rem; width: 10px; height: 10px; border-radius: 50%; background: var(--copper); box-shadow: 0 0 12px rgba(184,115,51,0.4); }
+    .tl-month { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--copper); margin-bottom: 0.3rem; }
+    .tl-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .tl-items { font-size: 0.875rem; color: var(--muted); }
+    .tl-items span { display: block; margin-bottom: 0.2rem; }
+    .tl-items span::before { content: '— '; color: var(--copper); }
+
+    /* ─── PRICING TABLE ─── */
+    .pricing-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    .pricing-table th { text-align: left; padding: 0.65rem 1rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); border-bottom: 1px solid var(--border); }
+    .pricing-table td { padding: 0.75rem 1rem; font-size: 0.9rem; border-bottom: 1px solid var(--border-subtle); color: var(--cream-dim); }
+    .pricing-table td:first-child { color: var(--white); font-weight: 500; }
+    .pricing-table td strong { color: var(--copper); }
+    .pricing-table tr:last-child td { border-bottom: none; font-weight: 700; color: var(--white); }
+
+    /* ─── SCRIPTURE BLOCK ─── */
+    .scripture {
+      background: var(--espresso-light); border: 1px solid var(--border-subtle);
+      border-left: 3px solid rgba(184,115,51,0.4);
+      border-radius: 12px; padding: 1.75rem;
+      margin: 2rem 0;
     }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 14px 16px;
-      border: 1px solid rgba(44,24,16,0.15);
-      border-radius: 10px;
-      font-size: 15px; font-family: inherit;
-      background: #fff;
+    .scripture p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--cream-dim); margin: 0 0 0.5rem; }
+    .scripture cite { font-size: 0.8rem; color: var(--muted); font-style: normal; }
+
+    /* ─── BIG NUMBER ─── */
+    .big-number { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 600; color: var(--copper); }
+
+    /* ─── CALLOUT ─── */
+    .callout {
+      background: rgba(184,115,51,0.08); border: 1px solid rgba(184,115,51,0.25);
+      border-radius: 12px; padding: 1.5rem 1.75rem; margin: 2rem 0;
+    }
+    .callout p { color: var(--cream); font-size: 0.95rem; margin: 0; }
+
+    /* ─── FORM ─── */
+    .form-wrap {
+      background: var(--espresso-mid); border: 1px solid var(--border);
+      border-radius: 20px; padding: 3rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .form-group label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--espresso); border: 1px solid var(--border-subtle);
+      color: var(--cream); border-radius: 8px; padding: 0.85rem 1rem;
+      font-size: 0.95rem; font-family: inherit; outline: none;
       transition: border-color 0.2s;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: var(--copper);
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--copper); }
+    .form-group select option { background: var(--espresso); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(240,235,227,0.25); }
+    .btn-primary {
+      width: 100%; background: var(--copper); color: var(--espresso);
+      border: none; border-radius: 10px; padding: 1.1rem;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      font-family: inherit; transition: all 0.2s; margin-top: 0.5rem;
+      letter-spacing: 0.02em;
     }
-    .form-group textarea { min-height: 100px; resize: vertical; }
-    
-    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
-    .radio-option {
-      flex: 1; min-width: 140px;
-      padding: 16px;
-      border: 2px solid rgba(44,24,16,0.1);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
-    }
-    .radio-option:hover { border-color: var(--copper); }
-    .radio-option.selected {
-      border-color: var(--copper);
-      background: rgba(184,115,51,0.08);
-    }
-    .radio-option input { display: none; }
-    .radio-option .option-label {
-      font-size: 14px; font-weight: 600;
-      color: var(--espresso);
-    }
-    .radio-option .option-price {
-      font-size: 18px; font-weight: 700;
-      color: var(--copper); margin-top: 4px;
-    }
+    .btn-primary:hover { background: var(--copper-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(184,115,51,0.3); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .form-success { text-align: center; padding: 3rem 1rem; display: none; }
+    .form-success h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1rem; }
 
-    .submit-btn {
-      width: 100%;
-      padding: 18px 32px;
-      background: var(--espresso);
-      color: var(--cream);
-      border: none; border-radius: 12px;
-      font-size: 16px; font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
+    /* ─── STAGE NAV BUTTONS ─── */
+    .stage-nav { display: flex; gap: 1rem; margin-top: 3rem; }
+    .btn-next {
+      background: var(--copper); color: var(--espresso);
+      border: none; border-radius: 10px;
+      padding: 0.9rem 2.5rem;
+      font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; font-family: inherit;
       transition: all 0.2s;
     }
-    .submit-btn:hover {
-      background: #3D261C;
-      transform: translateY(-2px);
+    .btn-next:hover { background: var(--copper-light); transform: translateY(-2px); }
+    .btn-back {
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--border-subtle); border-radius: 10px;
+      padding: 0.9rem 1.75rem;
+      font-size: 0.95rem; font-weight: 500;
+      cursor: pointer; font-family: inherit;
+      transition: color 0.2s;
     }
+    .btn-back:hover { color: var(--cream); }
 
-    /* INCLUDES */
-    .includes-list { margin: 24px 0; }
-    .includes-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(44,24,16,0.06);
-    }
-    .includes-item:last-child { border-bottom: none; }
-    .includes-check { color: var(--copper); font-size: 16px; }
-    .includes-text { font-size: 14px; color: var(--muted); }
-    .includes-text strong { color: var(--espresso); }
+    /* ─── STAT ROW ─── */
+    .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin: 2.5rem 0; }
+    .stat-card { text-align: center; padding: 1.5rem; background: var(--espresso-light); border-radius: 12px; border: 1px solid var(--border-subtle); }
+    .stat-number { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--copper); font-weight: 600; }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 60px 32px;
-      font-size: 12px;
-      color: var(--muted);
+    /* ─── AGENT EXPLAINER ─── */
+    .agent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 2rem 0; }
+    .agent-card {
+      background: var(--espresso-light); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 1.5rem; position: relative; overflow: hidden;
     }
+    .agent-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--copper), transparent);
+    }
+    .agent-card h4 { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; text-transform: none; letter-spacing: 0; }
+    .agent-name-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--copper); margin-bottom: 0.75rem; }
+    .agent-card p { font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.6; }
+    .agent-daily { margin-top: 0.75rem; font-size: 0.78rem; color: var(--muted); }
+    .agent-daily strong { color: var(--copper-light); display: block; margin-bottom: 0.3rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ─── DATA FLOW ─── */
+    .data-flow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+    .data-node { background: var(--copper-dim); border: 1px solid rgba(184,115,51,0.25); border-radius: 8px; padding: 0.45rem 0.9rem; font-size: 0.75rem; font-weight: 600; color: var(--copper-light); }
+    .data-arrow { color: var(--copper); font-size: 1.1rem; }
+
+    /* ─── TORCHY BLOCK ─── */
+    .torchy-block {
+      background: var(--espresso-light); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem 2.5rem; margin: 2rem 0;
+    }
+    .torchy-block h3 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+
+    /* ─── FOOTER ─── */
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-subtle); color: var(--muted); font-size: 0.75rem; }
+    footer a { color: var(--copper); text-decoration: none; }
 
     @media (max-width: 640px) {
-      nav { padding: 14px 20px; }
-      section { padding: 60px 20px; }
-      .hero { padding: 100px 20px 60px; }
-      .feature-grid { grid-template-columns: 1fr; }
-      .form-section { padding: 32px 24px; }
-      .pricing-card { padding: 32px 24px; }
+      .container, .container-wide { padding: 5rem 1.25rem 3rem; }
+      .progress-bar { padding: 0.75rem 1rem; }
+      .progress-step { font-size: 0; }
+      .progress-step.active { font-size: 0.6rem; }
+      .path-grid, .agent-grid, .form-row, .stat-row { grid-template-columns: 1fr; }
+      .form-wrap { padding: 2rem 1.25rem; }
+      .module-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <span class="nav-logo">RAIZE THE VIBE × BENNU</span>
-  <span class="nav-tag">DIGITAL FOUNDATION PROPOSAL</span>
+<!-- PROGRESS BAR -->
+<nav class="progress-bar">
+  <div class="progress-step active" onclick="goTo(1)" id="ps-1">Welcome</div>
+  <div class="progress-step" onclick="goTo(2)" id="ps-2">We Listened</div>
+  <div class="progress-step" onclick="goTo(3)" id="ps-3">Your Path</div>
+  <div class="progress-step" onclick="goTo(4)" id="ps-4">The System</div>
+  <div class="progress-step" onclick="goTo(5)" id="ps-5">Community</div>
+  <div class="progress-step" onclick="goTo(6)" id="ps-6">Timeline</div>
+  <div class="progress-step" onclick="goTo(7)" id="ps-7">Investment</div>
+  <div class="progress-step" onclick="goTo(8)" id="ps-8">Let's Go</div>
 </nav>
 
-<div class="hero">
-  <p class="hero-eyebrow">For Steve & Stephanie Williams</p>
-  <h1>Your digital presence,<br>running while you rest.</h1>
-  <p class="hero-sub">
-    You've built something beautiful — three locations, 17 years, a community. 
-    Let's make sure the digital side reflects the soul of what Bennu actually is.
-  </p>
+
+<!-- ───────────────────────────────────────── -->
+<!-- STAGE 1: THE HOOK -->
+<!-- ───────────────────────────────────────── -->
+<div class="stage active" id="stage-1">
+  <div class="container">
+    <div class="eyebrow">Prepared for Steve & Stephanie Williams</div>
+    <h1>The Bennu bird doesn't wait.<br>It rises.</h1>
+    <p style="font-size:1.15rem; color:var(--cream-dim); max-width:640px; margin: 1.5rem 0 1rem;">Seventeen years. Three locations. The recipe that became Chameleon Cold Brew — a national brand, a Nestlé acquisition. You built something real.</p>
+    <p style="font-size:1.15rem; color:var(--cream-dim); max-width:640px; margin-bottom:2rem;">This isn't another agency pitch. There are no strategy decks here, no quarterly reviews, no responsibility placed back on you for things outside your wheelhouse. <strong>This is a system — built specifically for Bennu, based on what you told me.</strong></p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-number">17</div>
+        <div class="stat-label">Years serving Austin</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Locations, all 24/7</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1M+</div>
+        <div class="stat-label">Texans in active recovery</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>Bennu is the Egyptian phoenix — a symbol of resurrection. Of rising from the ashes into something more powerful than before.<br><br>Austin didn't stop loving Bennu. <strong>Austin just forgot to look up.</strong> We're going to fix that.</p>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-next" onclick="goTo(2)">See what we heard →</button>
+    </div>
+  </div>
 </div>
 
-<section>
-  <p class="section-label">The Foundation</p>
-  <h2>Set it. Trust it. Forget it.</h2>
-  <p style="color: var(--muted); font-size: 16px; line-height: 1.8;">
-    You told me agencies kept putting the responsibility back on you for things outside your wheelhouse. 
-    That ends here. This package runs autonomously — you approve content once, 
-    then the systems work 24/7 just like your shops do.
-  </p>
 
-  <div class="feature-grid">
-    <div class="feature">
-      <div class="feature-icon">📱</div>
-      <h4>Autonomous Social Media</h4>
-      <p>Daily content that sounds like Bennu, not a bot. Posting, engaging, building presence — without your daily input.</p>
+<!-- ───────────────────────────────────────── -->
+<!-- STAGE 2: PROBLEM VALIDATION -->
+<!-- ───────────────────────────────────────── -->
+<div class="stage" id="stage-2">
+  <div class="container">
+    <div class="eyebrow">We listened</div>
+    <h2>Here's what I heard.</h2>
+    <p>You didn't open a pitch deck. You told me your story. So before we show you anything we built, here's proof we actually listened.</p>
+
+    <div class="pain-block">
+      <div class="pain-quote">"Agencies kept putting responsibility back on me for things outside my wheelhouse."</div>
+      <p style="font-size:0.9rem; color:var(--muted); margin:0 0 0.75rem;">You hired experts. They made you do the work. That's backwards — and it's the industry standard. You're expected to provide logins, approve every post, answer emails about strategy you never wanted to manage in the first place.</p>
+      <div class="pain-diff"><strong>What we do differently:</strong> Autonomous systems that run without your daily input. You approve the voice once. After that, it runs itself.</div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">🗺️</div>
-      <h4>Google Maps Optimization</h4>
-      <p>All 3 locations optimized and maintained. Show up when Austin searches "coffee near me" at 2 AM.</p>
+
+    <div class="pain-block">
+      <div class="pain-quote">"We could never justify the spend or measure it against any business movement."</div>
+      <p style="font-size:0.9rem; color:var(--muted); margin:0 0 0.75rem;">Money went out. Nothing visibly changed. No wonder you're skeptical. Most agencies optimize for their own reporting — not your revenue.</p>
+      <div class="pain-diff"><strong>What we do differently:</strong> Built-in tracking. Monthly reports that show what moved, what didn't, and what we're adjusting. If it's not working, we tell you — and we fix it.</div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">⭐</div>
-      <h4>Review Automation</h4>
-      <p>Turn happy customers into 5-star reviews automatically. Your QR system already captures them — now we activate them.</p>
+
+    <div class="pain-block">
+      <div class="pain-quote">"We don't have anything in place — just old architecture nobody maintains."</div>
+      <p style="font-size:0.9rem; color:var(--muted); margin:0 0 0.75rem;">Your shops are alive. Your online presence is dormant. Google Business profiles that haven't been touched in years. A review cadence that relies on luck. Social media that posts when someone remembers.</p>
+      <div class="pain-diff"><strong>What we do differently:</strong> We build it, we run it, we maintain it. Set it, trust it, forget it.</div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">🔄</div>
-      <h4>Database Reactivation</h4>
-      <p>Your cashierless system has captured thousands of customers. Let's bring the lapsed ones back home.</p>
+
+    <div class="pain-block">
+      <div class="pain-quote">"The current employee demographic is less and less useful and helpful."</div>
+      <p style="font-size:0.9rem; color:var(--muted); margin:0 0 0.75rem;">You identified this as a cultural problem — not a skills problem. The people you're drawing from aren't motivated the same way. That's not an HR fix. It's a pipeline fix.</p>
+      <div class="pain-diff"><strong>What we do differently:</strong> I have direct access to Austin's recovery community — people rebuilding their lives who show up with accountability and gratitude built in. More on this in the Community Relaunch.</div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">📲</div>
-      <h4>SMS Campaigns</h4>
-      <p>"Latte of the month" texts, seasonal specials, birthday offers. Simple touches that keep Bennu top of mind.</p>
+
+    <div class="pain-block">
+      <div class="pain-quote">"They come in for shelter. We don't want to kick them out. But we lose customers if we don't."</div>
+      <p style="font-size:0.9rem; color:var(--muted); margin:0 0 0.75rem;">You and Stephanie are good people caught in a lose-lose. Your current staff doesn't have the skills to handle this with grace. And neither option — ignore it or remove them — actually works.</p>
+      <div class="pain-diff"><strong>What we do differently:</strong> The Blessing Bag program. A third option that creates dignity, goodwill, and — surprisingly — trackable guerrilla marketing. More in the Community Relaunch.</div>
     </div>
-    <div class="feature">
-      <div class="feature-icon">🔍</div>
-      <h4>Search Visibility</h4>
-      <p>SEO foundations so people actually find you when they're looking for what you offer.</p>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(1)">← Back</button>
+      <button class="btn-next" onclick="goTo(3)">Choose your path →</button>
     </div>
   </div>
-</section>
+</div>
 
-<section>
-  <p class="section-label">The Investment</p>
-  <h2>Simple. Transparent. Fair.</h2>
-  
-  <div class="pricing-card">
-    <h3>Digital Foundation Package</h3>
-    <div class="pricing-amount">$5,000</div>
-    <p class="pricing-sub">One-time setup (includes Mac mini hosted at our location)</p>
-    
-    <hr class="pricing-divider">
-    
-    <p style="font-size: 14px; opacity: 0.8; margin-bottom: 8px;">Then</p>
-    <div class="pricing-alt">$500/month</div>
-    <p class="pricing-alt-note">Ongoing maintenance, monitoring, optimization</p>
-    
-    <hr class="pricing-divider">
-    
-    <p class="pricing-or">— OR —</p>
-    <div class="pricing-alt">$10,000 upfront</div>
-    <p class="pricing-alt-note">Save 2 months — no monthly fees for first year</p>
-  </div>
 
-  <div class="card">
-    <h3>What's Included in Setup</h3>
-    <div class="includes-list">
-      <div class="includes-item">
-        <span class="includes-check">✓</span>
-        <span class="includes-text"><strong>Mac mini</strong> — dedicated hardware, hosted at our location for guaranteed uptime</span>
+<!-- ───────────────────────────────────────── -->
+<!-- STAGE 3: PATH SELECTION -->
+<!-- ───────────────────────────────────────── -->
+<div class="stage" id="stage-3">
+  <div class="container">
+    <div class="eyebrow">Your path</div>
+    <h2>Two ways to start.<br>One direction.</h2>
+    <p>Both paths are built on what you told me. One is the digital infrastructure. The other is the community positioning. They work independently — and they're more powerful together.</p>
+
+    <div class="path-grid">
+      <div class="path-card featured" onclick="goTo(4)">
+        <div class="path-icon">⚙️</div>
+        <div class="path-tag">Path A — Digital Foundation</div>
+        <h3>Set it. Trust it. Forget it.</h3>
+        <p style="font-size:0.88rem; color:var(--muted); margin:0.75rem 0 0;">Five AI agents running 24/7 — handling social media, Google Maps, reviews, SMS campaigns, and search visibility — without you lifting a finger.</p>
+        <div class="path-price">$5,000 setup<br>+ $500/mo</div>
+        <div class="path-price-sub">or $10,000 upfront — saves $1,000 over 2 years</div>
+        <button class="path-cta" onclick="event.stopPropagation(); goTo(4)">Explore Digital Foundation →</button>
       </div>
-      <div class="includes-item">
-        <span class="includes-check">✓</span>
-        <span class="includes-text"><strong>Full platform configuration</strong> — social accounts, GMB, review systems, SMS</span>
-      </div>
-      <div class="includes-item">
-        <span class="includes-check">✓</span>
-        <span class="includes-text"><strong>Brand voice training</strong> — AI learns to write like Bennu, not like a corporation</span>
-      </div>
-      <div class="includes-item">
-        <span class="includes-check">✓</span>
-        <span class="includes-text"><strong>Customer database integration</strong> — connect your QR/POS data for reactivation</span>
-      </div>
-      <div class="includes-item">
-        <span class="includes-check">✓</span>
-        <span class="includes-text"><strong>30-day optimization period</strong> — we dial in what works before stepping back</span>
+
+      <div class="path-card" onclick="goTo(5)">
+        <div class="path-icon">🤝</div>
+        <div class="path-tag">Path B — Community Relaunch</div>
+        <h3>Bennu means resurrection.<br>Let's live up to the name.</h3>
+        <p style="font-size:0.88rem; color:var(--muted); margin:0.75rem 0 0;">Recovery hiring pipeline, blessing bags, event sponsorships, street team activation. Become Austin's recovery-friendly coffee shop — the Torchy's model, applied to Bennu.</p>
+        <div class="path-price">$12,000</div>
+        <div class="path-price-sub">$3,000/month × 4 months</div>
+        <button class="path-cta" onclick="event.stopPropagation(); goTo(5)">Explore Community Relaunch →</button>
       </div>
     </div>
-  </div>
-</section>
 
-<section>
-  <div class="quote">
-    <p>"There's still a huge population that appreciates the thrift store couches and the dusty books and the grumpy barista that coffee shops are supposed to deliver."</p>
-    <cite>— From our conversation, March 2026</cite>
-  </div>
-  
-  <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">
-    That population hasn't gone anywhere. They just forgot to look up. 
-    This package ensures that when they do look — at 2 AM, after a meeting, 
-    searching for somewhere real — they find Bennu.
-  </p>
-</section>
+    <div class="callout">
+      <p>Both together: <strong>$17,000</strong> — digital running, community anchored, Austin remembers. <a href="#" onclick="goTo(6)" style="color:var(--copper-light);">See the combined timeline →</a></p>
+    </div>
 
-<section>
-  <div class="form-section">
-    <h3>Ready to move forward?</h3>
-    <p>Select your preference and we'll prepare the agreement.</p>
-    
-    <form id="intent-form">
-      <div class="form-group">
-        <label>Which option works best for you?</label>
-        <div class="radio-group">
-          <label class="radio-option" onclick="selectOption(this)">
-            <input type="radio" name="pricing" value="monthly" required>
-            <div class="option-label">Monthly</div>
-            <div class="option-price">$5K + $500/mo</div>
-          </label>
-          <label class="radio-option" onclick="selectOption(this)">
-            <input type="radio" name="pricing" value="annual">
-            <div class="option-label">Annual (Save $1K)</div>
-            <div class="option-price">$10K upfront</div>
-          </label>
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(2)">← Back</button>
+      <button class="btn-next" onclick="goTo(4)">Start with Digital Foundation →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───────────────────────────────────────── -->
+<!-- STAGE 4: DIGITAL FOUNDATION -->
+<!-- ───────────────────────────────────────── -->
+<div class="stage" id="stage-4">
+  <div class="container">
+    <div class="eyebrow">Path A — Digital Foundation</div>
+    <h2>What a local AI agent actually does.</h2>
+    <p>Not a chatbot. Not a widget. A local AI agent is a purpose-built program that runs on hardware we configure, install, and maintain — doing specific, repeatable digital work for your business every single day without your input.</p>
+    <p>Here's what your five agents do starting Week 1:</p>
+
+    <div class="agent-grid">
+      <div class="agent-card">
+        <div class="agent-name-tag">Agent 01 — The Guardian</div>
+        <h4>Google Business + Reviews</h4>
+        <p>Keeps all three GBP profiles active, accurate, and optimized. Monitors for new reviews across Google and Yelp.</p>
+        <div class="agent-daily">
+          <strong>Daily activity:</strong>
+          Responds to positive reviews within 4 hours. Flags negative reviews to Chrix before they hurt your rating. Requests reviews from recent customers automatically. Adds posts, seasonal hours, photos on a rolling schedule.
         </div>
       </div>
-      
-      <div class="form-group">
-        <label>When would you like to start?</label>
-        <select name="timeline" required>
-          <option value="">Select timing...</option>
-          <option value="this-week">This week — let's go</option>
-          <option value="next-week">Next week</option>
-          <option value="two-weeks">In 2 weeks</option>
-          <option value="discussing">Still discussing internally</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label>Any questions or concerns before we proceed?</label>
-        <textarea name="questions" placeholder="Anything you want to discuss..."></textarea>
+
+      <div class="agent-card">
+        <div class="agent-name-tag">Agent 02 — The Voice</div>
+        <h4>Social Media — Instagram + Facebook</h4>
+        <p>Creates and schedules content in Bennu's voice — the thrift store couches, the dusty books, the grumpy barista energy that made you.</p>
+        <div class="agent-daily">
+          <strong>Daily activity:</strong>
+          Generates posts based on what's happening in your shops. Responds to comments and DMs. Maintains consistent cadence (3-4 posts/week). You approve or it posts — your choice.
+        </div>
       </div>
 
-      <input type="hidden" name="proposal" value="Basic AGE Digital Foundation">
-      <input type="hidden" name="client" value="Bennu Coffee">
-      <input type="hidden" name="email" value="Bennucoffee@gmail.com">
-      
-      <button type="submit" class="submit-btn">I'm ready — send the agreement</button>
-    </form>
+      <div class="agent-card">
+        <div class="agent-name-tag">Agent 03 — The Regular</div>
+        <h4>Lapsed Customer Re-engagement</h4>
+        <p>Your QR data captures every customer. Most haven't been back since the pandemic changed their habits. They didn't stop liking Bennu — they just stopped thinking about it.</p>
+        <div class="agent-daily">
+          <strong>Daily activity:</strong>
+          Triggers "we miss you" campaigns at 60-day lapse. Birthday latte sequences. Seasonal pushes. SMS or email. Human-feeling, not blasted.
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-name-tag">Agent 04 — The Mapper</div>
+        <h4>Local SEO + Search Visibility</h4>
+        <p>When someone searches "24 hour coffee Austin" or "late night coffee near me" at 1:30 AM — you show up first. Not Starbucks. Bennu.</p>
+        <div class="agent-daily">
+          <strong>Daily activity:</strong>
+          Monitors search ranking positions. Adjusts local SEO signals. Tracks how Bennu appears in AI search (ChatGPT, Google AI Overviews, Perplexity). Keeps citations consistent across 40+ directories.
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-name-tag">Agent 05 — The Messenger</div>
+        <h4>SMS Campaigns</h4>
+        <p>A direct line to your customer database. "Latte of the month." Event announcements. Flash deals. Simple, compliant, effective.</p>
+        <div class="agent-daily">
+          <strong>Daily activity:</strong>
+          Sends weekly touch campaigns. Manages opt-ins and opt-outs. Tracks open and conversion rates. Reports monthly.
+        </div>
+      </div>
+
+      <div class="agent-card" style="border-color: var(--border); background: var(--espresso-mid);">
+        <div class="agent-name-tag" style="color:var(--muted);">Hardware</div>
+        <h4>Mac Mini — On-Site Infrastructure</h4>
+        <p>Your agents don't live in a cloud subscription that can disappear. They run on dedicated hardware we configure, deliver to your main location, and maintain remotely.</p>
+        <div class="agent-daily">
+          <strong>What this means:</strong>
+          No per-seat fees. No surprise invoices. No platform dependencies. Your fleet runs locally, under your roof — and we monitor uptime 24/7.
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:3rem;">Your data is already there.</h3>
+    <p>The cashierless system at all three locations has been building a first-party customer database every single day. Every scan, every order, every payment — that's a contact record. Most coffee shops would pay significantly to have what you already have.</p>
+
+    <div class="data-flow">
+      <div class="data-node">📱 Customer scans QR</div>
+      <div class="data-arrow">→</div>
+      <div class="data-node">🧾 Order placed</div>
+      <div class="data-arrow">→</div>
+      <div class="data-node">📋 Contact captured</div>
+      <div class="data-arrow">→</div>
+      <div class="data-node">🤖 Agent activates</div>
+      <div class="data-arrow">→</div>
+      <div class="data-node">☕ They come back</div>
+    </div>
+
+    <p>We connect that data to The Regular. What you've been collecting starts working for you.</p>
+
+    <hr>
+
+    <h3>What delivery looks like</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Day 0 — You say yes</div>
+        <div class="tl-title">90-minute discovery session</div>
+        <div class="tl-items">
+          <span>Brand voice interview (tone, language, what Bennu sounds like)</span>
+          <span>Credentials walkthrough (Google, social, QR system access)</span>
+          <span>Hardware delivery scheduled</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Week 1</div>
+        <div class="tl-title">Infrastructure built, Guardian + Mapper go live</div>
+        <div class="tl-items">
+          <span>GBP profiles audited and optimized — all 3 locations</span>
+          <span>Review response templates trained to Bennu's voice</span>
+          <span>Hardware delivered and configured</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Week 2-3</div>
+        <div class="tl-title">Voice + Regular + Messenger go live</div>
+        <div class="tl-items">
+          <span>First social posts scheduled for approval</span>
+          <span>Database connected, lapsed customer list built</span>
+          <span>First SMS campaign drafted and sent</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Day 30</div>
+        <div class="tl-title">First check-in report</div>
+        <div class="tl-items">
+          <span>Review velocity change</span>
+          <span>Re-engagement email open rates</span>
+          <span>Search ranking movement</span>
+          <span>Anything not working → we adjust</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Day 90</div>
+        <div class="tl-title">Full performance review</div>
+        <div class="tl-items">
+          <span>All 5 agents running autonomously</span>
+          <span>Revenue attribution on re-engagement campaigns</span>
+          <span>Decision: continue, expand, or add Community Relaunch</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(3)">← Back</button>
+      <button class="btn-next" onclick="goTo(5)">See Community Relaunch →</button>
+    </div>
   </div>
-</section>
+</div>
+
+
+<!-- ───────────────────────────────────────── -->
+<!-- STAGE 5: COMMUNITY RELAUNCH -->
+<!-- ───────────────────────────────────────── -->
+<div class="stage" id="stage-5">
+  <div class="container">
+    <div class="eyebrow">Path B — Community Relaunch</div>
+    <h2>The Torchy's playbook.<br>Applied to Bennu.</h2>
+
+    <div class="torchy-block">
+      <h3>Before Torchy's was a $500M brand, Mike Rypka was sweating in a food truck.</h3>
+      <p style="margin-top:0.75rem;">He worked 100 hours a week for two years before breaking even. Rode a red Vespa around Austin handing out chips and salsa to galleries and salons. Built a community before he had a marketing budget.</p>
+      <p>What made the difference? Two things most people don't know about:</p>
+      <p><strong>He hired from the recovery community.</strong> People rebuilding their lives who showed up early, stayed late, and treated every shift like it mattered. Better hospitality than any agency could manufacture.</p>
+      <p><strong>He made Torchy's a friend to that community.</strong> Recovery discounts. Event sponsorships. Word-of-mouth through AA and NA networks. A fiercely loyal customer base that spread the word before he ever went viral.</p>
+      <p style="margin-bottom:0;"><strong>Mike Rypka is in recovery. I know this community.</strong> I live in it. And I can connect Bennu to it the same way.</p>
+    </div>
+
+    <div class="scripture">
+      <p>"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."</p>
+      <cite>— Jeremiah 29:11</cite>
+    </div>
+
+    <hr>
+
+    <h3>Four programs. Ninety days.</h3>
+
+    <div class="module-grid">
+      <div class="module-card">
+        <div class="module-number">Program 01</div>
+        <h3>Recovery Hiring Pipeline</h3>
+        <p>The problem isn't training. It's who you're drawing from. The recovery community is different — accountability is built into their program, showing up is how they stay sober.</p>
+        <div class="module-detail">
+          <ul>
+            <li>Activate sober living houses, treatment centers, peer recovery coaches in my network</li>
+            <li>Pre-vetted candidates who want to work and need the chance</li>
+            <li>Recovery employees better equipped to handle difficult interactions (including unhoused visitors)</li>
+            <li>You hire like normal — I fix the pipeline</li>
+          </ul>
+        </div>
+        <span class="module-live">Month 1: First candidates interviewed</span>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">Program 02</div>
+        <h3>The Blessing Bag Program</h3>
+        <p>Instead of creating a place for them to come — create a reason to leave with dignity. A branded bag each location stocks for unhoused visitors.</p>
+        <div class="module-detail">
+          <ul>
+            <li>Inside: snacks, hygiene items, a handwritten note from Steve & Stephanie, QR stickers</li>
+            <li>Optional participation: place stickers around Austin, photo-track placements</li>
+            <li>Tracks guerrilla marketing presence across the city</li>
+            <li>Recovery staff handles every interaction with grace</li>
+          </ul>
+        </div>
+        <span class="module-live">Month 2: Deployed at all 3 locations</span>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">Program 03</div>
+        <h3>Recovery Community Sponsorships</h3>
+        <p>Austin has 9–15 major recovery events every year. Bennu should be at every one. One peer recovery coach recommends you → their 5–15 clients start coming → they tell their sponsors.</p>
+        <div class="module-detail">
+          <ul>
+            <li>Event sponsorships (table, flyers, verbal mention)</li>
+            <li>Recovery discount program (5–10% off — honor system)</li>
+            <li>Flyers at meeting locations across Austin</li>
+            <li>Direct outreach to ~650–900 peer recovery coaches</li>
+          </ul>
+        </div>
+        <span class="module-live">Month 2–3: First events sponsored</span>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">Program 04</div>
+        <h3>Late-Night Street Team</h3>
+        <p>70+ Austin bars close at 2 AM. Thousands of people suddenly need somewhere to go. Bennu is one of the only 24/7 indoor options — most of them don't know it exists.</p>
+        <div class="module-detail">
+          <ul>
+            <li>Recovery community members earning honest income as canvassers</li>
+            <li>South Congress, 6th Street, Rainey Street — 12 AM to 2 AM</li>
+            <li>Trackable QR codes on every flyer</li>
+            <li>Real data on what neighborhoods convert</li>
+          </ul>
+        </div>
+        <span class="module-live">Month 3: Full activation</span>
+      </div>
+    </div>
+
+    <hr>
+
+    <h3>The ROI case — in plain numbers</h3>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-number">20%</div>
+        <div class="stat-label">Revenue down post-pandemic</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5×</div>
+        <div class="stat-label">ROI if 5% revenue recovered in Year 1</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$300K+</div>
+        <div class="stat-label">Potential valuation impact if considering sale</div>
+      </div>
+    </div>
+    <p style="font-size:0.85rem; color:var(--muted); margin-top:0.5rem;">Conservative: 3 locations × ~$450K/year = ~$1.35M gross. Down 20% = ~$270K lost. Community program recovers 5%: ~$67K/year. That's 5× return on a $12K investment in Year 1. At a 2× valuation multiple, community positioning adds $100–300K to the exit price.</p>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(4)">← Digital Foundation</button>
+      <button class="btn-next" onclick="goTo(6)">See the timeline →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───────────────────────────────────────── -->
+<!-- STAGE 6: TIMELINE -->
+<!-- ───────────────────────────────────────── -->
+<div class="stage" id="stage-6">
+  <div class="container">
+    <div class="eyebrow">Combined timeline</div>
+    <h2>Month by month —<br>what you'll see happening.</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Month 1 — Foundation</div>
+        <div class="tl-title">Infrastructure built, first people coming in</div>
+        <div class="tl-items">
+          <span>90-min discovery session — voice, access, strategy alignment</span>
+          <span>Hardware configured and delivered to main location</span>
+          <span>All 3 Google Business Profiles audited and live</span>
+          <span>Social content pipeline built and first posts scheduled</span>
+          <span>Recovery hiring pipeline activated — first candidates interviewed</span>
+          <span>Blessing bag design finalized, supply sourced</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Month 2 — Activation</div>
+        <div class="tl-title">All agents live, programs deployed</div>
+        <div class="tl-items">
+          <span>All 5 digital agents running autonomously</span>
+          <span>First lapsed customer re-engagement campaign sent</span>
+          <span>Review automation running — requests going out, responses coming back</span>
+          <span>Blessing bags at all 3 locations, QR sticker tracking live</span>
+          <span>First recovery event sponsorship confirmed</span>
+          <span>Month 1 report delivered — first data in hand</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Month 3 — Momentum</div>
+        <div class="tl-title">Community buzz building, data telling a story</div>
+        <div class="tl-items">
+          <span>First recovery hires on staff (if management moves forward)</span>
+          <span>QR sticker map showing Bennu presence across Austin</span>
+          <span>2–3 recovery events sponsored, peer coach outreach underway</span>
+          <span>SMS campaigns generating trackable return traffic</span>
+          <span>Street team activated — late-night flyer coverage begins</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-month">Month 4 — Proof</div>
+        <div class="tl-title">Full report, systems self-sustaining</div>
+        <div class="tl-items">
+          <span>Complete 90-day performance report</span>
+          <span>Revenue attribution from re-engagement campaigns</span>
+          <span>Community positioning established — recovery-friendly anchor</span>
+          <span>Digital fleet running fully autonomously at $500/mo</span>
+          <span>Decision point: expand, scale, or hand off community work to internal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Your time commitment after Month 1:</strong> 15–30 minutes a month reviewing reports. That's it. Everything else runs without you.</p>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(5)">← Back</button>
+      <button class="btn-next" onclick="goTo(7)">See the investment →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───────────────────────────────────────── -->
+<!-- STAGE 7: INVESTMENT -->
+<!-- ───────────────────────────────────────── -->
+<div class="stage" id="stage-7">
+  <div class="container">
+    <div class="eyebrow">Investment</div>
+    <h2>Clear numbers.<br>No surprises.</h2>
+    <p>This is what good investment looks like: you know exactly what it costs, you know exactly what it does, and you can measure whether it's working. No retainers that magically expand. No unexpected invoices.</p>
+
+    <h3 style="margin-top:2.5rem;">Digital Foundation</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Item</th><th>Cost</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Setup (one-time)</td><td><strong>$5,000</strong></td><td>Includes Mac Mini hardware</td></tr>
+        <tr><td>Monthly maintenance</td><td><strong>$500/mo</strong></td><td>5 agents + monitoring + optimization</td></tr>
+        <tr><td><em>Or pay upfront</em></td><td><strong>$10,000</strong></td><td>Saves $1,000 — no monthly for 12 months</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem;">Community Relaunch</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Item</th><th>Cost</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Program fee</td><td><strong>$3,000/mo</strong></td><td>4-month engagement = $12,000</td></tr>
+        <tr><td>Pass-through costs</td><td><strong>~$300–500/mo</strong></td><td>Bags, flyers, sponsorships — you control</td></tr>
+        <tr><td>After 4 months</td><td><strong>$0</strong></td><td>Systems handed off, relationships established</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem;">Both Together</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Component</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Digital Foundation setup</td><td><strong>$5,000</strong></td></tr>
+        <tr><td>Community Relaunch (4 mo)</td><td><strong>$12,000</strong></td></tr>
+        <tr><td>Digital monthly (ongoing)</td><td><strong>$500/mo</strong></td></tr>
+        <tr><td>Total to start</td><td><strong>$17,000</strong></td></tr>
+        <tr><td>After Month 4</td><td><strong>$500/mo + pass-throughs only</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-top:2rem;">
+      <p><strong>Payment terms:</strong> 50% to start, 50% at the Month 2 midpoint. Or let's talk — there's flexibility here. This is a relationship, not a transaction.</p>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(6)">← Back</button>
+      <button class="btn-next" onclick="goTo(8)">Let's move forward →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───────────────────────────────────────── -->
+<!-- STAGE 8: CTA FORM -->
+<!-- ───────────────────────────────────────── -->
+<div class="stage" id="stage-8">
+  <div class="container">
+    <div class="eyebrow">Next steps</div>
+    <h2>The Bennu bird rises<br>when it's ready.</h2>
+    <p>You've seen everything. Now it's just a conversation. Fill this out and Chrix will reach out within 24 hours — no pressure, no pitch, just figuring out the right path together.</p>
+
+    <div class="form-wrap">
+      <div id="form-container">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="Steve" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Williams" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="bennucoffee@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label>Best Phone</label>
+            <input type="tel" id="phone" placeholder="(512) 000-0000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Which path interests you most?</label>
+          <select id="package">
+            <option value="">Select one...</option>
+            <option value="digital">Digital Foundation — $5K + $500/mo</option>
+            <option value="community">Community Relaunch — $12K over 4 months</option>
+            <option value="both">Both together — $17K + $500/mo after</option>
+            <option value="upfront">Digital Foundation — $10K upfront</option>
+            <option value="talk">Not sure yet — I want to talk first</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>When would you like to start?</label>
+          <select id="timing">
+            <option value="">Select one...</option>
+            <option value="this-week">Ready this week</option>
+            <option value="next-week">Ready next week</option>
+            <option value="stephanie">Need to discuss with Stephanie</option>
+            <option value="evaluating">Still evaluating</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Anything else on your mind?</label>
+          <textarea id="notes" placeholder="Questions, concerns, what you're most excited about, what you're unsure of..."></textarea>
+        </div>
+        <button class="btn-primary" id="submit-btn" onclick="handleSubmit()">
+          I'm ready to move forward — reach out →
+        </button>
+        <p style="text-align:center; font-size:0.8rem; color:var(--muted); margin-top:1rem;">Or call Chrix directly: <a href="tel:+13214668774" style="color:var(--copper);">(321) 466-8774</a></p>
+      </div>
+      <div class="form-success" id="form-success">
+        <div style="font-size:3rem; margin-bottom:1rem;">☕</div>
+        <h3>The bird is rising, Steve.</h3>
+        <p style="max-width:400px; margin:0 auto;">Chrix has been notified. You'll hear from him personally — not a scheduler, not a form confirmation. Him. Within 24 hours.</p>
+      </div>
+    </div>
+    <div class="stage-nav" style="justify-content:center;">
+      <button class="btn-back" onclick="goTo(7)">← Back to Investment</button>
+    </div>
+  </div>
+</div>
 
 <footer>
-  <p>Raize The Vibe × Agent Genesis Engine</p>
-  <p style="margin-top: 8px; opacity: 0.6;">Built for Steve & Stephanie Williams · Bennu Coffee · Austin, TX</p>
+  <p>Prepared by <a href="https://raizethevibe.com">Raize The Vibe</a> for Bennu Coffee · Confidential · Steve & Stephanie Williams</p>
 </footer>
 
 <script>
-function selectOption(el) {
-  document.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
-  el.classList.add('selected');
-  el.querySelector('input').checked = true;
-}
+  const WEBHOOK = 'https://discord.com/api/webhooks/1486907841016107182/Em_Ldu80zKe85uRP7mZSOVnVUQEHxJexWT-Ch91B4O1TcRzkaJo_lctboTcnF7JevkoY';
+  let currentStage = 1;
+  const totalStages = 8;
 
-document.getElementById('intent-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData);
-  
-  // Format message for Discord
-  const message = {
-    content: `**🟢 BENNU INTENT SIGNAL — Basic AGE**\n\n` +
-      `**Client:** Bennu Coffee (Steve Williams)\n` +
-      `**Email:** Bennucoffee@gmail.com\n` +
-      `**Pricing Selected:** ${data.pricing === 'monthly' ? '$5K + $500/mo' : '$10K upfront'}\n` +
-      `**Timeline:** ${data.timeline}\n` +
-      `**Questions/Notes:** ${data.questions || 'None'}\n\n` +
-      `*Submitted from Basic AGE proposal page*`
-  };
-  
-  // Send to Discord webhook (you'll need to set this up)
-  try {
-    const webhookUrl = 'https://discord.com/api/webhooks/1486907841016107182/Em_Ldu80zKe85uRP7mZSOVnVUQEHxJexWT-Ch91B4O1TcRzkaJo_lctboTcnF7JevkoY';
-    await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(message)
+  function goTo(n) {
+    if (n < 1 || n > totalStages) return;
+    document.getElementById('stage-' + currentStage).classList.remove('active');
+    document.getElementById('ps-' + currentStage).classList.remove('active');
+    if (currentStage < n) document.getElementById('ps-' + currentStage).classList.add('done');
+
+    currentStage = n;
+    document.getElementById('stage-' + n).classList.add('active');
+
+    document.querySelectorAll('.progress-step').forEach((s, i) => {
+      s.classList.remove('active');
+      if (i + 1 < n) s.classList.add('done');
+      else s.classList.remove('done');
     });
-  } catch (err) {
-    console.log('Webhook not configured');
-  }
-  
-  // Show confirmation
-  this.innerHTML = `
-    <div style="text-align: center; padding: 40px 0;">
-      <div style="font-size: 48px; margin-bottom: 16px;">☕</div>
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--espresso); margin-bottom: 12px;">
-        Thank you, Steve.
-      </h3>
-      <p style="color: var(--muted);">
-        Chrix will reach out within 24 hours with the agreement.<br>
-        Looking forward to building this together.
-      </p>
-    </div>
-  `;
-  
-  // Track pageview/conversion
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'form_submit', { 'form_name': 'bennu_basic_age' });
-  }
-});
+    document.getElementById('ps-' + n).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-// Track page engagement
-let scrollDepth = 0;
-window.addEventListener('scroll', function() {
-  const newDepth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-  if (newDepth > scrollDepth && newDepth % 25 === 0) {
-    scrollDepth = newDepth;
-    console.log('Scroll depth:', scrollDepth + '%');
+    // Fire webhook on path selections
+    if (n === 4 || n === 5) {
+      fireWebhook({ event: 'viewed_path', path: n === 4 ? 'Digital Foundation' : 'Community Relaunch' });
+    }
   }
-});
+
+  async function fireWebhook(data) {
+    if (!WEBHOOK) return;
+    try {
+      const ts = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'medium', timeStyle: 'short' }) + ' CT';
+      await fetch(WEBHOOK, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: '<@1083410732382699561> 👀 **BENNU — PROSPECT ENGAGEMENT**',
+          embeds: [{ title: '☕ Bennu Journey — Activity', color: 0xb87333, fields: Object.entries(data).map(([k,v]) => ({ name: k, value: String(v), inline: true })), footer: { text: ts } }]
+        })
+      });
+    } catch(e) {}
+  }
+
+  async function handleSubmit() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const pkg = document.getElementById('package').value;
+    const timing = document.getElementById('timing').value;
+    const notes = document.getElementById('notes').value.trim();
+
+    if (!firstName || !email) {
+      alert('Please enter your first name and email.');
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true; btn.textContent = 'Sending...';
+
+    const ts = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'medium', timeStyle: 'short' }) + ' CT';
+
+    try {
+      await fetch(WEBHOOK, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: '<@1083410732382699561> 🔥 **BENNU COFFEE — PROPOSAL SUBMISSION**',
+          embeds: [{
+            title: '☕ Steve Williams — Ready to Move Forward',
+            color: 0xb87333,
+            fields: [
+              { name: '👤 Name', value: `${firstName} ${lastName}`, inline: true },
+              { name: '📧 Email', value: email || 'Not provided', inline: true },
+              { name: '📱 Phone', value: phone || 'Not provided', inline: true },
+              { name: '📦 Path Interest', value: pkg || 'Not selected', inline: true },
+              { name: '⏱ Timing', value: timing || 'Not selected', inline: true },
+              { name: '💬 Notes', value: notes || 'None', inline: false },
+            ],
+            footer: { text: `Bennu Proposal · ${ts}` }
+          }]
+        })
+      });
+    } catch(e) {}
+
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
 </script>
-
 </body>
 </html>
