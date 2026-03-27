@@ -524,8 +524,342 @@
       .btn-cast, .btn-next { padding-top: 1.2rem; padding-bottom: 1.2rem; }
     }
   </style>
+  <style>
+    /* ═══════════════════════════════════════
+       CAESAR LOCK SCREEN
+    ═══════════════════════════════════════ */
+    #lock-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #0a0906;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201,168,76,0.012) 2px, rgba(201,168,76,0.012) 4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    .lock-card {
+      position: relative;
+      width: 100%; max-width: 560px;
+      background: #141210;
+      border: 3px solid rgba(201,168,76,0.45);
+      border-radius: 18px; overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.9), 0 0 60px rgba(201,168,76,0.12), inset 0 0 80px rgba(0,0,0,0.4);
+    }
+    .lock-card::before {
+      content: ''; position: absolute; inset: 5px;
+      border: 1px solid rgba(201,168,76,0.18); border-radius: 13px;
+      pointer-events: none; z-index: 1;
+    }
+    .lock-title-bar {
+      background: linear-gradient(135deg, #2a2010 0%, #1a1508 50%, #2a2010 100%);
+      border-bottom: 2px solid rgba(201,168,76,0.45);
+      padding: 0.85rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .lock-card-name {
+      font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700;
+      color: #e8c96a; letter-spacing: 0.06em;
+    }
+    .lock-mana { color: #c9a84c; font-size: 0.9rem; letter-spacing: 0.1em; }
+    .lock-art {
+      background: linear-gradient(135deg, #0a0d1a 0%, #1a0808 40%, #1a1008 70%, #0a0d1a 100%);
+      border-bottom: 1px solid rgba(201,168,76,0.35);
+      min-height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; letter-spacing: 0.1em;
+      position: relative; overflow: hidden;
+    }
+    .lock-art::after {
+      content: 'ALEA IACTA EST';
+      position: absolute; bottom: 0.5rem; right: 1rem;
+      font-family: 'Cinzel', serif; font-size: 0.6rem;
+      color: rgba(201,168,76,0.4); letter-spacing: 0.2em;
+    }
+    .lock-type-line {
+      background: linear-gradient(135deg, #1a1810, #100e08, #1a1810);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 0.35rem 1.5rem;
+      font-family: 'Cinzel', serif; font-size: 0.68rem; color: #E8E4DC;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .lock-type-line span:last-child { color: #e85a1a; font-size: 0.75rem; }
+    .lock-body { padding: 1.5rem 1.75rem 2rem; }
+    .lock-intro {
+      font-family: 'Crimson Pro', serif; font-style: italic;
+      font-size: 1.05rem; color: #E8E4DC; margin-bottom: 1.5rem;
+      line-height: 1.65;
+    }
+    .q-block { margin-bottom: 1.5rem; }
+    .q-label {
+      font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: #c9a84c; margin-bottom: 0.5rem;
+    }
+    .q-text {
+      font-size: 0.95rem; color: #FAFAFA; font-weight: 600;
+      margin-bottom: 0.75rem; line-height: 1.5;
+    }
+    .q-options { display: flex; flex-direction: column; gap: 0.45rem; }
+    .q-opt {
+      background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px; padding: 0.65rem 1rem;
+      font-size: 0.88rem; color: #E8E4DC; cursor: pointer;
+      transition: all 0.2s; display: flex; align-items: center; gap: 0.75rem;
+    }
+    .q-opt:hover { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.4); color: #FAFAFA; }
+    .q-opt.correct { background: rgba(74,138,90,0.25); border-color: #4a8a5a; color: #FAFAFA; pointer-events: none; }
+    .q-opt.wrong { background: rgba(138,42,42,0.25); border-color: #8a2a2a; color: rgba(232,228,220,0.5); pointer-events: none; }
+    .q-opt-letter {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700;
+      color: #c9a84c; flex-shrink: 0;
+    }
+    .lock-progress {
+      display: flex; gap: 0.4rem; margin-bottom: 1.5rem; align-items: center;
+    }
+    .progress-pip {
+      height: 4px; flex: 1; border-radius: 2px;
+      background: rgba(201,168,76,0.15);
+      transition: background 0.4s;
+    }
+    .progress-pip.done { background: #4a8a5a; }
+    .progress-pip.active { background: #c9a84c; box-shadow: 0 0 8px rgba(201,168,76,0.6); }
+    .lock-feedback {
+      font-family: 'Crimson Pro', serif; font-style: italic;
+      font-size: 0.92rem; min-height: 1.5rem; margin-bottom: 1rem;
+      text-align: center; transition: color 0.3s;
+    }
+    .lock-feedback.good { color: #4a8a5a; }
+    .lock-feedback.bad { color: #c0504a; }
+    .lock-bypass {
+      text-align: center; margin-top: 1.25rem;
+      padding-top: 1.25rem; border-top: 1px solid rgba(201,168,76,0.12);
+    }
+    .bypass-label {
+      font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,168,76,0.4);
+      margin-bottom: 0.5rem;
+    }
+    .bypass-input-wrap { display: flex; gap: 0.5rem; }
+    .bypass-input {
+      flex: 1; background: rgba(201,168,76,0.04);
+      border: 1px solid rgba(201,168,76,0.2); border-radius: 8px;
+      padding: 0.55rem 0.85rem; font-size: 0.85rem;
+      color: #FAFAFA; font-family: 'Inter', sans-serif; outline: none;
+      letter-spacing: 0.08em;
+      transition: border-color 0.2s;
+    }
+    .bypass-input:focus { border-color: rgba(201,168,76,0.5); }
+    .bypass-input::placeholder { color: rgba(232,228,220,0.2); }
+    .bypass-btn {
+      background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+      color: #c9a84c; border-radius: 8px; padding: 0.55rem 0.85rem;
+      font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .bypass-btn:hover { background: rgba(201,168,76,0.2); color: #e8c96a; }
+    .lock-unlocking {
+      display: none; flex-direction: column; align-items: center;
+      justify-content: center; padding: 3rem 2rem; text-align: center;
+    }
+    .unlock-seal {
+      font-size: 3rem; margin-bottom: 1rem;
+      animation: sealBurn 0.8s ease forwards;
+    }
+    @keyframes sealBurn {
+      0% { filter: none; transform: scale(1); }
+      50% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.8)); transform: scale(1.2); }
+      100% { filter: drop-shadow(0 0 8px rgba(201,168,76,0.3)); transform: scale(1); }
+    }
+    .unlock-text {
+      font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700;
+      color: #e8c96a; margin-bottom: 0.5rem;
+    }
+    .unlock-sub {
+      font-family: 'Crimson Pro', serif; font-style: italic;
+      font-size: 1rem; color: rgba(232,228,220,0.7);
+    }
+  </style>
 </head>
 <body>
+
+  <!-- ═══════════ CAESAR LOCK SCREEN ═══════════ -->
+  <div id="lock-screen">
+    <div class="lock-card">
+      <div class="lock-title-bar">
+        <span class="lock-card-name">Authorization Seal — Access Denied</span>
+        <span class="lock-mana">{W}{B}{R}</span>
+      </div>
+      <div class="lock-art">🏛️⚔️🦅</div>
+      <div class="lock-type-line">
+        <span>Legendary Enchantment — Cipher · Restricted</span>
+        <span>◆</span>
+      </div>
+
+      <div class="lock-body">
+        <div id="quiz-section">
+          <p class="lock-intro">"This document is sealed by the authority of the Senate and the People of Rome. Prove your knowledge — or find another door."</p>
+          <div class="lock-progress">
+            <div class="progress-pip active" id="pip-1"></div>
+            <div class="progress-pip" id="pip-2"></div>
+            <div class="progress-pip" id="pip-3"></div>
+          </div>
+
+          <div id="q-container"></div>
+          <div class="lock-feedback" id="lock-feedback"></div>
+
+          <div class="lock-bypass">
+            <div class="bypass-label">◆ &nbsp; Patron Override &nbsp; ◆</div>
+            <div class="bypass-input-wrap">
+              <input type="password" class="bypass-input" id="bypass-input" placeholder="Enter key..." onkeydown="if(event.key==='Enter')checkBypass()">
+              <button class="bypass-btn" onclick="checkBypass()">UNLOCK</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="lock-unlocking" id="unlock-screen">
+          <div class="unlock-seal">🦅</div>
+          <div class="unlock-text">SENATUS POPULUSQUE ROMANUS</div>
+          <div class="unlock-sub">"The die is cast. The gates of Bennu are open."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const BYPASS_KEY = 'VENI-VIDI-VICI';
+    const QUESTIONS = [
+      {
+        q: "What was Julius Caesar's full Latin name at birth?",
+        opts: [
+          "Gaius Julius Caesar",
+          "Marcus Julius Caesar",
+          "Lucius Julius Caesar",
+          "Publius Julius Caesar"
+        ],
+        correct: 0,
+        feedback: "Correct — Gaius Julius Caesar. His praenomen was Gaius, a name he shared with his father."
+      },
+      {
+        q: "In what year was Julius Caesar assassinated on the Ides of March?",
+        opts: [
+          "55 BC",
+          "51 BC",
+          "44 BC",
+          "38 BC"
+        ],
+        correct: 2,
+        feedback: "The Ides of March, 44 BC. Twenty-three wounds. The Senate thought it was the end. It was the beginning."
+      },
+      {
+        q: "Which of these was Caesar's most famous military campaign, documented in his own writing?",
+        opts: [
+          "The Conquest of Egypt",
+          "The Gallic Wars",
+          "The Macedonian Campaign",
+          "The Siege of Carthage"
+        ],
+        correct: 1,
+        feedback: "Commentarii de Bello Gallico — eight books, written in the third person. Caesar documented his own conquest of Gaul."
+      }
+    ];
+    let current = 0;
+    let answered = 0;
+
+    function renderQ() {
+      const q = QUESTIONS[current];
+      const letters = ['A','B','C','D'];
+      document.getElementById('q-container').innerHTML = `
+        <div class="q-block">
+          <div class="q-label">Question ${current+1} of 3</div>
+          <div class="q-text">${q.q}</div>
+          <div class="q-options">
+            ${q.opts.map((o,i) => `
+              <div class="q-opt" onclick="answer(${i})" id="opt-${i}">
+                <span class="q-opt-letter">${letters[i]}</span>
+                ${o}
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+    }
+
+    function answer(idx) {
+      const q = QUESTIONS[current];
+      const fb = document.getElementById('lock-feedback');
+      const opts = document.querySelectorAll('.q-opt');
+      opts.forEach(o => o.style.pointerEvents = 'none');
+      if (idx === q.correct) {
+        opts[idx].classList.add('correct');
+        fb.textContent = q.feedback;
+        fb.className = 'lock-feedback good';
+        document.getElementById(`pip-${current+1}`).classList.add('done');
+        answered++;
+        if (answered === 3) {
+          setTimeout(unlock, 1200);
+        } else {
+          setTimeout(() => {
+            current++;
+            if (current < 3) {
+              const pip = document.getElementById(`pip-${current+1}`);
+              if(pip) pip.classList.add('active');
+            }
+            fb.textContent = '';
+            fb.className = 'lock-feedback';
+            renderQ();
+          }, 1400);
+        }
+      } else {
+        opts[idx].classList.add('wrong');
+        opts[q.correct].classList.add('correct');
+        fb.textContent = "Not quite — the Senate remembers. Try the next one.";
+        fb.className = 'lock-feedback bad';
+        setTimeout(() => {
+          current++;
+          if (current < 3) {
+            const pip = document.getElementById(`pip-${current+1}`);
+            if(pip) pip.classList.add('active');
+            fb.textContent = '';
+            fb.className = 'lock-feedback';
+            renderQ();
+          } else {
+            if(answered === 3) { unlock(); }
+            else {
+              fb.textContent = "The gates remain sealed. Try the patron key below.";
+              fb.className = 'lock-feedback bad';
+            }
+          }
+        }, 1600);
+      }
+    }
+
+    function checkBypass() {
+      const val = document.getElementById('bypass-input').value.trim().toUpperCase();
+      if (val === BYPASS_KEY) {
+        unlock();
+      } else {
+        const inp = document.getElementById('bypass-input');
+        inp.style.borderColor = '#8a2a2a';
+        setTimeout(() => inp.style.borderColor = '', 800);
+      }
+    }
+
+    function unlock() {
+      document.getElementById('quiz-section').style.display = 'none';
+      const us = document.getElementById('unlock-screen');
+      us.style.display = 'flex';
+      setTimeout(() => {
+        document.getElementById('lock-screen').style.opacity = '0';
+        document.getElementById('lock-screen').style.transition = 'opacity 0.7s ease';
+        setTimeout(() => {
+          document.getElementById('lock-screen').style.display = 'none';
+        }, 700);
+      }, 1800);
+    }
+
+    renderQ();
+  </script>
 
 <!-- QUEST TRACK -->
 <nav class="quest-track">
