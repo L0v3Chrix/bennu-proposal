@@ -1,782 +1,1251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bennu Coffee × Your Digital Foundation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bennu Coffee — A Proposal for Steve Williams</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --espresso: #2C1810;
-      --cream: #F5F0E8;
-      --copper: #B87333;
-      --copper-light: #D4956A;
-      --warm-white: #FFFBF5;
-      --muted: #6B5B4F;
-      --text: #1A1A1A;
+      --void: #0a0906;
+      --card-bg: #141210;
+      --card-dark: #0d0b08;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim: rgba(201,168,76,0.15);
+      --gold-border: rgba(201,168,76,0.35);
+      --white: #FAFAFA;
+      --off-white: #E8E4DC;
+      --muted: rgba(232,228,220,0.65);
+      --faint: rgba(232,228,220,0.35);
+      --green: #4a8a5a;
+      --green-dim: rgba(74,138,90,0.15);
     }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background: var(--cream);
-      color: var(--text);
       font-family: 'Inter', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
+      background: var(--void);
+      color: var(--white);
+      font-size: 16px;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201,168,76,0.012) 2px, rgba(201,168,76,0.012) 4px);
     }
 
-    /* PROGRESS BAR */
-    .progress-container {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      height: 4px; background: rgba(44,24,16,0.1);
+    /* ═══════════════ LOCK SCREEN ═══════════════ */
+    #lock-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #0a0906;
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201,168,76,0.012) 2px, rgba(201,168,76,0.012) 4px);
+      display: flex; align-items: center; justify-content: center; padding: 1.5rem;
     }
-    .progress-bar {
-      height: 100%; background: var(--copper);
-      width: 0%; transition: width 0.3s ease;
+    .lock-card {
+      position: relative; width: 100%; max-width: 560px;
+      background: #141210; border: 3px solid rgba(201,168,76,0.45);
+      border-radius: 18px; overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.9), 0 0 60px rgba(201,168,76,0.12), inset 0 0 80px rgba(0,0,0,0.4);
     }
+    .lock-card::before { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(201,168,76,0.18); border-radius: 13px; pointer-events: none; z-index: 1; }
+    .lock-title-bar { background: linear-gradient(135deg, #2a2010 0%, #1a1508 50%, #2a2010 100%); border-bottom: 2px solid rgba(201,168,76,0.45); padding: 0.85rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .lock-card-name { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: #e8c96a; letter-spacing: 0.06em; }
+    .lock-mana { color: #c9a84c; font-size: 0.9rem; letter-spacing: 0.1em; }
+    .lock-art { background: linear-gradient(135deg, #0a0d1a 0%, #1a0808 40%, #1a1008 70%, #0a0d1a 100%); border-bottom: 1px solid rgba(201,168,76,0.35); min-height: 100px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
+    .lock-art::after { content: 'ALEA IACTA EST'; position: absolute; bottom: 0.5rem; right: 1rem; font-family: 'Cinzel', serif; font-size: 0.6rem; color: rgba(201,168,76,0.4); letter-spacing: 0.2em; }
+    .lock-type-line { background: linear-gradient(135deg, #1a1810, #100e08, #1a1810); border-bottom: 1px solid rgba(201,168,76,0.2); padding: 0.35rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.68rem; color: #E8E4DC; display: flex; justify-content: space-between; align-items: center; }
+    .lock-type-line span:last-child { color: #e85a1a; font-size: 0.75rem; }
+    .lock-body { padding: 1.5rem 1.75rem 2rem; }
+    .lock-intro { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 1.05rem; color: #E8E4DC; margin-bottom: 1.5rem; line-height: 1.65; }
+    .q-block { margin-bottom: 1.5rem; }
+    .q-label { font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #c9a84c; margin-bottom: 0.5rem; }
+    .q-text { font-size: 0.95rem; color: #FAFAFA; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.5; }
+    .q-options { display: flex; flex-direction: column; gap: 0.45rem; }
+    .q-opt { background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; padding: 0.65rem 1rem; font-size: 0.88rem; color: #E8E4DC; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.75rem; }
+    .q-opt:hover { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.4); color: #FAFAFA; }
+    .q-opt.correct { background: rgba(74,138,90,0.25); border-color: #4a8a5a; color: #FAFAFA; pointer-events: none; }
+    .q-opt.wrong { background: rgba(138,42,42,0.25); border-color: #8a2a2a; color: rgba(232,228,220,0.5); pointer-events: none; }
+    .q-opt-letter { width: 22px; height: 22px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; color: #c9a84c; flex-shrink: 0; }
+    .lock-progress { display: flex; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .progress-pip { height: 4px; flex: 1; border-radius: 2px; background: rgba(201,168,76,0.15); transition: background 0.4s; }
+    .progress-pip.done { background: #4a8a5a; }
+    .progress-pip.active { background: #c9a84c; box-shadow: 0 0 8px rgba(201,168,76,0.6); }
+    .lock-feedback { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.92rem; min-height: 1.5rem; margin-bottom: 1rem; text-align: center; transition: color 0.3s; }
+    .lock-feedback.good { color: #4a8a5a; }
+    .lock-feedback.bad { color: #c0504a; }
+    .lock-bypass { text-align: center; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(201,168,76,0.12); }
+    .bypass-label { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,168,76,0.4); margin-bottom: 0.5rem; }
+    .bypass-input-wrap { display: flex; gap: 0.5rem; }
+    .bypass-input { flex: 1; background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.2); border-radius: 8px; padding: 0.55rem 0.85rem; font-size: 0.85rem; color: #FAFAFA; font-family: 'Inter', sans-serif; outline: none; letter-spacing: 0.08em; transition: border-color 0.2s; }
+    .bypass-input:focus { border-color: rgba(201,168,76,0.5); }
+    .bypass-input::placeholder { color: rgba(232,228,220,0.2); }
+    .bypass-btn { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: #c9a84c; border-radius: 8px; padding: 0.55rem 0.85rem; font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .bypass-btn:hover { background: rgba(201,168,76,0.2); color: #e8c96a; }
+    .lock-unlocking { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 3rem 2rem; text-align: center; }
+    .unlock-seal { font-size: 3rem; margin-bottom: 1rem; animation: sealBurn 0.8s ease forwards; }
+    @keyframes sealBurn { 0% { filter: none; transform: scale(1); } 50% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.8)); transform: scale(1.2); } 100% { filter: drop-shadow(0 0 8px rgba(201,168,76,0.3)); transform: scale(1); } }
+    .unlock-text { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; color: #e8c96a; margin-bottom: 0.5rem; }
+    .unlock-sub { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 1rem; color: rgba(232,228,220,0.7); }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 4px; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 32px;
-      background: rgba(245,240,232,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(44,24,16,0.08);
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
-      color: var(--espresso);
-    }
-    .nav-stage {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-    .nav-dots {
-      display: flex; gap: 8px;
-    }
-    .nav-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(44,24,16,0.15);
-      cursor: pointer; transition: all 0.2s;
-    }
-    .nav-dot.active { background: var(--copper); transform: scale(1.2); }
-    .nav-dot.completed { background: var(--copper); opacity: 0.5; }
+    /* ═══════════════ QUEST TRACK ═══════════════ */
+    .quest-track { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(10,9,6,0.97); border-bottom: 2px solid var(--gold-border); padding: 0.75rem 1.5rem; display: flex; align-items: center; gap: 0; box-shadow: 0 0 20px rgba(201,168,76,0.12), inset 0 -1px 0 rgba(201,168,76,0.5); }
+    .quest-track::before { content: '⚔'; font-size: 1rem; color: var(--gold); margin-right: 1rem; flex-shrink: 0; }
+    .q-step { flex: 1; text-align: center; font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); cursor: pointer; padding: 0.2rem 0.1rem; transition: color 0.3s; position: relative; }
+    .q-step.active { color: var(--gold-light); }
+    .q-step.active::after { content: ''; position: absolute; bottom: -0.75rem; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .q-step.done { color: var(--green); }
+    .q-step.done::after { content: ''; position: absolute; bottom: -0.75rem; left: 0; right: 0; height: 2px; background: var(--green); opacity: 0.6; }
 
-    /* STAGES */
-    .stage {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 100px 32px 80px;
-      max-width: 800px; margin: 0 auto;
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .stage.visible { opacity: 1; transform: translateY(0); }
-    .stage.center { text-align: center; }
+    /* ═══════════════ STAGES ═══════════════ */
+    .stage { display: none; min-height: 100vh; padding-top: 52px; animation: cardReveal 0.6s ease; }
+    .stage.active { display: block; }
+    @keyframes cardReveal { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-    /* TYPOGRAPHY */
-    .eyebrow {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
-      color: var(--copper); margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 600; line-height: 1.15;
-      color: var(--espresso); margin-bottom: 24px;
-    }
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 4vw, 36px);
-      font-weight: 600; line-height: 1.2;
-      color: var(--espresso); margin-bottom: 16px;
-    }
-    h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 600;
-      color: var(--espresso); margin-bottom: 12px;
-    }
-    p { margin-bottom: 16px; color: var(--muted); font-size: 16px; line-height: 1.8; }
-    .lead { font-size: 18px; max-width: 560px; }
-    .center .lead { margin: 0 auto 32px; }
+    /* ═══════════════ MTG CARD ═══════════════ */
+    .mtg-card { position: relative; background: var(--card-bg); border: 3px solid var(--gold-border); border-radius: 16px; overflow: hidden; box-shadow: 0 0 0 1px rgba(0,0,0,0.8), 0 0 30px rgba(201,168,76,0.1), inset 0 0 60px rgba(0,0,0,0.4); }
+    .mtg-card::before { content: ''; position: absolute; inset: 4px; border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; pointer-events: none; z-index: 1; }
+    .card-title-bar { background: linear-gradient(135deg, #2a2010 0%, #1a1508 50%, #2a2010 100%); border-bottom: 2px solid var(--gold-border); padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .card-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.06em; }
+    .card-mana { font-size: 0.85rem; color: var(--gold); letter-spacing: 0.1em; }
+    .card-art { background: linear-gradient(135deg, #0d1a0d 0%, #1a0d08 50%, #0d0d1a 100%); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); min-height: 120px; display: flex; align-items: center; justify-content: center; font-size: 4rem; background-size: cover; background-position: center; }
+    .art-img { min-height: 160px; background-size: cover !important; background-position: center top !important; font-size: 0; }
+    .card-type-line { background: linear-gradient(135deg, #1a1810, #100e08, #1a1810); border-bottom: 1px solid var(--gold-border); padding: 0.4rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.7rem; color: var(--off-white); display: flex; justify-content: space-between; align-items: center; }
+    .rarity-symbol { font-size: 0.8rem; }
+    .rarity-symbol.mythic { color: #e85a1a; }
+    .rarity-symbol.rare { color: var(--gold); }
+    .rarity-symbol.uncommon { color: #b0c8d0; }
+    .card-text-box { background: linear-gradient(180deg, #0f0c08 0%, #0a0806 100%); padding: 24px; }
+    .card-flavor { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 1rem; color: var(--off-white); border-top: 1px solid var(--faint); padding-top: 0.85rem; margin-top: 0.85rem; line-height: 1.6; }
+    .card-pt { position: absolute; bottom: 1rem; right: 1.25rem; background: var(--card-dark); border: 2px solid var(--gold-border); border-radius: 4px; padding: 0.2rem 0.5rem; font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; color: var(--gold-light); }
 
-    /* CARDS */
-    .card {
-      background: var(--warm-white);
-      border: 1px solid rgba(44,24,16,0.08);
-      border-radius: 16px;
-      padding: 28px;
-      margin-bottom: 16px;
-    }
-    .card-highlight {
-      border-color: var(--copper);
-      background: linear-gradient(135deg, rgba(184,115,51,0.04) 0%, var(--warm-white) 100%);
-    }
+    /* ═══════════════ LAYOUT ═══════════════ */
+    .container { max-width: 860px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+    .container-wide { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
 
-    /* PAIN POINTS */
-    .pain-block {
-      background: var(--warm-white);
-      border-left: 3px solid var(--copper);
-      padding: 24px 28px;
-      margin: 24px 0;
-      border-radius: 0 12px 12px 0;
-    }
-    .pain-block .quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px; font-style: italic;
-      color: var(--espresso); margin-bottom: 12px;
-    }
-    .pain-block .response {
-      font-size: 14px; color: var(--muted);
-      padding-left: 16px; border-left: 2px solid rgba(184,115,51,0.3);
-    }
+    /* ═══════════════ TYPOGRAPHY ═══════════════ */
+    h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--white); letter-spacing: 0.04em; line-height: 1.15; text-shadow: 0 0 40px rgba(201,168,76,0.3); }
+    h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 700; color: var(--white); letter-spacing: 0.04em; line-height: 1.2; }
+    h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold-light); letter-spacing: 0.06em; line-height: 1.3; }
+    p { color: var(--white); font-size: 1rem; margin-bottom: 1rem; line-height: 1.75; }
+    p.flavor { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 1.05rem; color: var(--off-white); }
+    strong { color: var(--white); font-weight: 600; }
+    hr { border: none; border-top: 1px solid rgba(201,168,76,0.15); margin: 2.5rem 0; }
+    .set-symbol { display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .set-symbol::before { content: '◆'; font-size: 0.5rem; }
+    .set-symbol::after { content: '◆'; font-size: 0.5rem; }
+    .phase-tag { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: var(--gold-dim); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--gold-border); margin-bottom: 0.75rem; }
 
-    /* FEATURES GRID */
-    .features-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 16px; margin: 32px 0;
-    }
-    .feature-card {
-      background: var(--warm-white);
-      border: 1px solid rgba(44,24,16,0.06);
-      border-radius: 12px;
-      padding: 24px;
-      transition: all 0.2s;
-    }
-    .feature-card:hover {
-      border-color: var(--copper);
-      transform: translateY(-2px);
-    }
-    .feature-icon { font-size: 28px; margin-bottom: 12px; }
-    .feature-card h4 {
-      font-size: 15px; font-weight: 700;
-      color: var(--espresso); margin-bottom: 8px;
-    }
-    .feature-card p { font-size: 13px; margin: 0; }
+    /* ═══════════════ PAIN BLOCKS ═══════════════ */
+    .pain-block { background: var(--card-bg); border: 2px solid var(--gold-border); border-radius: 12px; padding: 0; margin-bottom: 1.5rem; overflow: hidden; box-shadow: 0 0 20px rgba(201,168,76,0.06); }
+    .pain-art { height: 280px; background-size: cover !important; background-position: center top !important; border-radius: 10px 10px 0 0; }
+    .module-art { height: 160px; margin: -24px -24px 16px -24px; border-radius: 12px 12px 0 0; background-size: cover !important; background-position: center !important; }
+    .pain-header { background: linear-gradient(135deg, #2a2010, #1a1508, #2a2010); border-bottom: 1px solid var(--gold-border); padding: 0.75rem 1.25rem; font-family: 'Crimson Pro', serif; font-style: italic; font-size: 1.05rem; color: var(--white); }
+    .pain-body { padding: 24px 24px 0.5rem; }
+    .pain-body p { font-size: 0.95rem; color: var(--white); margin-bottom: 0.6rem; }
+    .pain-resolution { background: var(--card-dark); border-top: 1px solid rgba(201,168,76,0.15); padding: 0.75rem 1.25rem; font-size: 0.9rem; color: var(--white); }
+    .pain-resolution strong { color: var(--gold-light); }
 
-    /* DATA FLOW */
-    .data-flow {
-      display: flex; align-items: center; justify-content: center;
-      gap: 12px; margin: 32px 0; flex-wrap: wrap;
-    }
-    .flow-step {
-      background: var(--warm-white);
-      border: 1px solid rgba(44,24,16,0.1);
-      border-radius: 10px;
-      padding: 16px 20px;
-      text-align: center;
-      min-width: 120px;
-    }
-    .flow-step .icon { font-size: 24px; margin-bottom: 6px; }
-    .flow-step .label { font-size: 12px; font-weight: 600; color: var(--espresso); }
-    .flow-arrow { font-size: 20px; color: var(--copper); }
+    /* ═══════════════ EXPANDABLE ═══════════════ */
+    .expand-trigger { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; margin-top: 0.75rem; font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: none; border: none; padding: 0; transition: color 0.2s; }
+    .expand-trigger:hover { color: var(--gold-light); }
+    .expand-icon { font-size: 0.75rem; transition: transform 0.3s; }
+    .expand-content { overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
+    .expand-content.open { max-height: 1000px; }
+    .expand-content.open + .expand-trigger .expand-icon { transform: rotate(180deg); }
+    .expand-inner { padding: 1rem 0 0.5rem; border-top: 1px solid rgba(201,168,76,0.12); margin-top: 0.75rem; }
+    .expand-inner p { font-size: 0.88rem; color: var(--off-white); margin-bottom: 0.6rem; }
+    .expand-inner ul { list-style: none; }
+    .expand-inner ul li { font-size: 0.88rem; color: var(--off-white); padding: 0.2rem 0 0.2rem 1.2rem; position: relative; }
+    .expand-inner ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
 
-    /* PRICING */
-    .pricing-card {
-      background: var(--espresso);
-      color: var(--cream);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      margin: 32px 0;
-    }
-    .pricing-card h3 { color: var(--cream); margin-bottom: 8px; }
-    .pricing-amount {
-      font-size: 52px; font-weight: 700;
-      color: var(--copper-light); margin: 16px 0 8px;
-    }
-    .pricing-sub { font-size: 14px; opacity: 0.8; }
-    .pricing-divider {
-      border: none; border-top: 1px solid rgba(255,255,255,0.15);
-      margin: 24px 0;
-    }
-    .pricing-or {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.15em;
-      opacity: 0.5; margin: 16px 0;
-    }
-    .pricing-alt { font-size: 24px; font-weight: 700; color: var(--copper-light); }
-    .pricing-alt-note { font-size: 13px; opacity: 0.6; }
+    /* ═══════════════ AGENT CARDS ═══════════════ */
+    .agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+    .agent-mtg { position: relative; background: var(--card-bg); border: 3px solid var(--gold-border); border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px rgba(0,0,0,0.8), 0 4px 20px rgba(0,0,0,0.6); transition: transform 0.2s, box-shadow 0.2s; }
+    .agent-mtg:hover { transform: translateY(-4px) rotate(-0.5deg); box-shadow: 0 0 0 1px rgba(201,168,76,0.3), 0 16px 40px rgba(201,168,76,0.15); }
+    .agent-mtg::before { content: ''; position: absolute; inset: 4px; border: 1px solid rgba(201,168,76,0.15); border-radius: 10px; pointer-events: none; z-index: 1; }
+    .agent-name-bar { background: linear-gradient(135deg, #2a2010, #1a1508, #2a2010); border-bottom: 1px solid var(--gold-border); padding: 0.6rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+    .agent-card-name { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.04em; }
+    .agent-cost { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.08em; }
+    .agent-art-box { min-height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border-bottom: 1px solid var(--gold-border); }
+    .card-art.has-img, .agent-art-box.has-img, .path-art.has-img { background-size: cover !important; background-position: center top !important; font-size: 0 !important; min-height: 200px; }
+    .path-art.has-img { min-height: 200px; }
+    .agent-type-line { background: linear-gradient(135deg, #1a1810, #100e08, #1a1810); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 0.3rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .agent-type-text { font-family: 'Cinzel', serif; font-size: 13px; color: var(--white); letter-spacing: 0.08em; }
+    .agent-text-box { padding: 24px; }
+    .agent-text-box p { font-size: 16px; color: var(--white); margin-bottom: 0.5rem; line-height: 1.6; }
+    .agent-daily-label { font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin: 0.75rem 0 0.4rem; }
+    .agent-daily-items { font-size: 0.88rem; color: var(--off-white); list-style: none; }
+    .agent-daily-items li { padding: 0.2rem 0 0.2rem 1rem; position: relative; font-size: 15px; }
+    .agent-daily-items li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; }
+    .agent-pt-box { position: absolute; bottom: 0.75rem; right: 0.75rem; background: var(--card-dark); border: 2px solid var(--gold-border); border-radius: 4px; padding: 0.15rem 0.45rem; font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; color: var(--gold-light); }
 
-    /* INCLUDES LIST */
-    .includes-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 12px 0; border-bottom: 1px solid rgba(44,24,16,0.06);
-    }
-    .includes-item:last-child { border-bottom: none; }
-    .includes-check { color: var(--copper); font-size: 16px; flex-shrink: 0; }
-    .includes-text { font-size: 14px; }
-    .includes-text strong { color: var(--espresso); }
+    /* ═══════════════ PATH CARDS ═══════════════ */
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+    .path-card { background: var(--card-bg); border: 3px solid var(--gold-border); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.25s; box-shadow: 0 0 0 1px rgba(0,0,0,0.8), 0 8px 30px rgba(0,0,0,0.5); }
+    .path-card:hover { transform: translateY(-4px); box-shadow: 0 0 0 2px rgba(201,168,76,0.4), 0 16px 50px rgba(201,168,76,0.2); }
+    .path-title-bar { background: linear-gradient(135deg, #2a2010, #1a1508, #2a2010); border-bottom: 2px solid var(--gold-border); padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+    .path-card-name { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700; color: var(--gold-light); }
+    .path-art { min-height: 90px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border-bottom: 1px solid var(--gold-border); }
+    .path-type-line { background: linear-gradient(135deg, #1a1810, #100e08, #1a1810); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 0.35rem 1.25rem; font-family: 'Cinzel', serif; font-size: 0.65rem; color: var(--off-white); display: flex; justify-content: space-between; }
+    .path-text { padding: 24px; }
+    .path-text p { font-size: 0.95rem; color: var(--white); margin-bottom: 0.75rem; }
+    .path-price { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold-light); margin: 0.75rem 0 0.25rem; }
+    .path-price-sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem; }
+    .path-cta { display: block; width: 100%; text-align: center; background: var(--gold-dim); border: 1px solid var(--gold-border); color: var(--gold-light); padding: 0.65rem 1rem; border-radius: 8px; font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; cursor: pointer; transition: all 0.2s; text-decoration: none; text-transform: uppercase; }
+    .path-cta:hover { background: var(--gold); color: var(--void); }
 
-    /* TIMELINE */
-    .timeline { margin: 32px 0; }
-    .timeline-item {
-      display: flex; gap: 20px; padding: 20px 0;
-      border-bottom: 1px solid rgba(44,24,16,0.06);
+    /* ═══════════════ QR STICKER MOCKUP ═══════════════ */
+    .sticker-mockup {
+      width: 180px; height: 180px;
+      background: linear-gradient(135deg, #1a1508, #0a0906);
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 1rem;
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.15), 0 0 30px rgba(201,168,76,0.2);
+      position: relative; margin: 0 auto;
+      font-family: 'Cinzel', serif;
     }
-    .timeline-item:last-child { border-bottom: none; }
-    .timeline-week {
-      width: 80px; flex-shrink: 0;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.08em; color: var(--copper);
-    }
-    .timeline-content h4 {
-      font-size: 15px; font-weight: 700;
-      color: var(--espresso); margin-bottom: 4px;
-    }
-    .timeline-content p { font-size: 13px; margin: 0; }
+    .sticker-mockup::before { content: ''; position: absolute; inset: 4px; border: 1px dashed rgba(201,168,76,0.3); border-radius: 50%; pointer-events: none; }
+    .sticker-qr { font-size: 3rem; line-height: 1; margin-bottom: 0.3rem; }
+    .sticker-headline { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); line-height: 1.3; margin-bottom: 0.15rem; }
+    .sticker-sub { font-size: 0.5rem; color: var(--off-white); letter-spacing: 0.08em; opacity: 0.8; }
+    .sticker-brand { font-size: 0.55rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; margin-top: 0.4rem; text-transform: uppercase; }
+    .sticker-grid { display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap; margin: 2rem 0; }
+    .sticker-explain { flex: 1; min-width: 200px; }
 
-    /* NAVIGATION BUTTONS */
-    .stage-nav {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: 48px; padding-top: 32px;
-      border-top: 1px solid rgba(44,24,16,0.08);
-    }
-    .btn {
-      padding: 14px 28px;
-      border-radius: 10px;
-      font-size: 14px; font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-primary {
-      background: var(--espresso);
-      color: var(--cream);
-      border: none;
-    }
-    .btn-primary:hover { background: #3D261C; transform: translateY(-2px); }
-    .btn-secondary {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid rgba(44,24,16,0.15);
-    }
-    .btn-secondary:hover { border-color: var(--copper); color: var(--espresso); }
-    .btn-ghost {
-      background: none; border: none;
-      color: var(--muted); padding: 14px 0;
-    }
-    .btn-ghost:hover { color: var(--espresso); }
+    /* ═══════════════ TIMELINE ═══════════════ */
+    .timeline { position: relative; padding-left: 2rem; margin: 2rem 0; }
+    .timeline::before { content: ''; position: absolute; left: 0.4rem; top: 0.5rem; bottom: 0.5rem; width: 1px; background: var(--gold-border); }
+    .tl-item { position: relative; margin-bottom: 2rem; }
+    .tl-dot { position: absolute; left: -1.75rem; top: 0.35rem; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px rgba(201,168,76,0.6); }
+    .tl-phase { font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.3rem; }
+    .tl-title { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+    .tl-items { font-size: 0.88rem; color: var(--off-white); }
+    .tl-items li { list-style: none; padding: 0.2rem 0 0.2rem 1.1rem; position: relative; }
+    .tl-items li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
 
-    /* FORM */
-    .form-section {
-      background: var(--warm-white);
-      border-radius: 20px;
-      padding: 40px;
-      margin: 32px 0;
-    }
-    .form-group { margin-bottom: 24px; }
-    .form-group label {
-      display: block; font-size: 13px; font-weight: 600;
-      color: var(--espresso); margin-bottom: 8px;
-    }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 14px 16px;
-      border: 1px solid rgba(44,24,16,0.15);
-      border-radius: 10px;
-      font-size: 15px; font-family: inherit;
-      background: #fff;
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none; border-color: var(--copper);
-    }
-    .form-group textarea { min-height: 100px; resize: vertical; }
+    /* ═══════════════ STAT CARDS ═══════════════ */
+    .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin: 2rem 0; }
+    .stat-card { background: var(--card-bg); border: 2px solid var(--gold-border); border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 0 20px rgba(201,168,76,0.05); }
+    .stat-number { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold-light); font-weight: 700; }
+    .stat-label { font-size: 0.75rem; color: var(--off-white); margin-top: 0.25rem; font-family: 'Cinzel', serif; letter-spacing: 0.08em; }
 
-    .radio-group { display: flex; gap: 12px; }
-    .radio-option {
-      flex: 1; padding: 20px;
-      border: 2px solid rgba(44,24,16,0.1);
-      border-radius: 12px;
-      cursor: pointer; transition: all 0.2s;
-      text-align: center;
-    }
-    .radio-option:hover { border-color: var(--copper); }
-    .radio-option.selected {
-      border-color: var(--copper);
-      background: rgba(184,115,51,0.06);
-    }
-    .radio-option input { display: none; }
-    .radio-option .option-label { font-size: 14px; font-weight: 600; color: var(--espresso); }
-    .radio-option .option-price { font-size: 18px; font-weight: 700; color: var(--copper); margin-top: 4px; }
+    /* ═══════════════ TORCHY / MODULE / CALLOUT ═══════════════ */
+    .torchy-block { background: var(--card-bg); border: 2px solid var(--gold-border); border-radius: 14px; overflow: hidden; margin: 2rem 0; }
+    .torchy-header { background: linear-gradient(135deg, #2a2010, #1a1508, #2a2010); border-bottom: 2px solid var(--gold-border); padding: 0.75rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 700; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; }
+    .torchy-body { padding: 1.5rem 24px; }
+    .torchy-body p { font-size: 1rem; color: var(--white); margin-bottom: 0.75rem; }
+    .scripture { background: var(--card-dark); border: 1px solid var(--gold-border); border-left: 3px solid var(--gold); border-radius: 10px; padding: 1.5rem 1.75rem; margin: 2rem 0; }
+    .scripture p { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 1.1rem; color: var(--off-white); margin: 0 0 0.5rem; }
+    .scripture cite { font-size: 0.8rem; color: var(--gold); font-style: normal; font-family: 'Cinzel', serif; letter-spacing: 0.08em; }
+    .data-flow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+    .data-node { background: var(--gold-dim); border: 1px solid var(--gold-border); border-radius: 6px; padding: 0.4rem 0.85rem; font-family: 'Cinzel', serif; font-size: 0.68rem; font-weight: 600; color: var(--gold-light); letter-spacing: 0.06em; }
+    .data-arrow { color: var(--gold); font-size: 1rem; }
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+    .module-card { background: var(--card-bg); border: 2px solid var(--gold-border); border-radius: 14px; padding: 24px; overflow: hidden; position: relative; }
+    .module-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .module-num { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .module-card h3 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: var(--white); margin-bottom: 0.6rem; letter-spacing: 0.04em; }
+    .module-card p { font-size: 0.9rem; color: var(--white); }
+    .module-card ul { list-style: none; margin-top: 0.75rem; }
+    .module-card ul li { font-size: 0.85rem; color: var(--off-white); padding: 0.2rem 0 0.2rem 1rem; position: relative; }
+    .module-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; }
+    .module-live { display: inline-block; margin-top: 0.85rem; font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; color: var(--green); background: var(--green-dim); padding: 0.2rem 0.6rem; border-radius: 4px; }
+    .callout { background: var(--gold-dim); border: 1px solid var(--gold-border); border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .callout p { color: var(--white); margin: 0; font-size: 0.95rem; }
 
-    /* QUOTE */
-    .quote-block {
-      background: rgba(184,115,51,0.06);
-      border-left: 3px solid var(--copper);
-      padding: 24px 28px;
-      border-radius: 0 12px 12px 0;
-      margin: 32px 0;
-    }
-    .quote-block p {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px; font-style: italic;
-      color: var(--espresso); margin: 0;
-    }
-    .quote-block cite {
-      display: block; margin-top: 12px;
-      font-size: 12px; font-style: normal;
-      color: var(--muted);
-    }
+    /* ═══════════════ PRICING ═══════════════ */
+    .pricing-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    .pricing-table th { text-align: left; padding: 0.6rem 1rem; font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border-bottom: 2px solid var(--gold-border); }
+    .pricing-table td { padding: 0.7rem 1rem; font-size: 0.9rem; border-bottom: 1px solid rgba(201,168,76,0.08); color: var(--white); }
+    .pricing-table td strong { color: var(--gold-light); font-family: 'Cinzel', serif; }
+    .pricing-table tr:last-child td { border-bottom: none; font-weight: 700; }
 
-    /* LINK TO COMMUNITY */
-    .alt-path {
-      text-align: center;
-      padding: 32px;
-      border-top: 1px solid rgba(44,24,16,0.08);
-      margin-top: 48px;
-    }
-    .alt-path p { font-size: 14px; margin-bottom: 12px; }
-    .alt-path a {
-      color: var(--copper); font-weight: 600;
-      text-decoration: none;
-    }
-    .alt-path a:hover { text-decoration: underline; }
+    /* ═══════════════ FORM ═══════════════ */
+    .form-wrap { background: var(--card-bg); border: 3px solid var(--gold-border); border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 1px rgba(0,0,0,0.8), 0 20px 60px rgba(201,168,76,0.12); }
+    .form-header { background: linear-gradient(135deg, #2a2010, #1a1508, #2a2010); border-bottom: 2px solid var(--gold-border); padding: 1rem 2rem; font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; text-align: center; }
+    .form-body { padding: 2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .form-group label { font-family: 'Cinzel', serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+    .form-group input, .form-group select, .form-group textarea { background: var(--card-dark); border: 1px solid var(--gold-border); color: var(--white); border-radius: 8px; padding: 0.8rem 1rem; font-size: 0.9rem; font-family: 'Inter', inherit; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold-light); box-shadow: 0 0 0 2px rgba(201,168,76,0.15); }
+    .form-group select option { background: var(--card-dark); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(232,228,220,0.25); }
+    .btn-cast { width: 100%; background: linear-gradient(135deg, #c9a84c, #a88030, #c9a84c); color: var(--void); border: none; border-radius: 10px; padding: 1.1rem; font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; box-shadow: 0 4px 20px rgba(201,168,76,0.3); }
+    .btn-cast:hover { background: linear-gradient(135deg, #e8c96a, #c9a84c, #e8c96a); transform: translateY(-2px); }
+    .btn-cast:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .form-success { text-align: center; padding: 3rem 2rem; display: none; }
+    .form-success h3 { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--gold-light); margin-bottom: 1rem; }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 60px 32px;
-      font-size: 12px;
-      color: var(--muted);
-    }
+    /* ═══════════════ NAV ═══════════════ */
+    .stage-nav { display: flex; gap: 1rem; margin-top: 3rem; }
+    .btn-next { background: linear-gradient(135deg, #c9a84c, #a88030, #c9a84c); color: var(--void); border: none; border-radius: 10px; padding: 0.85rem 2.5rem; font-family: 'Cinzel', serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(201,168,76,0.25); }
+    .btn-next:hover { background: linear-gradient(135deg, #e8c96a, #c9a84c); transform: translateY(-2px); }
+    .btn-back { background: transparent; color: var(--muted); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; padding: 0.85rem 1.5rem; font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: color 0.2s; }
+    .btn-back:hover { color: var(--gold-light); }
+
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--gold-border); color: var(--faint); font-size: 0.75rem; font-family: 'Cinzel', serif; letter-spacing: 0.08em; }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ═══════════════ WHY NOW CARDS ═══════════════ */
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+    .why-card { background: var(--card-bg); border: 2px solid var(--gold-border); border-radius: 14px; padding: 24px; position: relative; overflow: hidden; }
+    .why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .why-card-num { font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 900; color: rgba(201,168,76,0.12); position: absolute; top: 0.5rem; right: 1rem; line-height: 1; }
+    .why-card h3 { font-family: 'Cinzel', serif; font-size: 0.88rem; color: var(--gold-light); margin-bottom: 0.6rem; letter-spacing: 0.06em; position: relative; }
+    .why-card p { font-size: 0.9rem; color: var(--white); position: relative; }
+    .card-banner { width: calc(100% + 48px); margin: -24px -24px 16px; height: 260px; background-size: cover; background-position: center; border-bottom: 1px solid var(--gold-border); }
+    .tl-banner { height: 260px; border-radius: 8px; margin-bottom: 0.75rem; background-size: cover; background-position: center top; border: 1px solid var(--gold-border); opacity: 0.9; }
+
+    /* ═══════════════ HARDWARE OWNERSHIP ═══════════════ */
+    .hardware-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 2rem 0; }
+    .hw-col { background: var(--card-bg); border: 2px solid var(--gold-border); border-radius: 12px; padding: 1.5rem; }
+    .hw-col.theirs { border-color: rgba(138,42,42,0.4); }
+    .hw-col.ours { border-color: rgba(74,138,90,0.4); }
+    .hw-col-label { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+    .hw-col.theirs .hw-col-label { color: #c0504a; }
+    .hw-col.ours .hw-col-label { color: var(--green); }
+    .hw-col ul { list-style: none; }
+    .hw-col ul li { font-size: 0.88rem; color: var(--off-white); padding: 0.3rem 0 0.3rem 1.2rem; position: relative; border-bottom: 1px solid rgba(201,168,76,0.06); }
+    .hw-col ul li:last-child { border-bottom: none; }
+    .hw-col.theirs ul li::before { content: '✗'; position: absolute; left: 0; color: #c0504a; font-size: 0.7rem; }
+    .hw-col.ours ul li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-size: 0.7rem; }
 
     @media (max-width: 640px) {
-      nav { padding: 14px 20px; }
-      .stage { padding: 100px 20px 60px; }
-      .features-grid { grid-template-columns: 1fr; }
-      .data-flow { flex-direction: column; }
-      .flow-arrow { transform: rotate(90deg); }
-      .radio-group { flex-direction: column; }
-      .form-section { padding: 28px 20px; }
-      .pricing-card { padding: 32px 24px; }
+      .container, .container-wide { padding: 2.5rem 1.25rem 3rem; }
+      .quest-track { padding: 0.6rem 0.75rem; }
+      .q-step { font-size: 0; }
+      .q-step.active { font-size: 14px; }
+      .quest-track::before { margin-right: 0.5rem; }
+      .path-grid, .form-row, .stat-row, .hardware-compare { grid-template-columns: 1fr; }
+      .agent-grid, .module-grid, .why-grid { grid-template-columns: 1fr; }
+      .btn-cast, .btn-next { padding-top: 1.2rem; padding-bottom: 1.2rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="progress-container">
-  <div class="progress-bar" id="progressBar"></div>
-</div>
+  <!-- ═══════════ CAESAR LOCK SCREEN ═══════════ -->
+  <div id="lock-screen">
+    <div class="lock-card">
+      <div class="lock-title-bar">
+        <span class="lock-card-name">Authorization Seal — Access Denied</span>
+        <span class="lock-mana">{W}{B}{R}</span>
+      </div>
+      <div class="lock-art">🏛️⚔️🦅</div>
+      <div class="lock-type-line">
+        <span>Legendary Enchantment — Cipher · Restricted</span>
+        <span>◆</span>
+      </div>
+      <div class="lock-body">
+        <div id="quiz-section">
+          <p class="lock-intro">"This document is sealed by the authority of the Senate and the People of Rome. Prove your knowledge — or find another door."</p>
+          <div class="lock-progress">
+            <div class="progress-pip active" id="pip-1"></div>
+            <div class="progress-pip" id="pip-2"></div>
+            <div class="progress-pip" id="pip-3"></div>
+          </div>
+          <div id="q-container"></div>
+          <div class="lock-feedback" id="lock-feedback"></div>
+          <div class="lock-bypass">
+            <div class="bypass-label">◆ &nbsp; Patron Override &nbsp; ◆</div>
+            <div class="bypass-input-wrap">
+              <input type="password" class="bypass-input" id="bypass-input" placeholder="Enter key..." onkeydown="if(event.key==='Enter')checkBypass()">
+              <button class="bypass-btn" onclick="checkBypass()">UNLOCK</button>
+            </div>
+          </div>
+        </div>
+        <div class="lock-unlocking" id="unlock-screen">
+          <div class="unlock-seal">🦅</div>
+          <div class="unlock-text">SENATUS POPULUSQUE ROMANUS</div>
+          <div class="unlock-sub">"The die is cast. The gates of Bennu are open."</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<nav>
-  <span class="nav-logo">BENNU × RAIZE THE VIBE</span>
-  <div class="nav-dots" id="navDots"></div>
-  <span class="nav-stage" id="navStage">Welcome</span>
+<!-- QUEST TRACK -->
+<nav class="quest-track">
+  <div class="q-step active" onclick="goTo(1)" id="qs-1">The Draw</div>
+  <div class="q-step" onclick="goTo(2)" id="qs-2">Your Hand</div>
+  <div class="q-step" onclick="goTo(3)" id="qs-3">Why Now</div>
+  <div class="q-step" onclick="goTo(4)" id="qs-4">Choose Path</div>
+  <div class="q-step" onclick="goTo(5)" id="qs-5">The Fleet</div>
+  <div class="q-step" onclick="goTo(6)" id="qs-6">Community</div>
+  <div class="q-step" onclick="goTo(7)" id="qs-7">Campaign</div>
+  <div class="q-step" onclick="goTo(8)" id="qs-8">Ante</div>
+  <div class="q-step" onclick="goTo(9)" id="qs-9">Cast</div>
 </nav>
 
-<!-- STAGE 1: WELCOME -->
-<section class="stage center" id="stage1" data-stage="1" data-name="Welcome">
-  <p class="eyebrow">For Steve & Stephanie Williams</p>
-  <h1>You named your shop after the phoenix.<br>Let's live up to it.</h1>
-  <p class="lead">
-    Seventeen years. Three locations. The recipe that became Chameleon Cold Brew. 
-    You've built something real — the kind of place with thrift store couches and dusty books 
-    that coffee shops are supposed to be.
-  </p>
-  <p class="lead">
-    This isn't another agency pitch. This is a system built specifically for you, 
-    based on what you told me matters.
-  </p>
-  <div class="stage-nav" style="justify-content: center;">
-    <button class="btn btn-primary" onclick="nextStage()">See what I heard →</button>
-  </div>
-</section>
 
-<!-- STAGE 2: PROBLEM VALIDATION -->
-<section class="stage" id="stage2" data-stage="2" data-name="What I Heard">
-  <p class="eyebrow">Here's what I heard</p>
-  <h2>You've been burned before.<br>I get it.</h2>
-  
-  <div class="pain-block">
-    <p class="quote">"Agencies kept putting responsibility back on me for things outside my wheelhouse."</p>
-    <p class="response"><strong>What we do differently:</strong> Autonomous systems that run without your daily input. You approve once, then the systems work 24/7 just like your shops do.</p>
-  </div>
-  
-  <div class="pain-block">
-    <p class="quote">"We could never justify the spend or measure it against any business movement."</p>
-    <p class="response"><strong>What we do differently:</strong> Built-in tracking for everything. Monthly reports that show exactly what happened. If something isn't working, we adjust — you don't have to ask.</p>
-  </div>
-  
-  <div class="pain-block">
-    <p class="quote">"We don't have anything in place — just old architecture nobody maintains."</p>
-    <p class="response"><strong>What we do differently:</strong> We build it, we run it, we maintain it. Set it, trust it, forget it.</p>
-  </div>
-
-  <div class="stage-nav">
-    <button class="btn btn-ghost" onclick="prevStage()">← Back</button>
-    <button class="btn btn-primary" onclick="nextStage()">See the solution →</button>
-  </div>
-</section>
-
-<!-- STAGE 3: THE DATA GOLDMINE -->
-<section class="stage center" id="stage3" data-stage="3" data-name="Your Data">
-  <p class="eyebrow">The goldmine you're sitting on</p>
-  <h2>Your cashierless system has captured thousands of customers.</h2>
-  <p class="lead">
-    Every QR scan is a contact. Every contact is a potential review, a return visit, 
-    a text about the latte of the month. You already have the data. You just need someone to activate it.
-  </p>
-
-  <div class="data-flow">
-    <div class="flow-step">
-      <div class="icon">📱</div>
-      <div class="label">Customer scans QR</div>
+<!-- ═══ STAGE 1: THE DRAW ═══ -->
+<div class="stage active" id="stage-1">
+  <div class="container">
+    <div style="text-align:center; padding: 3rem 0 2rem;">
+      <div class="set-symbol" style="justify-content:center; margin-bottom:2rem;">Raize The Vibe · Bennu Coffee · Confidential</div>
+      <div style="width:180px; height:180px; margin: 0 auto 1.5rem; border-radius:50%; border:3px solid rgba(201,168,76,0.45); background-image:url('images/01-bennu-phoenix.webp'); background-size:cover; background-position:center; box-shadow:0 0 40px rgba(201,168,76,0.25);"></div>
+      <h1 style="margin-bottom:1rem;">A PROPOSAL FOR<br><span style="color:var(--gold-light);">STEVE WILLIAMS</span></h1>
+      <p class="flavor" style="max-width:540px; margin: 1rem auto 2rem; font-size:1.1rem;">"In the world of Bennu, every card played was once just a thought in someone's hand."</p>
     </div>
-    <span class="flow-arrow">→</span>
-    <div class="flow-step">
-      <div class="icon">☕</div>
-      <div class="label">Orders & pays</div>
+    <div class="mtg-card" style="max-width:520px; margin: 0 auto 3rem;">
+      <div class="card-title-bar">
+        <span class="card-name">Bennu, the Phoenix of Austin</span>
+        <span class="card-mana">{B}{G}{R}</span>
+      </div>
+      <div class="card-art has-img" style="background:url('images/01-bennu-phoenix.webp') center/cover no-repeat; min-height:360px;"></div>
+      <div class="card-type-line">
+        <span>Legendary Creature — Phoenix Coffee Shop</span>
+        <span class="rarity-symbol mythic">◆</span>
+      </div>
+      <div class="card-text-box">
+        <p style="font-size:0.95rem; margin-bottom:0.5rem;">When Bennu enters the battlefield, look at the top five cards of your library. You may put any number of them into your hand.</p>
+        <p style="font-size:0.95rem;">Flying. Indestructible. <em style="color:var(--gold-light); font-style:normal;">When Austin forgets to look up, Bennu rises again.</em></p>
+        <div class="card-flavor">"Seventeen years. Three locations. The recipe that became Chameleon Cold Brew. You built something real. Austin just stopped looking up."</div>
+      </div>
+      <div class="card-pt">★★/★★</div>
     </div>
-    <span class="flow-arrow">→</span>
-    <div class="flow-step">
-      <div class="icon">📊</div>
-      <div class="label">We capture contact</div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-number">17</div><div class="stat-label">Years in Play</div></div>
+      <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">Locations · 24/7</div></div>
+      <div class="stat-card"><div class="stat-number">1M+</div><div class="stat-label">Texans in Recovery</div></div>
     </div>
-    <span class="flow-arrow">→</span>
-    <div class="flow-step">
-      <div class="icon">🔄</div>
-      <div class="label">They come back</div>
+    <div class="callout" style="text-align:center;">
+      <p>This isn't another agency pitch. <strong>This is a system</strong> — purpose-built for Bennu, built from what you told me. No responsibility placed back on you. No invisible spend. No excuses.</p>
+    </div>
+    <div class="stage-nav" style="justify-content:center;">
+      <button class="btn-next" onclick="goTo(2)">DRAW YOUR HAND →</button>
     </div>
   </div>
+</div>
 
-  <div class="quote-block">
-    <p>"There's still a huge population that appreciates the thrift store couches and the dusty books and the grumpy barista that coffee shops are supposed to deliver."</p>
-    <cite>— You, March 2026</cite>
+
+<!-- ═══ STAGE 2: YOUR HAND ═══ -->
+<div class="stage" id="stage-2">
+  <div class="container">
+    <div class="set-symbol">We Listened</div>
+    <h2>THE CARDS YOU WERE DEALT.</h2>
+    <p>You didn't open a pitch deck in our meeting. You told me your story. So before we show you anything we built, here's proof we drew the right cards.</p>
+
+    <div class="pain-block">
+      <div class="pain-art" style="background:url('images/11-pain-agencies.webp') center/cover no-repeat;"></div>
+      <div class="pain-header">"Agencies kept putting responsibility back on me for things outside my wheelhouse."</div>
+      <div class="pain-body"><p>You hired experts. They made you do the work. Logins, approvals, strategy sessions for things you never wanted to manage. That's outsourced anxiety.</p></div>
+      <div class="pain-resolution"><strong>Our play:</strong> Autonomous systems that run without your daily input. You approve the voice once. After that, it runs itself — day and night, three locations, no follow-ups.</div>
+    </div>
+
+    <div class="pain-block">
+      <div class="pain-art" style="background:url('images/12-pain-invisible-spend.webp') center/cover no-repeat;"></div>
+      <div class="pain-header">"We could never justify the spend or measure it against any business movement."</div>
+      <div class="pain-body"><p>Money went out. Nothing visibly changed. Most agencies optimize for their own reports, not your revenue.</p></div>
+      <div class="pain-resolution"><strong>Our play:</strong> Built-in attribution. Monthly reports showing exactly what moved. If it's not performing, we tell you before you have to ask.</div>
+    </div>
+
+    <div class="pain-block">
+      <div class="pain-art" style="background:url('images/13-pain-abandoned-architecture.webp') center/cover no-repeat;"></div>
+      <div class="pain-header">"We don't have anything in place — just old architecture nobody maintains."</div>
+      <div class="pain-body"><p>Your shops are alive. Your online presence is dormant. Google Business profiles from years ago. Reviews with no responses.</p></div>
+      <div class="pain-resolution"><strong>Our play:</strong> We build it, we run it, we maintain it. Every piece of infrastructure maintained continuously, not when someone remembers.</div>
+    </div>
+
+    <div class="pain-block">
+      <div class="pain-art" style="background:url('images/14-pain-forgotten-model.webp') center/cover no-repeat;"></div>
+      <div class="pain-header">"The current employee demographic is less and less useful and helpful."</div>
+      <div class="pain-body"><p>This isn't a training fix — it's a pipeline fix. The people you're drawing from don't share the motivation you need.</p></div>
+      <div class="pain-resolution"><strong>Our play:</strong> Direct access to Austin's recovery community — people rebuilding structure into their lives who show up with accountability built in.</div>
+    </div>
+
+    <div class="pain-block">
+      <div class="pain-art" style="background:url('images/24-street-team.webp') center/cover no-repeat;"></div>
+      <div class="pain-header">"They come in for shelter. We're good Christians. But we lose customers if we don't act."</div>
+      <div class="pain-body"><p>You and Stephanie are caught in a genuine lose-lose. There is a third play.</p></div>
+      <div class="pain-resolution"><strong>Our play:</strong> The Blessing Bag program. Give them a reason to leave — with dignity. Turned into trackable guerrilla marketing. More in the Community path.</div>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(1)">← DISCARD</button>
+      <button class="btn-next" onclick="goTo(3)">WHY NOW →</button>
+    </div>
   </div>
-  
-  <p>That population hasn't gone anywhere. They just forgot to look up.</p>
+</div>
 
-  <div class="stage-nav">
-    <button class="btn btn-ghost" onclick="prevStage()">← Back</button>
-    <button class="btn btn-primary" onclick="nextStage()">See what gets built →</button>
-  </div>
-</section>
 
-<!-- STAGE 4: WHAT YOU GET -->
-<section class="stage" id="stage4" data-stage="4" data-name="What You Get">
-  <p class="eyebrow">The Digital Foundation</p>
-  <h2>Six systems. One package.<br>Running while you rest.</h2>
+<!-- ═══ STAGE 3: WHY NOW — THE AI BRIEF ═══ -->
+<div class="stage" id="stage-3">
+  <div class="container">
+    <div class="set-symbol">The Brief · AI Evolution</div>
+    <h2>WHY AI. WHY LOCAL.<br><span style="color:var(--gold-light);">WHY NOW.</span></h2>
+    <p>Before we talk about what we're building, you need to understand what's actually changed — and why the window is open right now in a way it wasn't two years ago.</p>
 
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">📱</div>
-      <h4>Autonomous Social Media</h4>
-      <p>Daily content that sounds like Bennu — not a bot. The weird Austin energy, the 24/7 vibe, the "come as you are" spirit.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🗺️</div>
-      <h4>Google Maps Optimization</h4>
-      <p>All 3 locations optimized. Show up when Austin searches "coffee near me" at 2 AM.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">⭐</div>
-      <h4>Review Automation</h4>
-      <p>Turn happy customers into 5-star reviews automatically. 2 hours after they order, they get a gentle nudge.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔄</div>
-      <h4>Database Reactivation</h4>
-      <p>"We miss you" offers, birthday lattes, seasonal specials. Bring lapsed customers back home.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📲</div>
-      <h4>SMS Campaigns</h4>
-      <p>"Latte of the month" texts, event announcements. Simple touches that keep Bennu top of mind.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔍</div>
-      <h4>Search Visibility</h4>
-      <p>SEO foundations so "24 hour coffee Austin" and "late night coffee shop" find Bennu.</p>
-    </div>
-  </div>
-
-  <div class="stage-nav">
-    <button class="btn btn-ghost" onclick="prevStage()">← Back</button>
-    <button class="btn btn-primary" onclick="nextStage()">See the timeline →</button>
-  </div>
-</section>
-
-<!-- STAGE 5: TIMELINE -->
-<section class="stage" id="stage5" data-stage="5" data-name="Timeline">
-  <p class="eyebrow">The Timeline</p>
-  <h2>Live in 3 weeks.<br>Running forever.</h2>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-week">Week 1</div>
-      <div class="timeline-content">
-        <h4>Foundation</h4>
-        <p>Mac mini delivered. Brand voice interview (90 min). Platform access configured. GMB optimization begins.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="card-banner" style="background:url('images/11-ai-breakout-2022.webp') center/cover no-repeat;"></div>
+        <div class="why-card-num">01</div>
+        <h3>2022: AI Breaks Into the Open</h3>
+        <p>ChatGPT launches. For the first time, language models are accessible to anyone. The world starts paying attention. But the tools are cloud-only, expensive per-use, and general purpose — not built for any one business.</p>
+      </div>
+      <div class="why-card">
+        <div class="card-banner" style="background:url('images/12-compression-mac-mini.webp') center/cover no-repeat;"></div>
+        <div class="why-card-num">02</div>
+        <h3>2023–24: The Models Get Smaller</h3>
+        <p>Open-source models like Llama and Mistral compress the power of GPT-level AI into hardware that fits on a desk. What required a data center in 2022 now runs on a Mac Mini. This is the moment everything changed for local business.</p>
+      </div>
+      <div class="why-card">
+        <div class="card-banner" style="background:url('images/13-the-agent-2025.webp') center/cover no-repeat;"></div>
+        <div class="why-card-num">03</div>
+        <h3>2025: Agents Become Real</h3>
+        <p>AI stops being a chatbot and starts being a worker. Agents can now take actions — post to Instagram, respond to reviews, send SMS campaigns, track rankings — without human input. Repeatable, autonomous, never calls in sick.</p>
+      </div>
+      <div class="why-card">
+        <div class="card-banner" style="background:url('images/14-the-window-2026.webp') center/cover no-repeat;"></div>
+        <div class="why-card-num">04</div>
+        <h3>2026: The Window Is Open</h3>
+        <p>Most local businesses still haven't adopted any of this. Your competitors are still doing things manually. The businesses that act now will own their digital presence before the others even understand what happened.</p>
       </div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-week">Week 2</div>
-      <div class="timeline-content">
-        <h4>Launch</h4>
-        <p>Social media goes live. Review automation activated. First content calendar delivered for your approval.</p>
+
+    <hr>
+
+    <h2 style="margin-bottom:1.5rem;">WHAT IS A<br><span style="color:var(--gold-light);">LOCAL AGENT?</span></h2>
+
+    <div class="torchy-block">
+      <div class="torchy-header">◆ The Difference Between Cloud AI and a Local Agent</div>
+      <div class="torchy-body">
+        <p>When you use ChatGPT, your data goes to a server in a data center you'll never see. You pay per use. If OpenAI changes its pricing, you absorb the cost. If they go down, so do you. And it doesn't know your business — it knows everything and nothing at the same time.</p>
+        <p><strong>A local agent is different.</strong> It's a purpose-built program that runs on hardware at your location. It knows Bennu — your voice, your menu, your customers, your three locations. It's not a general AI you're renting. It's a worker you own.</p>
+        <p style="margin:0;">The agents we build for Bennu are trained on your brand, connected to your data sources, and running on a Mac Mini under your roof. They answer to you. Not to a subscription model, not to a cloud provider's uptime, not to a pricing change next quarter.</p>
       </div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-week">Week 3</div>
-      <div class="timeline-content">
-        <h4>Activation</h4>
-        <p>Database reactivation campaigns launch. SMS system live. All 6 systems running.</p>
+
+    <h3 style="margin: 2rem 0 1rem;">DEDICATED PRIVATE INFRASTRUCTURE.<br><span style="color:var(--gold-light);">ZERO IT BURDEN. ZERO SHARED SERVERS.</span></h3>
+    <div style="height:260px; border-radius:12px; margin-bottom:1.25rem; background:url('images/15-stronghold-interior.webp') center/cover no-repeat; border:1px solid var(--gold-border); opacity:0.9;"></div>
+    <div class="hardware-compare">
+      <div class="hw-col theirs">
+        <div class="hw-col-label">❌ &nbsp; Traditional Agency / SaaS</div>
+        <ul>
+          <li>Your data lives on their shared servers</li>
+          <li>Cancel the subscription, lose everything</li>
+          <li>Price increases — you absorb them or quit</li>
+          <li>You manage updates, outages, and renewals</li>
+          <li>Your business mixed with everyone else's data</li>
+        </ul>
+      </div>
+      <div class="hw-col ours">
+        <div class="hw-col-label">✓ &nbsp; Bennu's Dedicated Private Environment</div>
+        <ul>
+          <li>Dedicated hardware — your environment, yours alone</li>
+          <li>We provide, maintain, and guarantee uptime</li>
+          <li>Repairs, maintenance, monitoring — all on us</li>
+          <li>Your customer data never touches shared servers</li>
+          <li>Zero IT burden placed on you or your staff</li>
+        </ul>
       </div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-week">Month 2+</div>
-      <div class="timeline-content">
-        <h4>Optimize & Report</h4>
-        <p>Monthly performance reports. We adjust what's not working. You check in 15 min/month.</p>
-      </div>
+
+    <div class="callout">
+      <p><strong>This is Phase 1.</strong> We're building your digital foundation — the five public-facing agents. Once these are running, Phase 2 opens up: internal operational agents for scheduling, ordering, staff communication, shift management. The infrastructure we're building now is the foundation for everything.</p>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(2)">← YOUR HAND</button>
+      <button class="btn-next" onclick="goTo(4)">CHOOSE YOUR PATH →</button>
     </div>
   </div>
+</div>
 
-  <div class="card">
-    <h3>What we need from you</h3>
-    <div class="includes-item">
-      <span class="includes-check">○</span>
-      <span class="includes-text">Social media account credentials (IG, FB)</span>
-    </div>
-    <div class="includes-item">
-      <span class="includes-check">○</span>
-      <span class="includes-text">Google Business Profile access (all 3 locations)</span>
-    </div>
-    <div class="includes-item">
-      <span class="includes-check">○</span>
-      <span class="includes-text">QR/POS data export (for reactivation campaigns)</span>
-    </div>
-    <div class="includes-item">
-      <span class="includes-check">○</span>
-      <span class="includes-text">90 minutes for brand voice interview</span>
-    </div>
-  </div>
 
-  <div class="stage-nav">
-    <button class="btn btn-ghost" onclick="prevStage()">← Back</button>
-    <button class="btn btn-primary" onclick="nextStage()">See the investment →</button>
-  </div>
-</section>
+<!-- ═══ STAGE 4: CHOOSE PATH ═══ -->
+<div class="stage" id="stage-4">
+  <div class="container">
+    <div class="set-symbol">Bifurcated Path</div>
+    <h2>TWO PATHS.<br><span style="color:var(--gold-light);">ONE DIRECTION.</span></h2>
+    <p>Both are built from what you told me. One is your digital infrastructure running autonomously. The other is community positioning — the Torchy's playbook applied to Bennu. They work independently. They're more powerful together.</p>
 
-<!-- STAGE 6: PRICING -->
-<section class="stage center" id="stage6" data-stage="6" data-name="Investment">
-  <p class="eyebrow">The Investment</p>
-  <h2>Simple. Transparent. Fair.</h2>
-
-  <div class="pricing-card">
-    <h3>Digital Foundation Package</h3>
-    <div class="pricing-amount">$5,000</div>
-    <p class="pricing-sub">One-time setup (includes dedicated Mac mini)</p>
-    <hr class="pricing-divider">
-    <p style="font-size: 14px; opacity: 0.8; margin-bottom: 8px;">Then</p>
-    <div class="pricing-alt">$500/month</div>
-    <p class="pricing-alt-note">Ongoing maintenance, monitoring, optimization</p>
-    <hr class="pricing-divider">
-    <p class="pricing-or">— OR —</p>
-    <div class="pricing-alt">$10,000 upfront</div>
-    <p class="pricing-alt-note">No monthly fees for 12 months (saves $1,000)</p>
-  </div>
-
-  <div class="card">
-    <h3>What's included in setup</h3>
-    <div class="includes-item">
-      <span class="includes-check">✓</span>
-      <span class="includes-text"><strong>Mac mini</strong> — dedicated hardware, hosted at our location for guaranteed uptime</span>
-    </div>
-    <div class="includes-item">
-      <span class="includes-check">✓</span>
-      <span class="includes-text"><strong>Full platform configuration</strong> — social accounts, GMB, review systems, SMS</span>
-    </div>
-    <div class="includes-item">
-      <span class="includes-check">✓</span>
-      <span class="includes-text"><strong>Brand voice training</strong> — AI learns to write like Bennu, not like a corporation</span>
-    </div>
-    <div class="includes-item">
-      <span class="includes-check">✓</span>
-      <span class="includes-text"><strong>Customer database integration</strong> — connect your QR/POS data for reactivation</span>
-    </div>
-    <div class="includes-item">
-      <span class="includes-check">✓</span>
-      <span class="includes-text"><strong>30-day optimization period</strong> — we dial in what works before stepping back</span>
-    </div>
-  </div>
-
-  <div class="stage-nav">
-    <button class="btn btn-ghost" onclick="prevStage()">← Back</button>
-    <button class="btn btn-primary" onclick="nextStage()">I'm ready →</button>
-  </div>
-</section>
-
-<!-- STAGE 7: FORM -->
-<section class="stage" id="stage7" data-stage="7" data-name="Next Steps">
-  <p class="eyebrow">Next Steps</p>
-  <h2>Ready to move forward?</h2>
-  <p>Select your preference and we'll prepare the agreement.</p>
-
-  <div class="form-section">
-    <form id="intent-form">
-      <div class="form-group">
-        <label>Which option works best for you?</label>
-        <div class="radio-group">
-          <label class="radio-option" onclick="selectOption(this, 'pricing')">
-            <input type="radio" name="pricing" value="monthly" required>
-            <div class="option-label">Monthly</div>
-            <div class="option-price">$5K + $500/mo</div>
-          </label>
-          <label class="radio-option" onclick="selectOption(this, 'pricing')">
-            <input type="radio" name="pricing" value="annual">
-            <div class="option-label">Annual</div>
-            <div class="option-price">$10K upfront</div>
-          </label>
+    <div class="path-grid">
+      <div class="path-card" onclick="goTo(5)">
+        <div class="path-title-bar">
+          <span class="path-card-name">Digital Foundation</span>
+          <span style="font-size:0.65rem; color:var(--gold); font-family:'Cinzel',serif;">PATH A</span>
+        </div>
+        <div class="path-art has-img" style="background:url('images/02-digital-foundation.webp') center/cover no-repeat;"></div>
+        <div class="path-type-line">
+          <span>Enchantment — Continuous · Autonomous</span>
+          <span class="rarity-symbol rare">◈</span>
+        </div>
+        <div class="path-text">
+          <p>Six AI agents running 24/7 without your input. Social media, Google Maps, reviews, SMS, merch, search visibility — all on your dedicated private infrastructure.</p>
+          <div class="path-price">$5,000 setup<br>+ $500/mo</div>
+          <div class="path-price-sub">or $10,000 upfront — 2 months free (12 months service, $1,000 savings)</div>
+          <button class="path-cta">Explore The Fleet →</button>
         </div>
       </div>
 
-      <div class="form-group">
-        <label>When would you like to start?</label>
-        <select name="timeline" required>
-          <option value="">Select timing...</option>
-          <option value="this-week">This week — let's go</option>
-          <option value="next-week">Next week</option>
-          <option value="two-weeks">In 2 weeks</option>
-          <option value="discussing">Still discussing internally</option>
-        </select>
+      <div class="path-card" onclick="goTo(6)">
+        <div class="path-title-bar">
+          <span class="path-card-name">Community Relaunch</span>
+          <span style="font-size:0.65rem; color:var(--gold); font-family:'Cinzel',serif;">PATH B</span>
+        </div>
+        <div class="path-art has-img" style="background:url('images/03-community-relaunch.webp') center/cover no-repeat;"></div>
+        <div class="path-type-line">
+          <span>Sorcery — Recovery · Ground Game · Legacy</span>
+          <span class="rarity-symbol mythic">◆</span>
+        </div>
+        <div class="path-text">
+          <p>Recovery hiring pipeline. Blessing bags. Free shot campaigns. Street team activation. The Torchy's model — executed from inside the community.</p>
+          <div class="path-price">$12,000</div>
+          <div class="path-price-sub">$3,000/month × 4 months (normally $5,000/mo)</div>
+          <button class="path-cta">Explore The Relaunch →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>Both together: <strong style="color:var(--gold-light);">$22,000</strong> — dedicated infrastructure live, community anchored, Austin remembers. To start today: <strong style="color:var(--gold-light);">$8,000</strong>. See the full campaign timeline on Stage 7.</p>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(3)">← WHY NOW</button>
+      <button class="btn-next" onclick="goTo(5)">EXPLORE THE FLEET →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ STAGE 5: THE FLEET ═══ -->
+<div class="stage" id="stage-5">
+  <div class="container-wide">
+    <div class="set-symbol">Path A · The Fleet</div>
+    <div class="phase-tag">Phase 1 of 2</div>
+    <h2>SIX AGENTS.<br><span style="color:var(--gold-light);">RUNNING WHILE YOU SLEEP.</span></h2>
+    <p>Not chatbots. Not widgets. Local AI agents are purpose-built programs running on dedicated hardware — doing specific, repeatable digital work every single day without your input. Here's your fleet.</p>
+
+    <div class="agent-grid">
+
+      <div class="agent-mtg">
+        <div class="agent-name-bar"><span class="agent-card-name">The Guardian</span><span class="agent-cost">{G}{G}</span></div>
+        <div class="agent-art-box has-img" style="background:url('images/01-bennu-phoenix.webp') center/cover no-repeat;"></div>
+        <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Review Manager</span><span class="rarity-symbol rare">◈</span></div>
+        <div class="agent-text-box">
+          <p>Monitors Google and Yelp for every new review across all three locations. Responds to positive reviews within 4 hours in Bennu's voice. Flags problems before they escalate.</p>
+          <div class="agent-daily-label">Daily Activity</div>
+          <ul class="agent-daily-items">
+            <li>Flags negative reviews before they damage your rating</li>
+            <li>Sends automated review requests to recent customers</li>
+            <li>Adds weekly posts, seasonal hours, photos to GBP</li>
+          </ul>
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-icon">▼</span> WHY REVIEWS MATTER
+          </button>
+          <div class="expand-content">
+            <div class="expand-inner">
+              <p>Google's local ranking algorithm weighs review velocity and response rate heavily. A business that responds to every review ranks significantly higher than one that doesn't — even with fewer total reviews. The Guardian handles this automatically across all three locations. No manager checklist. No forgotten notifications.</p>
+            </div>
+          </div>
+        </div>
+        <div class="agent-pt-box">4/5</div>
       </div>
 
-      <div class="form-group">
-        <label>Any questions before we proceed?</label>
-        <textarea name="questions" placeholder="Anything you want to discuss..."></textarea>
+      <div class="agent-mtg">
+        <div class="agent-name-bar"><span class="agent-card-name">The Voice</span><span class="agent-cost">{R}{W}</span></div>
+        <div class="agent-art-box has-img" style="background:url('images/04-the-voice.webp') center/cover no-repeat;"></div>
+        <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Social Media</span><span class="rarity-symbol rare">◈</span></div>
+        <div class="agent-text-box">
+          <p>Generates and schedules content in Bennu's voice — the thrift store couches, dusty books, grumpy barista energy that made this place a legend.</p>
+          <div class="agent-daily-label">Daily Activity</div>
+          <ul class="agent-daily-items">
+            <li>Posts 3–4 times per week on Instagram and Facebook</li>
+            <li>Responds to comments and DMs in Bennu's tone</li>
+            <li>You approve posts, or it auto-publishes — your call</li>
+          </ul>
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-icon">▼</span> HOW WE TRAIN YOUR VOICE
+          </button>
+          <div class="expand-content">
+            <div class="expand-inner">
+              <p>In Month 1, we conduct a brand voice session — we feed the agent your existing posts, menu copy, any written materials you have. We define the personality rules: what Bennu says, what it never says, how it handles a complaint, how it celebrates a milestone. After that session, the agent operates within those rules without further input from you.</p>
+            </div>
+          </div>
+        </div>
+        <div class="agent-pt-box">3/4</div>
       </div>
 
-      <input type="hidden" name="proposal" value="Digital Foundation">
-      <input type="hidden" name="client" value="Bennu Coffee">
-      
-      <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-        I'm ready — send the agreement
-      </button>
-    </form>
-  </div>
+      <div class="agent-mtg">
+        <div class="agent-name-bar"><span class="agent-card-name">The Regular</span><span class="agent-cost">{B}{U}</span></div>
+        <div class="agent-art-box has-img" style="background:url('images/05-the-regular.webp') center/cover no-repeat;"></div>
+        <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Re-Engagement</span><span class="rarity-symbol mythic">◆</span></div>
+        <div class="agent-text-box">
+          <p>Your cashierless QR system has been capturing every customer contact since day one. The Regular uses that database to bring them back — automatically.</p>
+          <div class="agent-daily-label">The Data Flow</div>
+          <div class="data-flow" style="margin: 0.5rem 0;">
+            <div class="data-node">QR Scan</div>
+            <div class="data-arrow">→</div>
+            <div class="data-node">Contact</div>
+            <div class="data-arrow">→</div>
+            <div class="data-node">60 Days</div>
+            <div class="data-arrow">→</div>
+            <div class="data-node">We Miss You</div>
+          </div>
+          <ul class="agent-daily-items" style="margin-top:0.5rem;">
+            <li>Birthday latte sequences. Seasonal specials. Flash deals.</li>
+            <li>SMS or email — human-feeling, not blasted</li>
+          </ul>
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-icon">▼</span> TRACKABLE BY LOCATION
+          </button>
+          <div class="expand-content">
+            <div class="expand-inner">
+              <p>Each of your three locations gets a unique tracking code. The Regular doesn't just know a customer visited Bennu — it knows which Bennu. It tracks which location drives the most re-engagement, which campaigns work at which locations, which neighborhoods are most responsive. This is the aggregated data picture that tells you where to invest next.</p>
+              <p>Over time, you build a heat map of your customer ecosystem — who's loyal, who's lapsed, where they come from, how often they return. That's a business intelligence layer most local restaurants never see.</p>
+            </div>
+          </div>
+        </div>
+        <div class="agent-pt-box">5/3</div>
+      </div>
 
-  <div class="alt-path">
-    <p>Also interested in solving staffing and the unhoused situation?</p>
-    <a href="community.html">See the Community Relaunch Program →</a>
-  </div>
+      <div class="agent-mtg">
+        <div class="agent-name-bar"><span class="agent-card-name">The Mapper</span><span class="agent-cost">{G}{U}</span></div>
+        <div class="agent-art-box has-img" style="background:url('images/06-the-mapper.webp') center/cover no-repeat;"></div>
+        <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Local SEO</span><span class="rarity-symbol rare">◈</span></div>
+        <div class="agent-text-box">
+          <p>When someone searches "24 hour coffee Austin" at 1:30 AM — you show up first. Not Starbucks. Bennu. The Mapper keeps you visible everywhere searches happen.</p>
+          <div class="agent-daily-label">Daily Activity</div>
+          <ul class="agent-daily-items">
+            <li>Tracks search rankings across 40+ local directories</li>
+            <li>Monitors AI search visibility (ChatGPT, Google AI, Perplexity)</li>
+            <li>Keeps all 3 GBP locations current and consistent</li>
+          </ul>
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-icon">▼</span> AI SEARCH IS THE NEXT FRONTIER
+          </button>
+          <div class="expand-content">
+            <div class="expand-inner">
+              <p>When someone asks ChatGPT or Google's AI "where can I get coffee at 3 AM in Austin," those systems pull from structured data sources — your website, your Google Business Profile, your reviews. The Mapper ensures Bennu is consistently and correctly represented in those data sources so you show up in AI-generated recommendations — not just traditional search results.</p>
+            </div>
+          </div>
+        </div>
+        <div class="agent-pt-box">3/5</div>
+      </div>
 
-  <div style="text-align: center; margin: 32px 0;">
-    <a href="/welcome/bennu-coffee" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; font-size: 16px; padding: 16px 32px;">
-      Ready to Get Started <span>→</span>
-    </a>
-  </div>
+      <div class="agent-mtg">
+        <div class="agent-name-bar"><span class="agent-card-name">The Messenger</span><span class="agent-cost">{W}{R}</span></div>
+        <div class="agent-art-box has-img" style="background:url('images/07-the-messenger.webp') center/cover no-repeat;"></div>
+        <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · SMS Campaigns</span><span class="rarity-symbol uncommon">◇</span></div>
+        <div class="agent-text-box">
+          <p>Direct line to your customers. "Latte of the month." Event announcements. Flash deals. Compliant, trackable, effective.</p>
+          <div class="agent-daily-label">Daily Activity</div>
+          <ul class="agent-daily-items">
+            <li>Weekly touch campaigns — opt-ins managed automatically</li>
+            <li>Tracks open and conversion rates per campaign</li>
+            <li>Reports results monthly — tied to revenue when possible</li>
+          </ul>
+        </div>
+        <div class="agent-pt-box">2/3</div>
+      </div>
 
-  <div class="stage-nav">
-    <button class="btn btn-ghost" onclick="prevStage()">← Back</button>
+      <div class="agent-mtg">
+        <div class="agent-name-bar"><span class="agent-card-name">The Merchant</span><span class="agent-cost">{U}{B}{R}</span></div>
+        <div class="agent-art-box has-img" style="background:url('images/08-the-merchant.webp') center/cover no-repeat;"></div>
+        <div class="agent-type-line"><span class="agent-type-text">Creature — AI Agent · Merch & E-Commerce</span><span class="rarity-symbol rare">◈</span></div>
+        <div class="agent-text-box">
+          <p>Bennu has a merch shop. The Merchant keeps it alive — monitoring what's trending in the culture, what your regulars are wearing, and making sure your product line stays current with the meta.</p>
+          <div class="agent-daily-label">Daily Activity</div>
+          <ul class="agent-daily-items">
+            <li>Scans cultural trends relevant to Austin coffee + independent shop culture</li>
+            <li>Flags when new merch concepts align with trending keywords or aesthetics</li>
+            <li>Manages product listings, descriptions, and inventory sync</li>
+            <li>Promotes new drops through social and SMS campaigns</li>
+          </ul>
+          <button class="expand-trigger" onclick="toggleExpand(this)">
+            <span class="expand-icon">▼</span> WHY MERCH IS A MULTIPLIER
+          </button>
+          <div class="expand-content">
+            <div class="expand-inner">
+              <p>A Bennu tote bag walking down South Congress is a walking ad. Every sticker on a laptop is a brand impression. Merch is the only marketing channel where customers pay you to do it. The Merchant ensures your product line doesn't go stale — it watches what the culture is doing and surfaces opportunities before they peak.</p>
+            </div>
+          </div>
+        </div>
+        <div class="agent-pt-box">4/4</div>
+      </div>
+
+      <div class="agent-mtg" style="border-color: rgba(201,168,76,0.5);">
+        <div class="agent-name-bar" style="background: linear-gradient(135deg, #1a1810, #0d0c08, #1a1810);">
+          <span class="agent-card-name" style="color:var(--white);">Mac Mini — The Stronghold</span>
+          <span class="agent-cost">🖥</span>
+        </div>
+        <div class="agent-art-box has-img" style="background:url('images/09-the-stronghold.webp') center/cover no-repeat;"></div>
+        <div class="agent-type-line"><span class="agent-type-text">Artifact — Hardware · On-Site Infrastructure</span><span class="rarity-symbol rare">◈</span></div>
+        <div class="agent-text-box">
+          <p>Your agents run on dedicated private infrastructure — not a shared cloud subscription. We provision, deliver, maintain, and guarantee the uptime. Zero IT burden on you or your team.</p>
+          <div class="agent-daily-label">What This Means</div>
+          <ul class="agent-daily-items">
+            <li>Dedicated private environment — your data, no one else's</li>
+            <li>We handle repairs, maintenance, and monitoring</li>
+            <li>Uptime guaranteed — if something breaks, that's on us</li>
+            <li>Your customer data never touches shared servers</li>
+          </ul>
+        </div>
+        <div class="agent-pt-box">∞</div>
+      </div>
+
+    </div>
+
+    <div class="callout" style="margin-top:1rem;">
+      <p><strong>Phase 2 Preview:</strong> Once your public-facing agents are running, we build operational agents — scheduling, ordering, inventory alerts, staff communication. These are the back-office agents that streamline the internal bottlenecks you haven't even told me about yet. Phase 1 pays for Phase 2 before Phase 2 begins.</p>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(4)">← CHOOSE PATH</button>
+      <button class="btn-next" onclick="goTo(6)">COMMUNITY RELAUNCH →</button>
+    </div>
   </div>
-</section>
+</div>
+
+
+<!-- ═══ STAGE 6: COMMUNITY RELAUNCH ═══ -->
+<div class="stage" id="stage-6">
+  <div class="container">
+    <div class="set-symbol">Path B · Resurrection Arc</div>
+    <h2>THE TORCHY'S PLAYBOOK.<br><span style="color:var(--gold-light);">APPLIED TO BENNU.</span></h2>
+
+    <div class="torchy-block">
+      <div class="torchy-header">◆ Legendary Precedent — The Torchy's Tacos Origin Story</div>
+      <div class="torchy-body">
+        <p>Before Torchy's Tacos was a $500M brand with 110+ locations, Mike Rypka was sweating in a food truck on a South Austin street corner. He worked 100 hours a week for two years before breaking even.</p>
+        <p><strong>He hired from the recovery community.</strong> People rebuilding their lives who showed up early, stayed late, and treated every shift like it mattered — because it did.</p>
+        <p><strong>He made Torchy's a friend to that community.</strong> Recovery discounts. AA and NA event sponsorships. Word-of-mouth through rooms that talked to thousands.</p>
+        <p style="margin:0;"><strong>Mike Rypka is in recovery. I know this community — I live inside it.</strong> And I can connect Bennu to it the same way he connected Torchy's to Austin.</p>
+      </div>
+    </div>
+
+    <div class="scripture">
+      <p>"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."</p>
+      <cite>— Jeremiah 29:11</cite>
+    </div>
+
+    <hr>
+    <h2>FOUR PROGRAMS.<br>NINETY DAYS.</h2>
+
+    <div class="module-grid">
+
+      <div class="module-card">
+        <div class="module-art" style="background:url('images/23-recovery-network.webp') center/cover no-repeat;"></div>
+        <div class="module-num">Program 01 · Uncommon</div>
+        <h3>Recovery Hiring Pipeline</h3>
+        <p>Accountability is built into their program. Showing up is how they stay sober.</p>
+        <ul>
+          <li>Activate sober living houses, treatment centers, peer coaches in my network</li>
+          <li>Pre-vetted candidates motivated to show up and perform</li>
+          <li>Recovery staff better equipped to handle difficult interactions</li>
+          <li>You hire like normal — I fix the pipeline</li>
+        </ul>
+        <span class="module-live">Month 1: First interviews</span>
+      </div>
+
+      <div class="module-card">
+        <div class="module-art" style="background:url('images/22-blessing-bag.webp') center/cover no-repeat;"></div>
+        <div class="module-num">Program 02 · Rare</div>
+        <h3>The Blessing Bag Program</h3>
+        <p>Instead of a place to come — create a reason to leave with dignity.</p>
+        <ul>
+          <li>Inside: snacks, hygiene items, a note from Steve & Stephanie</li>
+          <li>QR stickers inside each bag — trackable impressions in the wild</li>
+          <li>Goodwill → trackable guerrilla marketing presence</li>
+          <li>Your recovery employees handle every interaction with grace</li>
+        </ul>
+        <span class="module-live">Month 2: All 3 locations</span>
+      </div>
+
+      <div class="module-card">
+        <div class="module-art" style="background:url('images/25-recovery-event-sponsorship.webp') center/cover no-repeat;"></div>
+        <div class="module-num">Program 03 · Rare</div>
+        <h3>Recovery Event Sponsorships</h3>
+        <p>Austin has 9–15 major recovery events every year. Bennu should be at every one.</p>
+        <ul>
+          <li>Table presence, flyers, verbal mention at sponsored events</li>
+          <li>Recovery discount program (5–10% — honor system)</li>
+          <li>Flyers placed at meeting locations across Austin</li>
+          <li>Direct outreach to ~650–900 peer recovery coaches</li>
+        </ul>
+        <span class="module-live">Month 2–3: First events</span>
+      </div>
+
+      <div class="module-card">
+        <div class="module-art" style="background:url('images/24-street-team.webp') center/cover no-repeat;"></div>
+        <div class="module-num">Program 04 · Mythic</div>
+        <h3>Late-Night Street Team + Free Shot Campaign</h3>
+        <p>70+ Austin bars close at 2 AM. The campaign: <em style="color:var(--gold-light); font-style:normal;">"Scan for Your Free Shot. Open 24/7."</em></p>
+        <ul>
+          <li>Stickers, not flyers — permanent static ads plastered across Austin</li>
+          <li>Each sticker is a trackable QR code (unique per neighborhood)</li>
+          <li>South Congress, 6th Street, Rainey, East Austin — 12 AM to 2 AM</li>
+          <li>Recovery community members earning honest income as canvassers</li>
+          <li>Real conversion data from each zone — aggregated weekly</li>
+        </ul>
+        <button class="expand-trigger" onclick="toggleExpand(this)">
+          <span class="expand-icon">▼</span> THE STICKER STRATEGY EXPLAINED
+        </button>
+        <div class="expand-content">
+          <div class="expand-inner">
+            <p>A flyer gets tossed. A sticker stays. On a light pole on South Congress, on a bathroom wall on 6th Street, on a bike rack on Rainey — those are impressions that compound over time. Each one has a unique QR code that tells you exactly where your best foot traffic is coming from. You end up with a living map of Austin showing exactly where Bennu's message is landing and converting.</p>
+            <p>The free shot offer is the hook that makes scanning feel worth it at 2 AM. Once they're in — they get your WiFi landing page, your opt-in SMS offer, a taste of what makes Bennu different. One scan → contact in the database → The Regular takes it from there.</p>
+          </div>
+        </div>
+        <span class="module-live">Month 3: Full activation</span>
+      </div>
+
+    </div>
+
+    <hr>
+    <h3 style="margin-bottom:0.75rem;">THE QR STICKER — BRANDED & TRACKABLE</h3>
+    <p style="margin-bottom:1.5rem;">Here's what a Bennu QR sticker looks like in the wild. Each location has a unique code. The data feeds back into The Regular.</p>
+
+    <div class="sticker-grid">
+      <div style="text-align:center;">
+        <img src="images/30-qr-sticker-realistic.webp" alt="Bennu Free Shot QR Sticker" style="width:180px; height:180px; object-fit:cover; border-radius:50%; border:3px solid var(--gold); box-shadow:0 0 30px rgba(201,168,76,0.3);">
+        <p style="text-align:center; font-size:0.7rem; color:var(--faint); margin-top:0.75rem; font-family:'Cinzel',serif; letter-spacing:0.08em;">Scan for Free Shot · Open 24/7</p>
+      </div>
+      <div class="sticker-explain">
+        <h3 style="margin-bottom:1rem;">THREE LOCATIONS.<br>THREE CODES. ONE MAP.</h3>
+        <div class="data-flow">
+          <div class="data-node">Sticker · 6th St</div><div class="data-arrow">→</div><div class="data-node">QR Scan</div><div class="data-arrow">→</div><div class="data-node">Free Shot</div>
+        </div>
+        <div class="data-flow" style="margin-top:0.25rem;">
+          <div class="data-node">Sticker · Congress</div><div class="data-arrow">→</div><div class="data-node">QR Scan</div><div class="data-arrow">→</div><div class="data-node">Contact Added</div>
+        </div>
+        <div class="data-flow" style="margin-top:0.25rem;">
+          <div class="data-node">Sticker · Rainey</div><div class="data-arrow">→</div><div class="data-node">QR Scan</div><div class="data-arrow">→</div><div class="data-node">Campaign Starts</div>
+        </div>
+        <p style="margin-top:1rem; font-size:0.9rem;">Over 90 days, you build a scan map of Austin — knowing which neighborhoods, which streets, which times of night are driving real visits. That data doesn't go away when the campaign ends.</p>
+      </div>
+    </div>
+
+    <hr>
+    <h3 style="margin-bottom:1rem;">THE OPPORTUNITY IN PLAIN NUMBERS</h3>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">Locations with untapped customer data</div></div>
+      <div class="stat-card"><div class="stat-number">5×+</div><div class="stat-label">Potential ROI if even a small % of lapsed customers return</div></div>
+      <div class="stat-card"><div class="stat-number">$100K+</div><div class="stat-label">Potential valuation lift from community positioning</div></div>
+    </div>
+    <p style="font-size:0.88rem; color:var(--muted);">We haven't run your revenue numbers together — and we're not going to assume them. What we do know: you have three locations capturing customer contacts every day, a recovery community of millions in Austin, and a 24/7 operation that most people don't know exists. The opportunity math is significant. Let's run the real numbers together once we're aligned on direction.</p>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(5)">← THE FLEET</button>
+      <button class="btn-next" onclick="goTo(7)">SEE THE CAMPAIGN →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ STAGE 7: TIMELINE ═══ -->
+<div class="stage" id="stage-7">
+  <div class="container">
+    <div class="set-symbol">The 90-Day Campaign</div>
+    <h2>MONTH BY MONTH —<br><span style="color:var(--gold-light);">WHAT YOU'LL SEE HAPPENING.</span></h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-banner" style="background:url('images/16-month1-foundation.webp') center/cover no-repeat;"></div>
+        <div class="tl-phase">Month 1 · Foundation Phase</div>
+        <div class="tl-title">Infrastructure Built · First People Arriving</div>
+        <ul class="tl-items">
+          <li>90-minute discovery session — brand voice, access, QR data connection</li>
+          <li>Hardware configured and delivered to main location</li>
+          <li>All 3 Google Business Profiles audited and live</li>
+          <li>Social content pipeline built, first posts scheduled</li>
+          <li>Recovery hiring pipeline activated — first interviews happening</li>
+          <li>Blessing bag design finalized, supplies sourced and delivered</li>
+          <li>Sticker artwork finalized — trackable QR codes assigned per location</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-banner" style="background:url('images/17-month2-activation.webp') center/cover no-repeat;"></div>
+        <div class="tl-phase">Month 2 · Activation Phase</div>
+        <div class="tl-title">All Agents Live · Community Programs Deployed</div>
+        <ul class="tl-items">
+          <li>All 6 digital agents running autonomously (including The Merchant)</li>
+          <li>First lapsed customer campaign launched — watching open rates</li>
+          <li>Review automation live — requests going out, responses coming back</li>
+          <li>Blessing bags at all 3 locations, QR sticker tracking active</li>
+          <li>First recovery event sponsorship confirmed and attended</li>
+          <li>Month 1 report delivered — first real data in hand</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-banner" style="background:url('images/18-month3-momentum.webp') center/cover no-repeat;"></div>
+        <div class="tl-phase">Month 3 · Momentum Phase</div>
+        <div class="tl-title">Free Shot Campaign Live · Data Aggregating</div>
+        <ul class="tl-items">
+          <li>Street team activated with "Scan for Free Shot" sticker campaign</li>
+          <li>South Congress, 6th Street, Rainey, East Austin coverage begins</li>
+          <li>Sticker scan map building — data by neighborhood, time, location</li>
+          <li>First recovery hires potentially on shift — hospitality quality shifting</li>
+          <li>2–3 events sponsored, peer coach outreach at scale</li>
+          <li>SMS campaigns generating trackable return foot traffic</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-banner" style="background:url('images/19-month4-proof.webp') center/cover no-repeat;"></div>
+        <div class="tl-phase">Month 4 · Proof Phase</div>
+        <div class="tl-title">Systems Self-Sustaining · Full Report</div>
+        <ul class="tl-items">
+          <li>Complete 90-day performance report with revenue attribution</li>
+          <li>Digital fleet running fully autonomously at $500/mo</li>
+          <li>Sticker map delivered — permanent reference for future campaign targeting</li>
+          <li>Community positioning as Austin's recovery-friendly anchor established</li>
+          <li>Decision point: expand, scale, or hand off community work to internal</li>
+          <li>Phase 2 conversation: operational agents for scheduling, ordering, staff</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Your time commitment after Month 1:</strong> 15–30 minutes per month reviewing reports. Everything else runs. You make the coffee — we handle the rest.</p>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(6)">← COMMUNITY</button>
+      <button class="btn-next" onclick="goTo(8)">SEE THE ANTE →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ STAGE 8: ANTE ═══ -->
+<div class="stage" id="stage-8">
+  <div class="container">
+    <div class="set-symbol">The Ante</div>
+    <h2>CLEAR NUMBERS.<br><span style="color:var(--gold-light);">NO HIDDEN COSTS.</span></h2>
+    <p>You told me you could never justify the spend or measure it against business movement. So here's how this is different: you know exactly what it costs, exactly what it does, and exactly how to measure whether it's working.</p>
+
+    <div style="height:260px; border-radius:12px; margin-bottom:2rem; background:url('images/29-roi-potential.webp') center/cover no-repeat; border:1px solid var(--gold-border); opacity:0.9;"></div>
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">PATH A · Digital Foundation</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Item</th><th>Cost</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>One-Time Setup</td><td><strong>$5,000</strong></td><td>6 agents built, dedicated hardware provisioned &amp; delivered</td></tr>
+        <tr><td>Monthly Operations</td><td><strong>$500/mo</strong></td><td>Monitoring, optimization, uptime guarantee, monthly report</td></tr>
+        <tr><td>Pay Upfront (Full Year)</td><td><strong>$10,000</strong></td><td>2 months free — 12 months of service, $1,000 savings</td></tr>
+        <tr><td>Additional Agents or Workflows</td><td><strong>Negotiated</strong></td><td>Separate setup + monthly cost — your call</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">PATH B · Community Consulting</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Item</th><th>Cost</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Monthly Consulting Rate</td><td><strong>$3,000/mo</strong></td><td>Normally $5,000/mo — reduced because we want this one</td></tr>
+        <tr><td>Engagement Length</td><td><strong>4 months</strong></td><td>$12,000 total</td></tr>
+        <tr><td>Pass-Through Costs</td><td><strong>~$300–500/mo</strong></td><td>Bags, stickers, events — you control this budget</td></tr>
+        <tr><td>After Month 4</td><td><strong>$0</strong></td><td>Systems handed off, relationships established</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem;">BOTH PATHS · The Complete Game</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Component</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Path A — Digital Foundation (prepaid year)</td><td><strong>$10,000</strong></td></tr>
+        <tr><td>Path B — Community Consulting (4 months)</td><td><strong>$12,000</strong></td></tr>
+        <tr><td>Total Investment</td><td><strong style="font-size:1.1rem; color:var(--gold-light);">$22,000</strong></td></tr>
+        <tr><td>After Month 4</td><td><strong>$500/mo only</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-top:2rem; background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.08)); border: 2px solid var(--gold-border);">
+      <p style="font-family:'Cinzel',serif; font-size:1.1rem; color:var(--gold-light); margin-bottom:0.5rem;">TO START TODAY: <strong style="font-size:1.4rem;">$8,000</strong></p>
+      <p style="margin:0; font-size:0.9rem;">$5,000 setup + $3,000 Month 1 consulting. That's it. We start building the moment the wire clears.</p>
+    </div>
+
+    <div class="callout" style="margin-top:1rem;">
+      <p>This is a relationship first, a transaction second. Flexible on timing and structure — reach Chrix directly: <a href="tel:+13214668774" style="color:var(--gold-light);">(321) 466-8774</a></p>
+    </div>
+
+    <div class="stage-nav">
+      <button class="btn-back" onclick="goTo(7)">← CAMPAIGN</button>
+      <button class="btn-next" onclick="goTo(9)">CAST THE SPELL →</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ STAGE 9: CAST ═══ -->
+<div class="stage" id="stage-9">
+  <div class="container">
+    <div class="set-symbol">Cast Your Spell</div>
+    <div style="text-align:center; margin-bottom:2.5rem;">
+      <h2 style="margin-bottom:1rem;">THE BENNU BIRD RISES<br><span style="color:var(--gold-light);">WHEN IT'S READY.</span></h2>
+      <p class="flavor" style="max-width:500px; margin:0 auto;">You've seen every card. Now it's just a conversation — figuring out the right play together.</p>
+    </div>
+
+    <div class="form-wrap">
+      <div class="form-header">◆ &nbsp; NEXT STEPS — STEVE & STEPHANIE WILLIAMS &nbsp; ◆</div>
+      <div class="form-body">
+        <div id="form-container">
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" id="firstName" placeholder="Steve" required></div>
+            <div class="form-group"><label>Last Name</label><input type="text" id="lastName" placeholder="Williams" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="bennucoffee@gmail.com" required></div>
+            <div class="form-group"><label>Best Phone</label><input type="tel" id="phone" placeholder="(512) 000-0000"></div>
+          </div>
+          <div class="form-group">
+            <label>Which path calls to you?</label>
+            <select id="package">
+              <option value="">Select your path...</option>
+              <option value="digital">Path A — Digital Foundation ($5K setup + $500/mo)</option>
+              <option value="community">Path B — Community Consulting ($12K over 4 months)</option>
+              <option value="both">Both Paths — The Complete Game ($22K, start with $8K)</option>
+              <option value="upfront">Path A Prepaid Year — $10K, 2 months free</option>
+              <option value="talk">Not sure yet — I want to talk first</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>When are you ready to start?</label>
+            <select id="timing">
+              <option value="">Select timing...</option>
+              <option value="this-week">Ready this week</option>
+              <option value="next-week">Ready next week</option>
+              <option value="stephanie">Need to loop in Stephanie first</option>
+              <option value="evaluating">Still evaluating</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Anything else on your mind?</label>
+            <textarea id="notes" placeholder="Questions, concerns, what resonated, what you're unsure about..."></textarea>
+          </div>
+          <button class="btn-cast" id="submit-btn" onclick="handleSubmit()">◆ &nbsp; CAST THE SPELL — REACH OUT &nbsp; ◆</button>
+          <p style="text-align:center; font-size:0.78rem; color:var(--faint); margin-top:1rem; font-family:'Cinzel',serif; letter-spacing:0.08em;">Or call Chrix directly: <a href="tel:+13214668774" style="color:var(--gold);">(321) 466-8774</a></p>
+        </div>
+        <div class="form-success" id="form-success">
+          <div style="font-size:3.5rem; margin-bottom:1rem; filter:drop-shadow(0 0 20px rgba(201,168,76,0.5));">🦅</div>
+          <h3>THE BIRD IS RISING, STEVE.</h3>
+          <p style="max-width:420px; margin: 0.75rem auto 0; color:var(--off-white);">Chrix has been notified. You'll hear from him personally — not a scheduler, not an autoresponder. Him. Within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+    <div class="stage-nav" style="justify-content:center; margin-top:2rem;">
+      <button class="btn-back" onclick="goTo(8)">← BACK TO ANTE</button>
+    </div>
+  </div>
+</div>
 
 <footer>
-  <p>Raize The Vibe × Agent Genesis Engine</p>
-  <p style="margin-top: 8px; opacity: 0.6;">Built for Steve & Stephanie Williams · Bennu Coffee · Austin, TX</p>
+  <p>Prepared by <a href="https://raizethevibe.com">Raize The Vibe</a> for Bennu Coffee · Phase 1 Proposal · Steve & Stephanie Williams · Austin, TX</p>
 </footer>
 
 <script>
-const stages = document.querySelectorAll('.stage');
-const navDots = document.getElementById('navDots');
-const navStage = document.getElementById('navStage');
-const progressBar = document.getElementById('progressBar');
-let currentStage = 1;
-const totalStages = stages.length;
+  const WEBHOOK = 'https://discord.com/api/webhooks/1486907841016107182/Em_Ldu80zKe85uRP7mZSOVnVUQEHxJexWT-Ch91B4O1TcRzkaJo_lctboTcnF7JevkoY';
+  const BYPASS_KEY = 'VENI-VIDI-VICI';
+  let cur = 1;
+  const total = 9;
 
-// Build nav dots
-stages.forEach((stage, i) => {
-  const dot = document.createElement('div');
-  dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
-  dot.onclick = () => goToStage(i + 1);
-  navDots.appendChild(dot);
-});
+  /* ═══ LOCK SCREEN ═══ */
+  const QUESTIONS = [
+    { q: "What was Julius Caesar's full Latin name at birth?", opts: ["Gaius Julius Caesar","Marcus Julius Caesar","Lucius Julius Caesar","Publius Julius Caesar"], correct: 0, feedback: "Correct — Gaius Julius Caesar. His praenomen was Gaius, a name he shared with his father." },
+    { q: "In what year was Julius Caesar assassinated on the Ides of March?", opts: ["55 BC","51 BC","44 BC","38 BC"], correct: 2, feedback: "The Ides of March, 44 BC. Twenty-three wounds. The Senate thought it was the end. It was the beginning." },
+    { q: "Which of these was Caesar's most famous military campaign, documented in his own writing?", opts: ["The Conquest of Egypt","The Gallic Wars","The Macedonian Campaign","The Siege of Carthage"], correct: 1, feedback: "Commentarii de Bello Gallico — eight books, written in the third person." }
+  ];
+  let lockCurrent = 0; let lockAnswered = 0;
+  function renderQ() {
+    const q = QUESTIONS[lockCurrent]; const letters = ['A','B','C','D'];
+    document.getElementById('q-container').innerHTML = `<div class="q-block"><div class="q-label">Question ${lockCurrent+1} of 3</div><div class="q-text">${q.q}</div><div class="q-options">${q.opts.map((o,i)=>`<div class="q-opt" onclick="answer(${i})" id="opt-${i}"><span class="q-opt-letter">${letters[i]}</span>${o}</div>`).join('')}</div></div>`;
+  }
+  function answer(idx) {
+    const q = QUESTIONS[lockCurrent]; const fb = document.getElementById('lock-feedback');
+    document.querySelectorAll('.q-opt').forEach(o => o.style.pointerEvents='none');
+    if (idx === q.correct) {
+      document.getElementById(`opt-${idx}`).classList.add('correct');
+      fb.textContent = q.feedback; fb.className = 'lock-feedback good';
+      document.getElementById(`pip-${lockCurrent+1}`).classList.add('done');
+      lockAnswered++;
+      if (lockAnswered === 3) { setTimeout(unlock, 1200); }
+      else { setTimeout(() => { lockCurrent++; if(lockCurrent<3){ const pip=document.getElementById(`pip-${lockCurrent+1}`); if(pip)pip.classList.add('active'); } fb.textContent=''; fb.className='lock-feedback'; renderQ(); }, 1400); }
+    } else {
+      document.getElementById(`opt-${idx}`).classList.add('wrong');
+      document.getElementById(`opt-${q.correct}`).classList.add('correct');
+      fb.textContent = "Not quite — the Senate remembers. Try the next one."; fb.className = 'lock-feedback bad';
+      setTimeout(() => { lockCurrent++; if(lockCurrent<3){ const pip=document.getElementById(`pip-${lockCurrent+1}`); if(pip)pip.classList.add('active'); fb.textContent=''; fb.className='lock-feedback'; renderQ(); } else { if(lockAnswered===3){unlock();} else { fb.textContent="The gates remain sealed. Try the patron key below."; fb.className='lock-feedback bad'; }} }, 1600);
+    }
+  }
+  function checkBypass() {
+    const val = document.getElementById('bypass-input').value.trim().toUpperCase();
+    if (val === BYPASS_KEY) { unlock(); }
+    else { const inp = document.getElementById('bypass-input'); inp.style.borderColor='#8a2a2a'; setTimeout(()=>inp.style.borderColor='',800); }
+  }
+  function unlock() {
+    document.getElementById('quiz-section').style.display='none';
+    const us = document.getElementById('unlock-screen'); us.style.display='flex';
+    setTimeout(() => {
+      document.getElementById('lock-screen').style.opacity='0';
+      document.getElementById('lock-screen').style.transition='opacity 0.7s ease';
+      setTimeout(()=>{ document.getElementById('lock-screen').style.display='none'; }, 700);
+    }, 1800);
+  }
+  renderQ();
 
-function updateNav() {
-  const dots = navDots.querySelectorAll('.nav-dot');
-  dots.forEach((dot, i) => {
-    dot.className = 'nav-dot';
-    if (i + 1 === currentStage) dot.classList.add('active');
-    else if (i + 1 < currentStage) dot.classList.add('completed');
-  });
-  
-  const stage = document.querySelector(`[data-stage="${currentStage}"]`);
-  navStage.textContent = stage.dataset.name;
-  progressBar.style.width = ((currentStage / totalStages) * 100) + '%';
-}
-
-function goToStage(n) {
-  stages.forEach(s => s.classList.remove('visible'));
-  currentStage = n;
-  const target = document.getElementById('stage' + n);
-  target.classList.add('visible');
-  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  updateNav();
-}
-
-function nextStage() {
-  if (currentStage < totalStages) goToStage(currentStage + 1);
-}
-
-function prevStage() {
-  if (currentStage > 1) goToStage(currentStage - 1);
-}
-
-function selectOption(el, groupName) {
-  document.querySelectorAll(`[name="${groupName}"]`).forEach(input => {
-    input.closest('.radio-option').classList.remove('selected');
-  });
-  el.classList.add('selected');
-  el.querySelector('input').checked = true;
-}
-
-// Form submission
-document.getElementById('intent-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData);
-  
-  const message = {
-    content: `**☕ BENNU INTENT — Digital Foundation**\n\n` +
-      `**Pricing:** ${data.pricing === 'monthly' ? '$5K + $500/mo' : '$10K upfront'}\n` +
-      `**Timeline:** ${data.timeline}\n` +
-      `**Questions:** ${data.questions || 'None'}\n\n` +
-      `<@1083410732382699561>`
-  };
-  
-  try {
-    await fetch('https://discord.com/api/webhooks/1486795399338524852/WEBHOOK_TOKEN', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(message)
+  /* ═══ NAVIGATION ═══ */
+  function goTo(n) {
+    if (n < 1 || n > total) return;
+    document.getElementById('stage-' + cur).classList.remove('active');
+    const prevStep = document.getElementById('qs-' + cur);
+    prevStep.classList.remove('active');
+    if (cur < n) prevStep.classList.add('done');
+    cur = n;
+    document.getElementById('stage-' + n).classList.add('active');
+    document.querySelectorAll('.q-step').forEach((s, i) => {
+      s.classList.remove('active');
+      if (i + 1 < n) s.classList.add('done');
+      else if (i + 1 > n) s.classList.remove('done');
     });
-  } catch (err) { console.log('Webhook error'); }
-  
-  this.innerHTML = `
-    <div style="text-align: center; padding: 40px 0;">
-      <div style="font-size: 48px; margin-bottom: 16px;">☕</div>
-      <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--espresso); margin-bottom: 12px;">
-        Thank you, Steve.
-      </h3>
-      <p style="color: var(--muted);">
-        Chrix will reach out within 24 hours with the agreement.<br>
-        Looking forward to building this together.
-      </p>
-    </div>
-  `;
-});
+    document.getElementById('qs-' + n).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (n === 5 || n === 6) { fireWebhook({ event: 'Stage Viewed', stage: n===5 ? 'The Fleet' : 'Community Relaunch' }); }
+  }
 
-// Initialize
-goToStage(1);
+  /* ═══ EXPAND/COLLAPSE ═══ */
+  function toggleExpand(btn) {
+    const content = btn.previousElementSibling;
+    const icon = btn.querySelector('.expand-icon');
+    if (content.classList.contains('open')) {
+      content.classList.remove('open');
+      icon.style.transform = 'rotate(0deg)';
+      btn.querySelector('.expand-icon').textContent = '▼';
+    } else {
+      content.classList.add('open');
+      icon.style.transform = 'rotate(180deg)';
+    }
+  }
+
+  /* ═══ WEBHOOK ═══ */
+  async function fireWebhook(data) {
+    if (!WEBHOOK) return;
+    try {
+      const ts = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CT';
+      await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ content:'<@1083410732382699561> 👀 **BENNU — Prospect Engagement**', embeds:[{ title:'☕ Bennu Journey Activity', color:0xc9a84c, fields:Object.entries(data).map(([k,v])=>({name:k, value:String(v), inline:true})), footer:{text:ts} }] }) });
+    } catch(e) {}
+  }
+
+  /* ═══ FORM ═══ */
+  async function handleSubmit() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!firstName || !email) { alert('Please enter your first name and email.'); return; }
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true; btn.textContent = 'Casting...';
+    const ts = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CT';
+    const data = { firstName, lastName: document.getElementById('lastName').value.trim(), email, phone: document.getElementById('phone').value.trim(), pkg: document.getElementById('package').value, timing: document.getElementById('timing').value, notes: document.getElementById('notes').value.trim() };
+    try {
+      await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ content:'<@1083410732382699561> 🔥 **BENNU COFFEE — PROPOSAL SUBMISSION**', embeds:[{ title:'🦅 Steve Williams — Ready to Move Forward', color:0xc9a84c, fields:[{name:'👤 Name',value:`${data.firstName} ${data.lastName}`,inline:true},{name:'📧 Email',value:data.email||'—',inline:true},{name:'📱 Phone',value:data.phone||'—',inline:true},{name:'⚔ Path Selected',value:data.pkg||'Not selected',inline:true},{name:'⏱ Timing',value:data.timing||'Not selected',inline:true},{name:'💬 Notes',value:data.notes||'None',inline:false}], footer:{text:`Bennu Proposal v5 — Phase 1 · ${ts}`} }] }) });
+    } catch(e) {}
+    document.getElementById('form-container').style.display='none';
+    document.getElementById('form-success').style.display='block';
+  }
 </script>
-
 </body>
 </html>
