@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Portal — Genesis Labs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #ffffff;
+      --surface: #fafafa;
+      --surface-elevated: #ffffff;
+      --border: #e8e8e8;
+      --border-light: #f0f0f0;
+      --text: #0a0a0a;
+      --text-secondary: #737373;
+      --text-tertiary: #a3a3a3;
+      --accent: #0a0a0a;
+      --blue: #2563eb;
+      --blue-light: #eff6ff;
+      --blue-border: #bfdbfe;
+      --green: #059669;
+      --green-light: #ecfdf5;
+      --green-border: #a7f3d0;
+      --radius: 10px;
+      --radius-lg: 14px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--surface);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 32px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-size: 15px; font-weight: 800; letter-spacing: -0.04em;
+      color: var(--text);
+    }
+    .nav-sub {
+      font-size: 11px; color: var(--text-tertiary); font-weight: 500;
+      letter-spacing: 0.02em; margin-top: 1px;
+    }
+    .nav-steps { display: flex; gap: 6px; align-items: center; }
+    .nav-step {
+      width: 32px; height: 3px; border-radius: 3px;
+      background: var(--border);
+      transition: all 0.4s ease; cursor: pointer;
+    }
+    .nav-step.active { background: var(--blue); width: 40px; }
+    .nav-step.done { background: var(--text); }
+    .nav-client {
+      font-size: 13px; color: var(--text-secondary); font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    section { padding: 72px 0; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 140px 0 0;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 60px; left: -20%; right: -20%; bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--blue); text-transform: uppercase;
+      background: var(--blue-light); border: 1px solid var(--blue-border);
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 44px; font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: var(--text); margin-bottom: 18px;
+    }
+    .hero p {
+      font-size: 17px; color: var(--text-secondary); line-height: 1.7;
+      max-width: 560px; font-weight: 400;
+    }
+    .hero-meta {
+      display: flex; gap: 20px; margin-top: 28px;
+      padding-top: 28px; border-top: 1px solid var(--border);
+    }
+    .hero-meta-item {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .hero-meta-item .meta-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-tertiary);
+    }
+    .hero-meta-item .meta-value {
+      font-size: 14px; font-weight: 600; color: var(--text);
+    }
+
+    /* ── SECTION HEADERS ── */
+    .step-label {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px; border-radius: 50%;
+      font-size: 12px; font-weight: 700;
+      background: var(--text); color: #fff;
+      margin-bottom: 14px;
+    }
+    h2 {
+      font-size: 28px; font-weight: 800; line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 15px; color: var(--text-secondary); line-height: 1.7;
+      margin-bottom: 32px; max-width: 540px;
+    }
+
+    /* ── CARD BASE ── */
+    .card {
+      background: var(--surface-elevated);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: var(--shadow); }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0;
+    }
+
+    /* ── VIDEO CARDS ── */
+    .video-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    @media (max-width: 640px) { .video-grid { grid-template-columns: 1fr; } }
+    .video-card { overflow: hidden; }
+    .video-card .video-wrap {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+    }
+    .video-card .video-wrap iframe,
+    .video-card .video-wrap video {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: 0;
+    }
+    .video-placeholder {
+      display: flex; align-items: center; justify-content: center;
+      height: 100%; position: absolute; inset: 0;
+      color: rgba(255,255,255,0.5); font-size: 13px; text-align: center;
+      padding: 20px; font-weight: 500;
+    }
+    .play-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px; font-size: 16px;
+      transition: all 0.3s;
+    }
+    .video-card:hover .play-icon {
+      background: rgba(255,255,255,0.15);
+      transform: scale(1.05);
+    }
+    .video-info { padding: 16px 20px; }
+    .video-info h3 { font-size: 14px; font-weight: 700; margin-bottom: 3px; letter-spacing: -0.01em; }
+    .video-info p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex; gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+    .tab {
+      padding: 13px 22px;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-tertiary); cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px; transition: all 0.2s;
+      background: none; border-top: 0; border-left: 0; border-right: 0;
+      font-family: inherit; letter-spacing: -0.01em;
+    }
+    .tab.active { color: var(--text); border-bottom-color: var(--text); }
+    .tab:hover { color: var(--text-secondary); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── ENGAGEMENT LETTER ── */
+    .letter { padding: 36px 0; }
+    .letter-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 32px; padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .letter-title {
+      font-size: 22px; font-weight: 800; color: var(--text);
+      letter-spacing: -0.03em;
+    }
+    .letter-sub { font-size: 14px; color: var(--text-secondary); margin-top: 3px; font-weight: 500; }
+    .letter-meta { text-align: right; font-size: 12px; color: var(--text-tertiary); line-height: 1.9; font-weight: 500; }
+
+    .letter h4 {
+      font-size: 13px; font-weight: 700; color: var(--text);
+      margin: 32px 0 12px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .letter h4::before {
+      content: ''; display: inline-block;
+      width: 3px; height: 14px; background: var(--blue);
+      border-radius: 2px;
+    }
+
+    .letter p, .letter li {
+      font-size: 14px; line-height: 1.75; color: #404040;
+    }
+    .letter > p { margin-bottom: 8px; }
+    .letter ul { list-style: none; padding: 0; }
+    .letter li { padding: 5px 0 5px 20px; position: relative; }
+    .letter li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--blue); position: absolute;
+      left: 0; top: 13px;
+    }
+    .letter .oos li::before { background: var(--text-tertiary); }
+
+    .investment-box {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 22px 24px; margin: 16px 0;
+      border: 1px solid var(--border);
+    }
+    .investment-box .inv-title {
+      font-weight: 700; font-size: 13px; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .investment-box .inv-row {
+      display: flex; justify-content: space-between;
+      padding: 5px 0; font-size: 14px; color: #404040;
+    }
+    .investment-box .inv-row .inv-val { font-weight: 600; }
+    .investment-box .inv-row.total {
+      border-top: 1px solid var(--border);
+      margin-top: 10px; padding-top: 12px;
+      font-weight: 700; font-size: 16px; color: var(--text);
+    }
+
+    /* ── TABLES ── */
+    .data-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      margin: 14px 0; font-size: 13px;
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .data-table th {
+      background: var(--text); color: #fff;
+      text-align: left; padding: 11px 16px; font-weight: 600; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .data-table td {
+      padding: 11px 16px; border-bottom: 1px solid var(--border-light);
+      color: #404040; vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:nth-child(even) td { background: var(--surface); }
+    .data-table td:first-child { font-weight: 600; color: var(--text); }
+
+    /* ── COMMITMENT BOX ── */
+    .commitment-box {
+      background: var(--blue-light); border-radius: var(--radius);
+      padding: 20px 24px; margin: 16px 0;
+      font-size: 14px; line-height: 1.75; color: #404040;
+      border: 1px solid var(--blue-border);
+    }
+
+    /* ── CHECKLIST ── */
+    .checklist { list-style: none; padding: 0; margin: 10px 0; }
+    .checklist li {
+      padding: 5px 0 5px 26px; position: relative;
+      font-size: 14px; color: #404040;
+    }
+    .checklist li::before {
+      content: ''; width: 16px; height: 16px;
+      border: 1.5px solid var(--border); border-radius: 4px;
+      position: absolute; left: 0; top: 8px;
+    }
+
+    /* ── FORMS ── */
+    .form-card {
+      background: var(--surface-elevated);
+      border-radius: var(--radius-lg);
+      padding: 28px 28px;
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .form-card + .form-card { margin-top: 16px; }
+    .form-card h3 {
+      font-size: 16px; font-weight: 700; margin-bottom: 18px;
+      letter-spacing: -0.02em;
+    }
+    .form-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px 20px;
+    }
+    @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: 11px; font-weight: 600; color: var(--text-secondary);
+      letter-spacing: 0.05em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px; font-family: inherit;
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-note {
+      font-size: 12px; color: var(--text-tertiary);
+      margin-top: 14px; display: flex; align-items: center; gap: 6px;
+    }
+    .form-note .lock-icon {
+      display: inline-flex; width: 14px; height: 14px;
+    }
+
+    /* ── PAYMENT OPTIONS ── */
+    .payment-options { margin-top: 28px; }
+    .payment-option {
+      position: relative;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg);
+    }
+    .payment-option:hover { border-color: #d0d0d0; }
+    .payment-option.selected {
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+    .payment-option input[type="radio"] {
+      position: absolute; opacity: 0; pointer-events: none;
+    }
+    .payment-radio {
+      position: absolute; top: 26px; left: 28px;
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid var(--border);
+      background: #fff;
+      transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .payment-radio::after {
+      content: ''; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--blue); opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .payment-option.selected .payment-radio {
+      border-color: var(--blue);
+    }
+    .payment-option.selected .payment-radio::after { opacity: 1; }
+    .payment-body { padding-left: 36px; }
+    .payment-body .payment-name {
+      font-size: 16px; font-weight: 700; color: var(--text);
+      letter-spacing: -0.02em; margin-bottom: 4px;
+    }
+    .payment-body .payment-desc {
+      font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+    }
+    .payment-body .payment-price {
+      font-size: 28px; font-weight: 800; color: var(--text);
+      letter-spacing: -0.04em; margin-top: 10px;
+    }
+    .payment-body .payment-price .price-note {
+      font-size: 13px; font-weight: 500; color: var(--text-tertiary);
+      display: block; margin-top: 2px; letter-spacing: 0;
+    }
+    .savings-badge {
+      position: absolute; top: 16px; right: 20px;
+      background: var(--green-light); color: var(--green);
+      border: 1px solid var(--green-border);
+      font-size: 12px; font-weight: 700;
+      padding: 4px 12px; border-radius: 20px;
+      letter-spacing: 0.01em;
+    }
+    .payment-breakdown {
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .payment-option.selected .payment-breakdown {
+      border-top-color: var(--blue-border);
+    }
+    .payment-breakdown .bd-row {
+      display: flex; justify-content: space-between;
+      font-size: 13px; color: var(--text-secondary);
+      padding: 3px 0;
+    }
+    .payment-breakdown .bd-row.bd-total {
+      font-weight: 700; color: var(--text); font-size: 14px;
+      border-top: 1px solid var(--border); margin-top: 6px; padding-top: 8px;
+    }
+    .payment-option.selected .payment-breakdown .bd-row.bd-total {
+      border-top-color: var(--blue-border);
+    }
+
+    /* ── SIGNATURE ── */
+    .sig-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; margin-top: 24px;
+    }
+    @media (max-width: 640px) { .sig-grid { grid-template-columns: 1fr; } }
+    .sig-block .sig-label {
+      font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+    .sig-block input {
+      width: 100%; padding: 14px 0;
+      border: none; border-bottom: 2px solid var(--text);
+      background: transparent; font-size: 20px;
+      font-family: inherit; font-weight: 500;
+      color: var(--text); letter-spacing: -0.02em;
+    }
+    .sig-block input:focus { outline: none; border-bottom-color: var(--blue); }
+    .sig-block .sig-name {
+      font-size: 13px; color: var(--text-secondary); font-weight: 500;
+      margin-top: 8px;
+    }
+    .sig-block .sig-date { margin-top: 14px; }
+    .sig-block .sig-date input {
+      font-size: 14px; border-bottom-width: 1px;
+      border-bottom-color: var(--border); padding: 10px 0;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 36px; border-radius: 10px;
+      font-size: 15px; font-weight: 700; font-family: inherit;
+      cursor: pointer; transition: all 0.2s;
+      border: none; text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .btn-primary {
+      background: var(--text); color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .btn-primary:hover {
+      background: #262626;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateY(-1px);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* ── SUMMARY BAR ── */
+    .summary-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 26px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 14px;
+      margin-bottom: 24px;
+    }
+    .summary-bar h3 {
+      font-size: 17px; font-weight: 800; margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .summary-bar p { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .summary-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag {
+      padding: 6px 14px; border-radius: 6px;
+      font-size: 12px; font-weight: 700;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 48px 24px;
+      font-size: 13px; color: var(--text-tertiary);
+    }
+    footer a { color: var(--text); text-decoration: none; font-weight: 600; }
+    footer a:hover { text-decoration: underline; }
+    footer .footer-line { margin-top: 6px; font-weight: 500; }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 32px; }
+      h2 { font-size: 24px; }
+      .hero-meta { flex-wrap: wrap; gap: 16px; }
+      nav { padding: 12px 16px; }
+      .container { padding: 0 16px; }
+      .form-card { padding: 20px; }
+      .payment-option { padding: 20px; }
+      .payment-body { padding-left: 30px; }
+      .payment-radio { left: 20px; top: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="nav-brand">Genesis Labs</div>
+    <div class="nav-sub">Client Portal</div>
+  </div>
+  <div class="nav-steps">
+    <div class="nav-step active" data-section="welcome"></div>
+    <div class="nav-step" data-section="watch"></div>
+    <div class="nav-step" data-section="engagement"></div>
+    <div class="nav-step" data-section="credentials"></div>
+    <div class="nav-step" data-section="payment"></div>
+    <div class="nav-step" data-section="sign"></div>
+  </div>
+  <div class="nav-client">Bennu Coffee</div>
+</nav>
+
+<!-- WELCOME -->
+<div class="container">
+  <div class="hero fade-in" id="welcome">
+    <div class="label">Client Portal</div>
+    <h1>Welcome, Steve &amp;<br>Stephanie.</h1>
+    <p>Everything you need to get started is on this page. Watch the orientation videos, review both engagement letters, provide your credentials, choose a payment plan, and sign.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="meta-label">Date</span>
+        <span class="meta-value">April 2026</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Location</span>
+        <span class="meta-value">Austin, TX</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Locations</span>
+        <span class="meta-value">3 Stores</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Engagements</span>
+        <span class="meta-value">2 Active</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- WATCH -->
+  <section class="fade-in" id="watch">
+    <div class="step-label">1</div>
+    <h2>Watch These First</h2>
+    <p class="section-desc">Two short videos that walk you through what we're building and how the first 90 days unfold.</p>
+
+    <div class="video-grid">
+      <div class="video-card card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/V4xpTdhsCdo" title="The Phoenix Turnaround" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <h3>The Phoenix Turnaround</h3>
+          <p>The full story — why Bennu, why now, and how we bring it back.</p>
+        </div>
+      </div>
+
+      <div class="video-card card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/mgZHmR3ePnQ" title="Execution Blueprint" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <h3>Execution Blueprint</h3>
+          <p>Timelines, milestones, and exactly what we need from you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ENGAGEMENT LETTERS -->
+  <section class="fade-in" id="engagement">
+    <div class="step-label">2</div>
+    <h2>Review Your Engagement Letters</h2>
+    <p class="section-desc">Two engagements, two letters. Read through each carefully, then sign at the bottom of this page.</p>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('digital')">Digital Footprint — 12 Months</button>
+      <button class="tab" onclick="switchTab('community')">Community Relaunch — 4 Months</button>
+    </div>
+
+    <!-- TAB 1: DIGITAL FOOTPRINT -->
+    <div class="tab-content active" id="tab-digital">
+      <div class="letter">
+        <div class="letter-header">
+          <div>
+            <div class="letter-title">Engagement Letter</div>
+            <div class="letter-sub">Digital Footprint — 12-Month AI-Native Operations</div>
+          </div>
+          <div class="letter-meta">
+            Date: April 9, 2026<br>
+            Valid through: April 23, 2026
+          </div>
+        </div>
+
+        <h4>Goal</h4>
+        <p>Establish and autonomously manage Bennu Coffee's complete digital presence across all three Austin locations. Social media, Google Maps, reviews, SMS campaigns, SEO, and customer reactivation — running 24/7 through AI agent architecture hosted in a secure cloud environment. Your existing cashierless QR ordering system becomes the data backbone: every customer scan is a contact, a potential review, and a reactivation opportunity. You approve the voice once. We handle everything after that.</p>
+        <p style="font-style:italic;color:var(--text-secondary);margin-top:8px;font-size:13px;"><strong>Our intent:</strong> This is an audition. We want to become your long-term technology partner — and we want you to stop looking elsewhere for a solution.</p>
+
+        <h4>Scope of Work</h4>
+        <ul>
+          <li><strong>Autonomous Social Media</strong> — Daily content across Instagram and Facebook that captures Bennu's voice — the weird Austin energy, the 24/7 vibe, the "come as you are" spirit. AI agents trained on your brand identity.</li>
+          <li><strong>Google Maps Optimization</strong> — All three locations — MLK, South Congress, Highland — fully optimized with photos, hours, attributes, and keywords.</li>
+          <li><strong>Review Generation Engine</strong> — Integrated with your cashierless QR ordering system. Every order scan captures a contact. Two hours later: an automated "How was your visit?" text with a one-tap Google review link.</li>
+          <li><strong>Database Reactivation ("The Regular")</strong> — Your cashierless system has captured years of customer data. Targeted campaigns: "We miss you" nudges, birthday lattes, seasonal specials, and inactivity triggers after 60 days.</li>
+          <li><strong>SMS Campaigns</strong> — Direct-line weekly texts: latte of the month, event announcements, flash deals. Compliant, easy opt-out.</li>
+          <li><strong>Search Visibility (SEO)</strong> — Local SEO foundations so "24 hour coffee Austin" and "late night coffee shop" find Bennu.</li>
+          <li><strong>Secure Cloud Environment</strong> — All agent architecture hosted in a secure cloud environment ensuring uptime and reliability. Monitoring, maintenance, and infrastructure included.</li>
+        </ul>
+
+        <h4>Out of Scope</h4>
+        <ul class="oos">
+          <li>Paid social media advertising / Google Ads</li>
+          <li>Custom website redesign or Shopify development</li>
+          <li>Physical signage, print media, or traditional advertising</li>
+          <li>Community Relaunch Program deliverables (see separate engagement)</li>
+        </ul>
+
+        <h4>Roadmap</h4>
+        <table class="data-table">
+          <tr><th>Phase</th><th>Timeline</th><th>Milestones</th></tr>
+          <tr><td>Setup &amp; Foundation</td><td>Weeks 1–2</td><td>Brand voice interview · Cloud environment provisioned · Social media agents trained · GMB optimization · Cashierless system integration mapped</td></tr>
+          <tr><td>Activation</td><td>Weeks 2–3</td><td>Social posting live · Review engine active (connected to QR system) · First SMS campaign · Database reactivation launched</td></tr>
+          <tr><td>Optimization</td><td>Month 2–3</td><td>Data-driven adjustments · First monthly report · SEO foundations · A/B testing</td></tr>
+          <tr><td>Autonomous Ops</td><td>Month 4–12</td><td>Systems running autonomously · Monthly reports · Quarterly strategy reviews</td></tr>
+        </table>
+
+        <h4>Investment</h4>
+        <div class="investment-box">
+          <div class="inv-title">Digital Footprint — 12-Month Engagement</div>
+          <div class="inv-row"><span>Month 1 (Setup + Launch)</span><span class="inv-val">$5,500</span></div>
+          <div class="inv-row"><span>Months 2–12 (Monthly Retainer)</span><span class="inv-val">$500/month</span></div>
+          <div class="inv-row total"><span>Total Engagement Value</span><span class="inv-val">$11,000</span></div>
+        </div>
+        <p><strong>Payment Terms:</strong> Month 1 payment ($5,500) due by April 15, 2026 via Zelle. Monthly retainer ($500) due on the 15th of each month, months 2–12.</p>
+
+        <h4>Commitment Structure</h4>
+        <div class="commitment-box">
+          <strong>Genesis Labs commits to a 12-month engagement</strong> — we cannot terminate before 12 months.
+          <strong>Bennu Coffee is month-to-month</strong> with cancellation at any time after Month 1.
+          If cancelled, all data, content, and account access are returned within 5 business days.
+        </div>
+
+        <h4>Client Responsibilities</h4>
+        <p><strong>To Activate:</strong></p>
+        <ul class="checklist">
+          <li>Signed engagement letter returned to Genesis Labs</li>
+          <li>Month 1 payment received via Zelle</li>
+          <li>Access credentials provided (see below)</li>
+        </ul>
+        <p><strong>During the Engagement:</strong></p>
+        <ul>
+          <li>Review and approve brand voice direction (Week 1 — ~1 hour)</li>
+          <li>Provide access to cashierless/QR ordering system data export</li>
+          <li>Monthly report review (~15 minutes/month)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 2: COMMUNITY RELAUNCH -->
+    <div class="tab-content" id="tab-community">
+      <div class="letter">
+        <div class="letter-header">
+          <div>
+            <div class="letter-title">Engagement Letter</div>
+            <div class="letter-sub">Community Relaunch Program — 4-Month Engagement</div>
+          </div>
+          <div class="letter-meta">
+            Date: April 9, 2026<br>
+            Valid through: April 23, 2026
+          </div>
+        </div>
+
+        <h4>Goal</h4>
+        <p>Transform Bennu Coffee into Austin's recovery-friendly coffee shop through two equal pillars: a recovery community employment pipeline that solves your staffing challenges, and a QR sticker activation game powered by the Blessing Bag program that turns the unhoused situation from a liability into a brand asset. This is a hands-on consulting engagement — Genesis Labs designs the strategy, coordinates the network, and guides execution. Bennu handles the on-the-ground operations in a weekly working partnership.</p>
+
+        <h4>Pillar 1: Recovery Employment Pipeline</h4>
+        <ul>
+          <li><strong>Network Activation</strong> — Direct outreach to sober living houses, treatment centers, and peer recovery coaches. Candidates pre-vetted, motivated, and ready.</li>
+          <li><strong>Candidate Pipeline</strong> — Ongoing sourcing, not a one-time list. The pipeline adapts as your staffing needs evolve.</li>
+          <li><strong>Hiring Support</strong> — You hire like normal — we fix the pipeline. Interview coordination and warm introductions.</li>
+          <li><strong>Peer Coach Network</strong> — Outreach to ~650–900 peer recovery coaches in Austin. Each coach influences 5–15 clients.</li>
+        </ul>
+
+        <h4>Pillar 2: QR Sticker Game + Blessing Bags</h4>
+        <ul>
+          <li><strong>Blessing Bag Program</strong> — Bags with snacks, hygiene items, a note from Steve &amp; Stephanie, and Bennu QR stickers. Distributed by recovery employees trained in compassionate de-escalation.</li>
+          <li><strong>QR Sticker Activation</strong> — Recipients place Bennu QR stickers around Austin and optionally photo-track placements. Guerrilla marketing powered by goodwill.</li>
+          <li><strong>Recovery Event Sponsorship</strong> — 9–15 Austin recovery events per year. Table presence, flyers, recovery discount program (5–10% off, honor system).</li>
+          <li><strong>Street Team Coordination</strong> — Recovery community members canvassing South Congress, 6th Street, Rainey from 12 AM–2 AM. Flyers with QR codes, trackable results.</li>
+        </ul>
+
+        <h4>Who Does What</h4>
+        <table class="data-table">
+          <tr><th>Genesis Labs (Strategy + Coordination)</th><th>Bennu Coffee (Execution)</th></tr>
+          <tr><td>Design blessing bag contents and program</td><td>Curate and assemble blessing bags</td></tr>
+          <tr><td>Design QR stickers and tracking system</td><td>Print QR codes and stickers</td></tr>
+          <tr><td>Activate recovery network for hiring</td><td>Interview and hire candidates</td></tr>
+          <tr><td>Identify and schedule recovery events</td><td>Approve event sponsorship spend</td></tr>
+          <tr><td>Recruit and coordinate street team</td><td>Schedule street team shifts</td></tr>
+          <tr><td>Provide weekly progress reports</td><td>Attend weekly working meetings</td></tr>
+          <tr><td>Train staff on blessing bag distribution</td><td>Manage daily bag distribution</td></tr>
+        </table>
+
+        <h4>Communication</h4>
+        <ul>
+          <li><strong>Weekly In-Person Working Meetings</strong> — Chrix and Steve meet once per week to review progress, coordinate tasks, and keep momentum. Working sessions, not status calls.</li>
+          <li><strong>Point of Contact</strong> — Steve Williams is the primary POC. All coordination flows through Steve.</li>
+          <li><strong>Between Meetings</strong> — Direct access to Chrix via text or email. Same-day response.</li>
+        </ul>
+
+        <h4>Roadmap</h4>
+        <table class="data-table">
+          <tr><th>Phase</th><th>Timeline</th><th>Milestones</th></tr>
+          <tr><td>Foundation</td><td>Month 1</td><td>Recovery network activated · First candidates interviewed · Blessing bag program designed · Weekly meetings established</td></tr>
+          <tr><td>Deployment</td><td>Month 2</td><td>Blessing bags at all 3 locations · First event sponsored · QR tracking live · Hiring pipeline delivering</td></tr>
+          <tr><td>Momentum</td><td>Month 3</td><td>Street team active · Multiple events sponsored · Coach network expanding · Word-of-mouth building</td></tr>
+          <tr><td>Handoff</td><td>Month 4</td><td>Systems documented and handed off · Relationships locked · Pipeline self-sustaining</td></tr>
+        </table>
+
+        <h4>Pass-Through Costs</h4>
+        <p style="font-style:italic;color:var(--text-secondary);font-size:13px;">Costs you control directly. Genesis Labs coordinates; you approve the spend.</p>
+        <table class="data-table">
+          <tr><th>Item</th><th style="text-align:right;">Monthly Estimate</th></tr>
+          <tr><td>Blessing bag supplies</td><td style="text-align:right;">$75–150</td></tr>
+          <tr><td>Street team compensation</td><td style="text-align:right;">$100–200</td></tr>
+          <tr><td>Flyer printing</td><td style="text-align:right;">$50–100</td></tr>
+          <tr><td>Event sponsorships</td><td style="text-align:right;">$100–300 / event</td></tr>
+          <tr><td style="font-weight:700;">Estimated Total</td><td style="text-align:right;font-weight:700;">$300–500/month</td></tr>
+        </table>
+
+        <h4>Investment</h4>
+        <div class="investment-box">
+          <div class="inv-title">Community Relaunch — 4-Month Engagement</div>
+          <div class="inv-row"><span>Monthly Program Fee</span><span class="inv-val">$3,000/month × 4 months</span></div>
+          <div class="inv-row total"><span>Total Engagement Value</span><span class="inv-val">$12,000</span></div>
+        </div>
+        <p><strong>Payment:</strong> $3,000 due on the 15th of each month via Zelle. Pass-through costs invoiced separately.</p>
+
+        <h4>Commitment Structure</h4>
+        <div class="commitment-box">
+          <strong>Genesis Labs commits to the full 4-month program.</strong> All deliverables completed and systems handed off by Month 4. Early termination by client forfeits remaining fees. All relationships, documentation, and systems transfer to Bennu upon completion.
+        </div>
+
+        <h4>Client Responsibilities (Bennu Executes)</h4>
+        <ul>
+          <li>Attend weekly in-person working meetings (Steve as point person)</li>
+          <li>Curate and assemble blessing bags for all 3 locations</li>
+          <li>Print QR codes and stickers (design provided by Genesis Labs)</li>
+          <li>Schedule and manage street team shifts</li>
+          <li>Introduce Chrix to staff for blessing bag training</li>
+          <li>Approve event sponsorship spend and pass-through costs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CREDENTIALS -->
+  <section class="fade-in" id="credentials">
+    <div class="step-label">3</div>
+    <h2>Access Credentials</h2>
+    <p class="section-desc">We need these to get your systems running. All access is secured and used solely for engagement deliverables.</p>
+
+    <div class="form-card">
+      <h3>Social Media &amp; Google</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Instagram Login</label>
+          <input type="text" name="ig_login" placeholder="Username or email">
+        </div>
+        <div class="form-group">
+          <label>Instagram Password</label>
+          <input type="password" name="ig_pass" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label>Facebook Login</label>
+          <input type="text" name="fb_login" placeholder="Username or email">
+        </div>
+        <div class="form-group">
+          <label>Facebook Password</label>
+          <input type="password" name="fb_pass" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label>Google Business Email</label>
+          <input type="email" name="gmb_email" placeholder="email@bennu.com">
+        </div>
+        <div class="form-group">
+          <label>Google Business Password</label>
+          <input type="password" name="gmb_pass" placeholder="Password">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>QR / POS System</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>POS System Name</label>
+          <input type="text" name="pos_name" placeholder="e.g., Square, Toast, etc.">
+        </div>
+        <div class="form-group">
+          <label>POS Admin Login</label>
+          <input type="text" name="pos_login" placeholder="Username or email">
+        </div>
+        <div class="form-group">
+          <label>POS Admin Password</label>
+          <input type="password" name="pos_pass" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label>SMS Platform (if any)</label>
+          <input type="text" name="sms_platform" placeholder="e.g., Twilio, SlickText, etc.">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>Community Relaunch Info</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Current Employee Count (all locations)</label>
+          <input type="text" name="num_employees" placeholder="e.g., 15">
+        </div>
+        <div class="form-group">
+          <label>Preferred Day/Time for Weekly Meetings</label>
+          <input type="text" name="meeting_pref" placeholder="e.g., Tuesdays at 10am">
+        </div>
+        <div class="form-group full">
+          <label>Known Recovery Community Contacts (if any)</label>
+          <textarea name="recovery_contacts" placeholder="Any existing relationships with sober living houses, treatment centers, recovery coaches..."></textarea>
+        </div>
+        <div class="form-group full">
+          <label>Organizations You Do NOT Want Us to Contact</label>
+          <textarea name="exclusions" placeholder="List any orgs or individuals to avoid"></textarea>
+        </div>
+      </div>
+      <p class="form-note">
+        <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        All information is encrypted and used exclusively for this engagement.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- PAYMENT -->
+  <section class="fade-in" id="payment">
+    <div class="step-label">4</div>
+    <h2>Choose Your Payment Plan</h2>
+    <p class="section-desc">Select how you'd like to structure payment. Both options cover the same scope of work.</p>
+
+    <div class="payment-options">
+      <!-- OPTION 1: MONTHLY -->
+      <label class="payment-option selected" onclick="selectPayment('monthly')">
+        <input type="radio" name="payment_plan" value="monthly" checked>
+        <div class="payment-radio"></div>
+        <div class="payment-body">
+          <div class="payment-name">Monthly Payments</div>
+          <div class="payment-desc">Pay each engagement separately on a monthly billing cycle.</div>
+          <div class="payment-price">
+            $23,000
+            <span class="price-note">total across both engagements</span>
+          </div>
+          <div class="payment-breakdown">
+            <div class="bd-row"><span>Digital — Month 1 (Setup + Launch)</span><span>$5,500</span></div>
+            <div class="bd-row"><span>Digital — Months 2–12 ($500/mo)</span><span>$5,500</span></div>
+            <div class="bd-row"><span>Community — Months 1–4 ($3,000/mo)</span><span>$12,000</span></div>
+            <div class="bd-row bd-total"><span>Combined Total</span><span>$23,000</span></div>
+          </div>
+        </div>
+      </label>
+
+      <!-- OPTION 2: PAY IN FULL -->
+      <label class="payment-option" onclick="selectPayment('full')">
+        <input type="radio" name="payment_plan" value="full">
+        <div class="payment-radio"></div>
+        <div class="savings-badge">Save 13%</div>
+        <div class="payment-body">
+          <div class="payment-name">Pay in Full</div>
+          <div class="payment-desc">One payment for both engagements. Immediate start, simplified billing.</div>
+          <div class="payment-price">
+            $20,000
+            <span class="price-note">one-time payment — save $3,000</span>
+          </div>
+          <div class="payment-breakdown">
+            <div class="bd-row"><span>Digital Footprint (12 months)</span><span>$11,000</span></div>
+            <div class="bd-row"><span>Community Relaunch (4 months)</span><span>$12,000</span></div>
+            <div class="bd-row"><span style="color:var(--green);font-weight:600;">Bundle Discount</span><span style="color:var(--green);font-weight:600;">−$3,000</span></div>
+            <div class="bd-row bd-total"><span>Total Due</span><span>$20,000</span></div>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    <p style="font-size:13px;color:var(--text-tertiary);margin-top:16px;">
+      All payments via Zelle. First payment due by <strong style="color:var(--text-secondary);">April 15, 2026</strong>. Monthly payments due on the 15th of each month thereafter.
+    </p>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- SIGN -->
+  <section class="fade-in" id="sign">
+    <div class="step-label">5</div>
+    <h2>Sign &amp; Activate</h2>
+    <p class="section-desc">By signing below, you agree to both engagement letters and the selected payment plan as reviewed above.</p>
+
+    <div class="summary-bar">
+      <div>
+        <h3>Engagement Summary</h3>
+        <p>Digital Footprint (12 months) + Community Relaunch (4 months)</p>
+      </div>
+      <div class="summary-tags">
+        <span class="tag">Digital — $11,000</span>
+        <span class="tag">Community — $12,000</span>
+      </div>
+    </div>
+
+    <div id="payment-summary-line" style="background:var(--green-light);border:1px solid var(--green-border);border-radius:var(--radius);padding:14px 20px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;font-size:14px;">
+      <span>Selected plan: <strong id="selected-plan-text">Monthly Payments</strong></span>
+      <span style="font-weight:700;" id="selected-plan-amount">$23,000</span>
+    </div>
+
+    <div class="form-card">
+      <h3>Signatures</h3>
+      <div class="sig-grid">
+        <div class="sig-block">
+          <div class="sig-label">Bennu Coffee</div>
+          <input type="text" placeholder="Type your full name to sign" id="client-sig">
+          <div class="sig-name">Steve Williams, Owner</div>
+          <div class="sig-date">
+            <label style="font-size:11px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.05em;">Date</label>
+            <input type="date" id="client-date">
+          </div>
+        </div>
+        <div class="sig-block">
+          <div class="sig-label">Genesis Labs</div>
+          <input type="text" value="Chrix Colvard" readonly style="color:var(--text-tertiary);">
+          <div class="sig-name">Chrix Colvard, Founder</div>
+          <div class="sig-date">
+            <label style="font-size:11px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.05em;">Date</label>
+            <input type="date" value="2026-04-09" readonly style="color:var(--text-tertiary);">
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:40px;">
+        <button class="btn btn-primary" onclick="handleSubmit()" style="padding:16px 56px;font-size:16px;">
+          Sign &amp; Submit
+        </button>
+        <p id="due-at-signing" style="font-size:13px;color:var(--text-tertiary);margin-top:14px;">
+          First payment of <strong style="color:var(--text-secondary);">$8,500</strong> due by April 15, 2026 via Zelle.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>Questions? Contact <a href="mailto:chrix@1322legacystrategies.com">chrix@1322legacystrategies.com</a></p>
+  <p class="footer-line">Genesis Labs &middot; 2026</p>
+</footer>
+
+<script>
+// ── Payment Selection ──
+function selectPayment(plan) {
+  document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+  const radio = document.querySelector(`input[value="${plan}"]`);
+  radio.checked = true;
+  radio.closest('.payment-option').classList.add('selected');
+
+  const planText = document.getElementById('selected-plan-text');
+  const planAmount = document.getElementById('selected-plan-amount');
+  const dueText = document.getElementById('due-at-signing');
+
+  if (plan === 'full') {
+    planText.textContent = 'Pay in Full (Save 13%)';
+    planAmount.textContent = '$20,000';
+    dueText.innerHTML = 'Payment of <strong style="color:var(--text-secondary);">$20,000</strong> due by April 15, 2026 via Zelle.';
+  } else {
+    planText.textContent = 'Monthly Payments';
+    planAmount.textContent = '$23,000';
+    dueText.innerHTML = 'First payment of <strong style="color:var(--text-secondary);">$8,500</strong> due by April 15, 2026 via Zelle.';
+  }
+}
+
+// ── Tab Switching ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── Scroll Animations ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── Nav Progress ──
+const sections = ['welcome', 'watch', 'engagement', 'credentials', 'payment', 'sign'];
+const navSteps = document.querySelectorAll('.nav-step');
+
+window.addEventListener('scroll', () => {
+  let current = 0;
+  sections.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < window.innerHeight * 0.5) current = i;
+  });
+  navSteps.forEach((step, i) => {
+    step.classList.remove('active', 'done');
+    if (i < current) step.classList.add('done');
+    if (i === current) step.classList.add('active');
+  });
+});
+
+navSteps.forEach((step, i) => {
+  step.addEventListener('click', () => {
+    document.getElementById(sections[i]).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// ── Submit Handler ──
+function handleSubmit() {
+  const sig = document.getElementById('client-sig').value;
+  const date = document.getElementById('client-date').value;
+
+  if (!sig.trim()) { alert('Please type your full name to sign.'); return; }
+  if (!date) { alert('Please select a date.'); return; }
+
+  const formData = {};
+  document.querySelectorAll('input, textarea, select').forEach(el => {
+    if (el.name) formData[el.name] = el.value;
+  });
+  formData.client_signature = sig;
+  formData.client_date = date;
+  formData.payment_plan = document.querySelector('input[name="payment_plan"]:checked').value;
+  formData.timestamp = new Date().toISOString();
+
+  console.log('Form submission:', JSON.stringify(formData, null, 2));
+
+  const plan = formData.payment_plan === 'full' ? '$20,000 (Pay in Full)' : '$8,500 (first monthly payment)';
+  alert(`Thank you, Steve! Your engagement letters are signed and your information has been submitted.\n\nSelected plan: ${plan}\nPayment due by April 15, 2026 via Zelle.\n\nChrix will reach out within 24 hours to kick things off.`);
+}
+</script>
+
+</body>
+</html>
