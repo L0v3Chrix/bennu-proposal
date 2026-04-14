@@ -2,7 +2,7 @@ import { BENNU_CLIENT } from "@/lib/config";
 
 export default function Hero() {
   return (
-    <section className="pt-[140px] pb-12 relative">
+    <section className="pt-[140px] pb-12 relative print:hidden">
       <div className="absolute top-[60px] -left-[20%] -right-[20%] bottom-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(37,99,235,0.04)_0%,transparent_70%)] pointer-events-none" />
       <div className="max-w-[780px] mx-auto px-6 relative">
         <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold tracking-[0.06em] text-accent uppercase bg-accent-light border border-accent-border px-3.5 py-1 rounded-full mb-5">

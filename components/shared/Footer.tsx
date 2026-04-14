@@ -2,7 +2,7 @@ import { CONTACT_EMAIL } from "@/lib/config";
 
 export default function Footer() {
   return (
-    <footer className="py-16 text-center">
+    <footer className="py-16 text-center print:hidden">
       <p className="text-[13px] text-tertiary">
         Questions?{" "}
         <a
