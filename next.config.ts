@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      { source: "/pitch-deck", destination: "/index.html" },
+      { source: "/pitch-deck", destination: "/pitch-deck.html" },
       { source: "/community", destination: "/community.html" },
     ];
   },
