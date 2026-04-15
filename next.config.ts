@@ -1,12 +1,5 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  async rewrites() {
-    return [
-      { source: "/pitch-deck", destination: "/index.html" },
-      { source: "/community", destination: "/community.html" },
-    ];
-  },
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
