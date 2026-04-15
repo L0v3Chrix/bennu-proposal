@@ -7,7 +7,7 @@ const DISCORD_WEBHOOK_URL =
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { signerName, signerDate, paymentPlan, credentials } = body;
+    const { signerName, signerDate, paymentPlan, credentials, journey } = body;
 
     if (!signerName?.trim() || !signerDate || !paymentPlan) {
       return NextResponse.json(
@@ -88,6 +88,51 @@ export async function POST(request: NextRequest) {
         value: credentialLines.join("\n"),
         inline: false,
       });
+    }
+
+    // Journey report
+    if (journey) {
+      const journeyLines: string[] = [];
+
+      if (journey.totalTime) {
+        journeyLines.push(`**Total Session Time:** ${journey.totalTime}`);
+      }
+
+      if (journey.pageVisits?.length > 0) {
+        journeyLines.push(
+          `**Pages Visited:** ${journey.pageVisits.join(" → ")}`
+        );
+      }
+
+      if (journey.videoEngagement?.length > 0) {
+        journeyLines.push(
+          `**Video Watch Time:**\n${journey.videoEngagement.join("\n")}`
+        );
+      }
+
+      if (journey.sectionTimes?.length > 0) {
+        journeyLines.push(
+          `**Section Time:**\n${journey.sectionTimes.join("\n")}`
+        );
+      }
+
+      if (journey.scrollDepth) {
+        journeyLines.push(`**Max Scroll Depth:** ${journey.scrollDepth}%`);
+      }
+
+      if (journey.tabSwitches?.length > 0) {
+        journeyLines.push(
+          `**Tab Switches:** ${journey.tabSwitches.join(", ")}`
+        );
+      }
+
+      if (journeyLines.length > 0) {
+        embed.fields.push({
+          name: "Customer Journey",
+          value: journeyLines.join("\n"),
+          inline: false,
+        });
+      }
     }
 
     // Post to Discord

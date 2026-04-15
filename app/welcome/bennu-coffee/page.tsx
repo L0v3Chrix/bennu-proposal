@@ -1,6 +1,7 @@
 import Link from "next/link";
 import NavBar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
+import JourneyTracker from "@/components/shared/JourneyTracker";
 import Infographic from "@/components/welcome/Infographic";
 import VideoGrid from "@/components/welcome/VideoGrid";
 import { BENNU_CLIENT } from "@/lib/config";
@@ -12,6 +13,7 @@ export const metadata = {
 export default function WelcomePage() {
   return (
     <>
+      <JourneyTracker page="/welcome/bennu-coffee" label="Welcome Page" />
       <NavBar clientName={BENNU_CLIENT.companyName} />
 
       {/* Hero */}

@@ -7,6 +7,7 @@ import PaymentSelector from "./PaymentSelector";
 import SignatureSection from "./SignatureSection";
 import PrintableEngagementLetters from "./PrintableEngagementLetters";
 import { PAYMENT_OPTIONS } from "@/lib/config";
+import { buildJourneySummary } from "@/lib/journey";
 
 export default function OnboardForm() {
   const [credentials, setCredentials] = useState<Record<string, string>>({});
@@ -36,6 +37,7 @@ export default function OnboardForm() {
           signerDate,
           paymentPlan,
           credentials,
+          journey: buildJourneySummary(),
         }),
       });
 

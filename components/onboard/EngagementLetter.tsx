@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ENGAGEMENTS, type EngagementData } from "@/lib/config";
+import { trackEvent } from "@/lib/journey";
 
 function LetterSection({
   title,
@@ -263,6 +264,27 @@ function LetterContent({ engagement }: { engagement: EngagementData }) {
 
 export default function EngagementLetters() {
   const [activeTab, setActiveTab] = useState<string>(ENGAGEMENTS[0].id);
+  const tabStartRef = useRef<number>(Date.now());
+
+  const handleTabSwitch = (newTabId: string) => {
+    const currentTab = ENGAGEMENTS.find((e) => e.id === activeTab);
+    if (currentTab) {
+      const duration = Date.now() - tabStartRef.current;
+      trackEvent({
+        type: "section_view",
+        page: "/onboard/bennu-coffee",
+        label: currentTab.title,
+        durationMs: duration,
+      });
+      trackEvent({
+        type: "tab_switch",
+        page: "/onboard/bennu-coffee",
+        label: `${currentTab.title} → ${ENGAGEMENTS.find((e) => e.id === newTabId)?.title}`,
+      });
+    }
+    tabStartRef.current = Date.now();
+    setActiveTab(newTabId);
+  };
 
   return (
     <section id="engagement" className="py-12">
@@ -285,7 +307,7 @@ export default function EngagementLetters() {
           {ENGAGEMENTS.map((eng) => (
             <button
               key={eng.id}
-              onClick={() => setActiveTab(eng.id)}
+              onClick={() => handleTabSwitch(eng.id)}
               className={`px-4 py-2 rounded-[10px] text-[13px] font-semibold transition-all cursor-pointer ${
                 activeTab === eng.id
                   ? "bg-primary text-white"
