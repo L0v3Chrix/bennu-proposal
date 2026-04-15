@@ -11,7 +11,7 @@ export default function NavBar({ clientName }: { clientName: string }) {
       </div>
       <div className="flex items-center gap-5">
         <a
-          href="/"
+          href="/pitch-deck"
           className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-secondary hover:text-primary transition-colors"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
